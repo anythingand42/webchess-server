@@ -1,0 +1,11 @@
+.play-button {
+    width: 20%;
+    margin-left: 2%;
+}
+
+@media (min-width: 800px) {
+    .play-button {
+        width: 160px;
+        margin-left: 20px;
+    }
+}
