@@ -19,8 +19,8 @@ app.use(express.static(path.join(__dirname, 'client/dist/')));
 app.use(cookieParser());
 app.use(logger('dev'));
 
-app.use("/", (req, res) => {
-  res.sendFile('main.html', {root: path.join(__dirname, 'client/dist/')});
-});
+// app.use("/", (req, res) => {
+//   res.sendFile('main.html', {root: path.join(__dirname, 'client/dist/')});
+// });
 
 module.exports = app;

@@ -1,6 +1,5 @@
 import React, {Component} from "react";
-import Button from "../../../Button";
-import s from "./style.css";
+import Styles from "./styles.js";
 
 class SearchPlayButton extends Component {
     constructor(props) {
@@ -51,13 +50,15 @@ class SearchPlayButton extends Component {
     }
 
     render() {
-        return (
-            <Button onClick={this.handleClick}
-                    text={this.text}
-                    pressed={this.state.pressed}
-                    cssClasses={[s["search_button"]]}
-            />
-        )
+        if(this.state.pressed) {
+            return (
+                <Styles.PressedButton onClick={this.handleClick}>{this.text}</Styles.PressedButton>
+            );
+        } else {
+            return (
+                <Styles.ReleasedButton onClick={this.handleClick}>{this.text}</Styles.ReleasedButton>
+            );
+        }
     }
 }
 

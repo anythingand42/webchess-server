@@ -1,14 +1,22 @@
 import React from "react";
-import PlayButton from "./HomeButton";
-import LogInButton from "./LogInButton";
-import s from "./style.css";
+import Styles from "./styles.js";
+import Button from "../Button";
+import {Link} from "react-router-dom";
 
 function Header() {
     return (
-        <div className={s.header}>
-            <PlayButton />
-            <LogInButton />
-        </div>
+        <Styles.Header>
+            <Styles.HomeDiv>
+                <Link to="/">
+                    <Styles.Button>home</Styles.Button>
+                </Link>
+            </Styles.HomeDiv>
+            <Styles.LoginDiv>
+                <Link to="/login">
+                    <Styles.Button>log in</Styles.Button>
+                </Link>
+            </Styles.LoginDiv>
+        </Styles.Header>
     )
 }
 

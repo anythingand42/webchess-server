@@ -2,10 +2,36 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1d03f3a5-9326-4593-a29b-0c4f6e1f36c3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/webchess-server.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/Header/styles.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/Main/styles.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/dist/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/dist/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/dist/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/dist/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Button/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Button/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Button/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/GameSearchContainer/Lobby/LobbyButton/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/GameSearchContainer/Lobby/LobbyButton/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/GameSearchContainer/Lobby/LobbyButton/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/GameSearchContainer/Lobby/LobbyButton/styles.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/GameSearchContainer/Lobby/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/GameSearchContainer/Lobby/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/GameSearchContainer/Lobby/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/GameSearchContainer/Lobby/styles.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/GameSearchContainer/SearchPlayButtons/SearchPlayButton/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/GameSearchContainer/SearchPlayButtons/SearchPlayButton/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/GameSearchContainer/SearchPlayButtons/SearchPlayButton/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/GameSearchContainer/SearchPlayButtons/SearchPlayButton/styles.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/GameSearchContainer/SearchPlayButtons/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/GameSearchContainer/SearchPlayButtons/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/GameSearchContainer/SearchPlayButtons/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/GameSearchContainer/SearchPlayButtons/styles.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/GameSearchContainer/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/GameSearchContainer/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/GameSearchContainer/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/GameSearchContainer/styles.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Header/HomeButton/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Header/HomeButton/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Header/LogInButton/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Header/LogInButton/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Header/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Header/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Header/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Main/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Main/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Main/style.css" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,6 +46,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="javascript.nodejs.core.library.configured.version" value="10.16.3" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
@@ -35,6 +62,16 @@
       </list>
     </option>
   </component>
+  <component name="RunManager">
+    <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/webchess-server/client/dist/index.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.index.html" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -45,7 +82,11 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1566587247280</updated>
-      <workItem from="1566587248438" duration="329000" />
+      <workItem from="1566587248438" duration="5332000" />
+      <workItem from="1566653717369" duration="19000" />
+      <workItem from="1566653755222" duration="10723000" />
+      <workItem from="1566666623641" duration="8822000" />
+      <workItem from="1566684073085" duration="5517000" />
     </task>
     <servers />
   </component>
@@ -57,7 +98,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

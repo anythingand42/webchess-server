@@ -4,8 +4,8 @@ import Header from "../Header";
 import MessageForm from "../MessageForm";
 import Textarea from "../Textarea";
 import ChessBoard from "../ChessBoard";
-import s from  "./style.css"
-import io from "../../../node_modules/socket.io-client/dist/socket.io";
+import Container from  "./styles.js"
+import io from "socket.io-client/dist/socket.io";
 import setCookie from "set-cookie";
 
 class Main extends Component {
@@ -23,6 +23,7 @@ class Main extends Component {
 
     componentWillUnmount() {
         this.socket.removeAllListeners("anon_cookie");
+        this.socket.removeAllListeners("start_game");
     }
 
     render() {
@@ -38,11 +39,12 @@ class Main extends Component {
         } else {
             cont = <GameSearchContainer socket={this.socket} />;
         }
+
         return (
-            <div className={s["main"]}>
-                <Header />
-                {cont}
-            </div>
+                <Container>
+                    <Header />
+                    {cont}
+                </Container>
         )
     }
 }

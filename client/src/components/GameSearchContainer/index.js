@@ -1,14 +1,14 @@
 import React from "react";
 import SearchPlayButtons from "./SearchPlayButtons";
 import Lobby from "./Lobby";
-import s from "./style.css";
+import Container from "./styles.js";
 
 function GameSearchContainer(props) {
     return (
-        <div className={s["game-search-container"]}>
+        <Container>
             <SearchPlayButtons socket = {props.socket}/>
             <Lobby socket = {props.socket}/>
-        </div>
+        </Container>
     )
 }
 

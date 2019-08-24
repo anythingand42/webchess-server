@@ -1,28 +1,19 @@
-import React from "react";
-import b from "bootstrap/dist/css/bootstrap.css";
-import s from "./style.css";
+import styled from "styled-components";
 
-function Button(props) {
-    const cssClasses = props.cssClasses.join(" ");
-    let state;
-    if(props.pressed) {
-        state = "pressed";
-    } else {
-        state = "released";
+const Button = styled.button`
+    background-color: rgb(100, 100, 100);
+    border: 0 !important;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+    outline: none !important;
+    &:hover {
+        background-color: rgb(85, 85, 85);
     }
-    return (
-        <button btn-state={state}
-                onClick={props.onClick}
-                type={"button"}
-                className={`
-                    ${b.btn} 
-                    ${b["btn-dark"]} 
-                    ${cssClasses} 
-                    ${s.btn}
-                `}
-        >
-            {props.text}
-        </button>
-    )
-}
+`;
+
 export default Button;

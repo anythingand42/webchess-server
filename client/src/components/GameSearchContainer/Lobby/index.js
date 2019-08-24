@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import LobbyButton from "./LobbyButton";
-import s from "./style.css";
+import LobbyDiv from "./styles.js";
 
 class Lobby extends Component {
     constructor(props) {
@@ -27,9 +27,9 @@ class Lobby extends Component {
             return (<LobbyButton key={challenge._id} text={text}/>);
         });
         return (
-            <div className={s.lobby}>
+            <LobbyDiv>
                 {challengesList}
-            </div>
+            </LobbyDiv>
         )
     }
 }
