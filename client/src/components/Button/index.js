@@ -11,7 +11,7 @@ const Button = styled.button`
     font-size: 16px;
     border-radius: 5px;
     outline: none !important;
-    &:hover {
+    :hover {
         background-color: rgb(85, 85, 85);
     }
 `;

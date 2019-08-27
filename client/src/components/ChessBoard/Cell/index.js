@@ -1,15 +1,37 @@
 import React, {Component} from "react";
+import Styles from "./styles.js";
+import highlighter from "../piecesImages/highlight.png";
 
 class Cell extends Component {
     constructor(props) {
         super(props);
-        this.cssClasses = props.cssClasses.join(" ");
     }
 
     render() {
-        return (
-            <div className={`${this.cssClasses}`}/>
-        )
+        if(this.props.piece === null || this.props.piece === undefined) {
+            if(this.props.highlight) {
+                return (
+                    <Styles.EmptyCell id={this.props.id}>
+                        <Styles.highlighter/>
+                    </Styles.EmptyCell>
+                );
+            } else {
+                return <Styles.EmptyCell id={this.props.id}/>;
+            }
+        } else {
+            const CellWithPiece = Styles[this.props.piece];
+            if(this.props.highlight) {
+                return (
+                    <CellWithPiece id={this.props.id}>
+                        <Styles.highlighter/>
+                    </CellWithPiece>
+                );
+            } else {
+                return (
+                    <CellWithPiece id={this.props.id}/>
+                );
+            }
+        }
     }
 }
 

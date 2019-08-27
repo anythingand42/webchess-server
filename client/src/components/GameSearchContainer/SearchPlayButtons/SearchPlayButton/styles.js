@@ -9,6 +9,9 @@ const Styles = {
         :last-child {
             margin-bottom: 0;
         }
+        &:hover {
+            background-color: rgb(40, 40, 40);
+        }
     `,
     ReleasedButton: styled(Button)`
         width: 100%;
@@ -16,7 +19,7 @@ const Styles = {
         :last-child {
             margin-bottom: 0;
         }
-    `,
+    `
 };
 
 export default Styles;

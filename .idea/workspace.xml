@@ -2,36 +2,48 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1d03f3a5-9326-4593-a29b-0c4f6e1f36c3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/Header/styles.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/Main/styles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/dist/093b01e4db273f71baac1bce18c94125.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/dist/161f795c21622e641836615790e78508.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/dist/1b847341a361c681a715bbc40365b4d8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/dist/2ab2a7a1c38954792d313a0022e36602.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/dist/2da52baf5af472d42fef05d03ad5e2b6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/dist/612ec5d01508d75f4f21a520229f8896.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/dist/81892ed772f35f2ed07854f28eda9f01.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/dist/836bdd4ab066aa55eb62c2297223e121.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/dist/8865c54b812266339d2e52ed70b59e40.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/dist/a6ab8f1e71b0496bdc17bf738e30a77c.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/dist/d3644ccb756503dd733e3ca4f6577759.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/dist/d510249ee6899724e56e192e21d2d814.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/ChessBoard/Cell/styles.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/ChessBoard/Piece/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/ChessBoard/Piece/styles.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/ChessBoard/piecesImages/highlight.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/ChessBoard/piecesImages/mycustom/bb.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/ChessBoard/piecesImages/mycustom/bk.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/ChessBoard/piecesImages/mycustom/bn.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/ChessBoard/piecesImages/mycustom/bp.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/ChessBoard/piecesImages/mycustom/bq.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/ChessBoard/piecesImages/mycustom/br.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/ChessBoard/piecesImages/mycustom/wb.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/ChessBoard/piecesImages/mycustom/wk.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/ChessBoard/piecesImages/mycustom/wn.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/ChessBoard/piecesImages/mycustom/wp.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/ChessBoard/piecesImages/mycustom/wq.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/ChessBoard/piecesImages/mycustom/wr.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/ChessBoard/styles.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/dist/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/dist/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/dist/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/dist/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/dist/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/dist/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/Button/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Button/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Button/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/GameSearchContainer/Lobby/LobbyButton/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/GameSearchContainer/Lobby/LobbyButton/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/GameSearchContainer/Lobby/LobbyButton/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/GameSearchContainer/Lobby/LobbyButton/styles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/GameSearchContainer/Lobby/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/GameSearchContainer/Lobby/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/GameSearchContainer/Lobby/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/GameSearchContainer/Lobby/styles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/GameSearchContainer/SearchPlayButtons/SearchPlayButton/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/GameSearchContainer/SearchPlayButtons/SearchPlayButton/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/GameSearchContainer/SearchPlayButtons/SearchPlayButton/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/GameSearchContainer/SearchPlayButtons/SearchPlayButton/styles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/GameSearchContainer/SearchPlayButtons/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/GameSearchContainer/SearchPlayButtons/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/GameSearchContainer/SearchPlayButtons/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/GameSearchContainer/SearchPlayButtons/styles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/GameSearchContainer/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/GameSearchContainer/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/GameSearchContainer/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/GameSearchContainer/styles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Header/HomeButton/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Header/HomeButton/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Header/LogInButton/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Header/LogInButton/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Header/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Header/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Header/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ChessBoard/Cell/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ChessBoard/Cell/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ChessBoard/Cell/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ChessBoard/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ChessBoard/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ChessBoard/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/GameSearchContainer/SearchPlayButtons/SearchPlayButton/styles.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/GameSearchContainer/SearchPlayButtons/SearchPlayButton/styles.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/Main/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Main/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Main/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/index.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -43,12 +55,24 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1Pq2LCmnvb77qWOve8RPytsqC16" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="10.16.3" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/client/src/components/ChessBoard/piecesImages" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/client/src/components/ChessBoard/piecesImages" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/client/src/components/ChessBoard/piecesImages/mycustom" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -86,7 +110,14 @@
       <workItem from="1566653717369" duration="19000" />
       <workItem from="1566653755222" duration="10723000" />
       <workItem from="1566666623641" duration="8822000" />
-      <workItem from="1566684073085" duration="5517000" />
+      <workItem from="1566684073085" duration="9715000" />
+      <workItem from="1566729183910" duration="5513000" />
+      <workItem from="1566745731008" duration="24201000" />
+      <workItem from="1566819607193" duration="25301000" />
+      <workItem from="1566851634225" duration="3557000" />
+      <workItem from="1566855205501" duration="1339000" />
+      <workItem from="1566902197040" duration="7506000" />
+      <workItem from="1566916773120" duration="2636000" />
     </task>
     <servers />
   </component>

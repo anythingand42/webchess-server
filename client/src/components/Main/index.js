@@ -3,10 +3,10 @@ import GameSearchContainer from "../GameSearchContainer";
 import Header from "../Header";
 import MessageForm from "../MessageForm";
 import Textarea from "../Textarea";
-import ChessBoard from "../ChessBoard";
 import Container from  "./styles.js"
 import io from "socket.io-client/dist/socket.io";
 import setCookie from "set-cookie";
+import ChessBoard from "../ChessBoard";
 
 class Main extends Component {
     constructor (props) {

@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Main from "./components/Main";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
-function BasicExample() {
+function Root() {
     return (
         <Router>
             <div>
@@ -15,4 +15,4 @@ function BasicExample() {
     );
 }
 
-ReactDOM.render(<BasicExample />, document.getElementById("root"));
+ReactDOM.render(<Root />, document.getElementById("root"));
