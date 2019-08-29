@@ -3,23 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1d03f3a5-9326-4593-a29b-0c4f6e1f36c3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/dist/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/dist/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ChessBoard/Cell/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ChessBoard/Cell/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ChessBoard/Cell/styles.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ChessBoard/Cell/styles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ChessBoard/Piece/styles.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ChessBoard/Piece/styles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ChessBoard/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ChessBoard/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ChessBoard/piecesImages/highlight.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ChessBoard/styles.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ChessBoard/styles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Main/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Main/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Main/styles.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Main/styles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/MessageForm/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Chat/MessageForm/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/MessageForm/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Textarea/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Chat/Textarea/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Textarea/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/anon.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/anon.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/game.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/game.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/room.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/room.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sockets/anonSocketHandler.js" beforeDir="false" afterPath="$PROJECT_DIR$/sockets/anonSocketHandler.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -100,7 +84,7 @@
       <workItem from="1566941338574" duration="1443000" />
       <workItem from="1566942794839" duration="6187000" />
       <workItem from="1567014362848" duration="8980000" />
-      <workItem from="1567040656196" duration="3041000" />
+      <workItem from="1567040656196" duration="3858000" />
     </task>
     <servers />
   </component>

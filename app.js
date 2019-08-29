@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
-const logger = require('morgan');
+// const logger = require('morgan');
 
 const app = express();
 
@@ -17,7 +17,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 app.use(express.static(path.join(__dirname, 'client/dist/')));
 
 app.use(cookieParser());
-app.use(logger('dev'));
+// app.use(logger('dev'));
 
 // app.use("/", (req, res) => {
 //   res.sendFile('main.html', {root: path.join(__dirname, 'client/dist/')});
