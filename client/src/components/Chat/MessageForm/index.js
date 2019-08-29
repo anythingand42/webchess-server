@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import Styles from "./styles";
 
 class MessageForm extends Component {
     constructor(props) {
@@ -15,18 +16,20 @@ class MessageForm extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
+        console.log("submit");
         this.socket.emit("send_msg", this.state.value);
         this.setState({value: ""});
     }
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <label>
-                    <textarea value={this.state.value} onChange={this.handleChange} />
-                </label>
-                <input type="submit" value="Отправить" />
-            </form>
+            <Styles.Form onSubmit={this.handleSubmit}>
+                <Styles.Input
+                    type="text"
+                    value={this.state.value}
+                    onChange={this.handleChange}
+                />
+            </Styles.Form>
         );
     }
 }

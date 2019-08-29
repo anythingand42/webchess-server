@@ -6,7 +6,8 @@ const AnonSchema = new Schema(
     {
         socketId: String,
         token: String,
-        activeRoomId: String
+        activeRoomId: String,
+        activeColor: String
     }
 );
 

@@ -1,17 +1,16 @@
 import styled from "styled-components";
-import K from "../piecesImages/mycustom/wk.png";
-import Q from "../piecesImages/mycustom/wq.png";
-import R from "../piecesImages/mycustom/wr.png";
-import B from "../piecesImages/mycustom/wb.png";
-import N from "../piecesImages/mycustom/wn.png";
-import P from "../piecesImages/mycustom/wp.png";
-import k from "../piecesImages/mycustom/bk.png";
-import q from "../piecesImages/mycustom/bq.png";
-import r from "../piecesImages/mycustom/br.png";
-import b from "../piecesImages/mycustom/bb.png";
-import n from "../piecesImages/mycustom/bn.png";
-import p from "../piecesImages/mycustom/bp.png";
-import highlighter from "../piecesImages/highlight.png";
+import K from "../piecesImages/from_wiki/wk.svg";
+import Q from "../piecesImages/from_wiki/wq.svg";
+import R from "../piecesImages/from_wiki/wr.svg";
+import B from "../piecesImages/from_wiki/wb.svg";
+import N from "../piecesImages/from_wiki/wn.svg";
+import P from "../piecesImages/from_wiki/wp.svg";
+import k from "../piecesImages/from_wiki/bk.svg";
+import q from "../piecesImages/from_wiki/bq.svg";
+import r from "../piecesImages/from_wiki/br.svg";
+import b from "../piecesImages/from_wiki/bb.svg";
+import n from "../piecesImages/from_wiki/bn.svg";
+import p from "../piecesImages/from_wiki/bp.svg";
 
 const EmptyCell = styled.div`
     background-color: rgb(100, 100, 100);
@@ -45,73 +44,73 @@ const Styles = {
     EmptyCell: EmptyCell,
     "K": styled(EmptyCell)`
         background-image: url(${K});
-        background-size: 90%;
+        background-size: 100%;
         background-repeat: no-repeat;
         background-position: center;
     `,
     "Q": styled(EmptyCell)`
         background-image: url(${Q});
-        background-size: 90%;
+        background-size: 100%;
         background-repeat: no-repeat;
         background-position: center;
     `,
     "R": styled(EmptyCell)`
         background-image: url(${R});
-        background-size: 90%;
+        background-size: 100%;
         background-repeat: no-repeat;
         background-position: center;
     `,
     "B": styled(EmptyCell)`
         background-image: url(${B});
-        background-size: 90%;
+        background-size: 100%;
         background-repeat: no-repeat;
         background-position: center;
     `,
     "N": styled(EmptyCell)`
         background-image: url(${N});
-        background-size: 90%;
+        background-size: 100%;
         background-repeat: no-repeat;
         background-position: center;
     `,
     "P": styled(EmptyCell)`
         background-image: url(${P});
-        background-size: 90%;
+        background-size: 100%;
         background-repeat: no-repeat;
         background-position: center;
     `,
     "k": styled(EmptyCell)`
         background-image: url(${k});
-        background-size: 90%;
+        background-size: 100%;
         background-repeat: no-repeat;
         background-position: center;
     `,
     "q": styled(EmptyCell)`
         background-image: url(${q});
-        background-size: 90%;
+        background-size: 100%;
         background-repeat: no-repeat;
         background-position: center;
     `,
     "r": styled(EmptyCell)`
         background-image: url(${r});
-        background-size: 90%;
+        background-size: 100%;
         background-repeat: no-repeat;
         background-position: center;
     `,
     "b": styled(EmptyCell)`
         background-image: url(${b});
-        background-size: 90%;
+        background-size: 100%;
         background-repeat: no-repeat;
         background-position: center;
     `,
     "n": styled(EmptyCell)`
         background-image: url(${n});
-        background-size: 90%;
+        background-size: 100%;
         background-repeat: no-repeat;
         background-position: center;
     `,
     "p": styled(EmptyCell)`
         background-image: url(${p});
-        background-size: 90%;
+        background-size: 100%;
         background-repeat: no-repeat;
         background-position: center;
     `,

@@ -6,7 +6,8 @@ const RoomSchema = new Schema(
     {
         whitePlayerId: String,
         blackPlayerId: String,
-        id: String
+        id: String,
+        game_fen: String
     }
 );
 

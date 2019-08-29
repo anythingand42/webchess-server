@@ -3,6 +3,7 @@ import React, {Component} from "react";
 import Cell from "./Cell";
 import Piece from "./Piece";
 import Styles from "./styles.js";
+import styled from "styled-components";
 
 class ChessBoard extends Component {
     constructor(props) {
@@ -17,7 +18,9 @@ class ChessBoard extends Component {
             });
         }
         this.travelingPiece = null;
-        this.reverse = false;
+        this.color = props.color;
+        this.reverse = props.color === "b";
+
         this.state = {
             cells: this.cells,
             travelingPiece: this.travelingPiece,
@@ -28,6 +31,18 @@ class ChessBoard extends Component {
         this.handleMouseDown = this.handleMouseDown.bind(this);
         this.handleMouseUp = this.handleMouseUp.bind(this);
         this.handleMouseLeave = this.handleMouseLeave.bind(this);
+
+        this.socket = props.socket;
+        this.socket.on("send_fen_to_client", (fen) => {
+            if(fen) {
+                this.game = new Chess(fen);
+                this.setCellsFromGame();
+                this.setReactBoardState();
+            }
+        });
+        this.socket.emit("get_fen_from_server");
+
+        this.board = React.createRef();
     }
 
     componentDidMount() {
@@ -61,6 +76,7 @@ class ChessBoard extends Component {
 
     handleMouseDown(event) {
         event.preventDefault();
+        if(this.game.turn() !== this.color) return;
         const id = event.target.id;
 
         const piece = this.cells[this.convertToNumId(id)].piece;
@@ -102,6 +118,9 @@ class ChessBoard extends Component {
             if( move === null ) {
                 this.cells[this.convertToNumId(idFrom)].piece = piece;
             } else {
+                if(this.socket) {
+                    this.socket.emit("send_fen_to_server", this.game.fen());
+                }
                 this.setCellsFromGame();
             }
         } else {
@@ -195,15 +214,16 @@ class ChessBoard extends Component {
 
         if(this.state.travelingPiece === null) {
             return (
-                <div>
-                    <Styles.ChessBoard onMouseDown={this.handleMouseDown}>
+                <Styles.Div>
+                    <Styles.ChessBoard ref={this.board} onMouseDown={this.handleMouseDown}>
                         {cells}
                     </Styles.ChessBoard>
-                </div>
+                    <Styles.Dummy/>
+                </Styles.Div>
             )
         } else {
             return (
-                <div>
+                <Styles.Div>
                     <Styles.ChessBoard
                         onMouseDown={this.handleMouseDown}
                         onMouseUp={this.handleMouseUp}
@@ -214,11 +234,12 @@ class ChessBoard extends Component {
                     <Piece
                         left={this.state.travelingPiece.left}
                         top={this.state.travelingPiece.top}
-                        width={50}
-                        height={50}
+                        width={this.board.current.offsetWidth/8}
+                        height={this.board.current.offsetWidth/8}
                         piece={this.state.travelingPiece.piece}
                     />
-                </div>
+                    <Styles.Dummy/>
+                </Styles.Div>
             )
         }
     }

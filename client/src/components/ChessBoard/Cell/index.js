@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import Styles from "./styles.js";
-import highlighter from "../piecesImages/highlight.png";
 
 class Cell extends Component {
     constructor(props) {
@@ -26,11 +25,11 @@ class Cell extends Component {
                         <Styles.highlighter/>
                     </CellWithPiece>
                 );
-            } else {
-                return (
-                    <CellWithPiece id={this.props.id}/>
-                );
             }
+
+            return (
+                <CellWithPiece id={this.props.id}/>
+            );
         }
     }
 }

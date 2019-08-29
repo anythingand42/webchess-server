@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import Styles from "./styles.js";
 
 class Textarea extends Component {
     constructor(props) {
@@ -9,9 +10,11 @@ class Textarea extends Component {
         this.handleGetMsg = this.handleGetMsg.bind(this);
         this.socket = props.socket;
         this.socket.on("get_msg", this.handleGetMsg);
+        this.ref = React.createRef();
     }
 
     handleGetMsg(msg) {
+        this.ref.current.scrollTop = this.ref.current.scrollHeight;
         this.setState(state => ({
             value: `${state.value}${msg}\n`
         }));
@@ -19,7 +22,7 @@ class Textarea extends Component {
 
     render() {
         return (
-            <textarea readOnly={true} value={this.state.value} />
+            <Styles.Textarea readOnly ref={this.ref} value={this.state.value} />
         );
     }
 }
