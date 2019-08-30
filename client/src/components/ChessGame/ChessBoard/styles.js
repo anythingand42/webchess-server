@@ -13,7 +13,7 @@ const Styles = {
         height: 100%;
     `,
     Dummy: styled.div`
-        margin-top: 100%;
+        padding-bottom: 100%;
     `
 };
 

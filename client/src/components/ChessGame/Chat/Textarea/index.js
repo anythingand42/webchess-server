@@ -14,7 +14,7 @@ class Textarea extends Component {
     }
 
     handleGetMsg(msg) {
-        this.ref.current.scrollTop = this.ref.current.scrollHeight;
+        this.ref.current.scrollTop = this.ref.current.scrollHeight + 999;
         this.setState(state => ({
             value: `${state.value}${msg}\n`
         }));

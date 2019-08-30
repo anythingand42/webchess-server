@@ -6,6 +6,15 @@ class Cell extends Component {
         super(props);
     }
 
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        if(this.props.piece !== nextProps.piece || this.props.highlight !== nextProps.highlight) {
+            console.log(this.props.id + " update");
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     render() {
         if(this.props.piece === null || this.props.piece === undefined) {
             if(this.props.highlight) {

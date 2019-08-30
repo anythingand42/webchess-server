@@ -3,7 +3,6 @@ import React, {Component} from "react";
 import Cell from "./Cell";
 import Piece from "./Piece";
 import Styles from "./styles.js";
-import styled from "styled-components";
 
 class ChessBoard extends Component {
     constructor(props) {
@@ -18,78 +17,122 @@ class ChessBoard extends Component {
             });
         }
         this.travelingPiece = null;
-        this.color = props.color;
-        this.reverse = props.color === "b";
 
         this.state = {
             cells: this.cells,
             travelingPiece: this.travelingPiece,
-            reverse: this.reverse
+            orientation: this.props.orientation
         };
-        this.game = null;
+
         this.setStartPosition = this.setStartPosition.bind(this);
         this.handleMouseDown = this.handleMouseDown.bind(this);
         this.handleMouseUp = this.handleMouseUp.bind(this);
         this.handleMouseLeave = this.handleMouseLeave.bind(this);
 
-        this.socket = props.socket;
-        this.socket.on("send_fen_to_client", (fen) => {
-            if(fen) {
-                this.game = new Chess(fen);
-                this.setCellsFromGame();
-                this.setReactBoardState();
-            }
-        });
-        this.socket.emit("get_fen_from_server");
-
         this.board = React.createRef();
+
+        this.draggable = !!props.draggable;
+        this.position = props.position;
+        this.onDragStart = props.onDragStart;
+        this.onDrop = props.onDrop;
+        this.highlightOnDragStart = props.highlightOnDragStart;
+        this.highlightOnDrop = props.highlightOnDrop;
+        this.orientation = props.orientation;
+
+        if(!this.position) {
+            this.setEmptyBoard();
+        } else if (this.position === "start") {
+            this.setStartPosition();
+        } else {
+            this.setCellsFromFen(this.position);
+        }
     }
 
-    componentDidMount() {
-        this.setStartPosition();
+    UNSAFE_componentWillReceiveProps(nextProps) {
+        this.draggable = !!nextProps.draggable;
+        this.position = nextProps.position;
+        this.onDragStart = nextProps.onDragStart;
+        this.onDrop = nextProps.onDrop;
+        this.highlightOnDragStart = nextProps.highlightOnDragStart;
+        this.highlightOnDrop = nextProps.highlightOnDrop;
+        this.orientation = nextProps.orientation;
+
+        if(!this.position) {
+            this.setEmptyBoard();
+        } else if (this.position === "start") {
+            this.setStartPosition();
+        } else {
+            this.setCellsFromFen(this.position);
+        }
+        this.setReactBoardState();
     }
+    shouldComponentUpdate() {
+        console.log("update board");
+        return true;
+    }
+
+    // shouldComponentUpdate(nextProps, nextState, nextContext) {
+    //     this.draggable = !!nextProps.draggable;
+    //     this.position = nextProps.position;
+    //     this.onDragStart = nextProps.onDragStart;
+    //     this.onDrop = nextProps.onDrop;
+    //     this.highlightOnDragStart = nextProps.highlightOnDragStart;
+    //     this.highlightOnDrop = nextProps.highlightOnDrop;
+    //     this.orientation = nextProps.orientation || "w";
+    //
+    //     if(!this.position) {
+    //         this.setEmptyBoard();
+    //     } else if (this.position === "start") {
+    //         this.setStartPosition();
+    //     } else {
+    //         this.setCellsFromFen(this.position);
+    //     }
+    //
+    //     return true;
+    // }
 
     turnBoard() {
-        this.reverse = !this.reverse;
+        if(this.orientation === "w") {
+            this.orientation = "b";
+        } else {
+            this.orientation = "w";
+        }
     }
 
     setEmptyBoard() {
-        for(let i = 0; i < 64; i++) {
-            const id = this.convertToStrId(i);
-            this.cells.push({
-                id: id,
-                piece: null
-            });
-        }
+        this.cells.forEach((cell) => {
+            cell.piece = null;
+        });
         this.travelingPiece = null;
         this.removeAllHighlighters();
-        this.setReactBoardState();
     }
 
     setStartPosition() {
-        this.game = new Chess();
-        this.setCellsFromGame();
+        let game = new Chess();
+        this.setCellsFromGame(game);
         this.travelingPiece = null;
         this.removeAllHighlighters();
-        this.setReactBoardState();
     }
 
     handleMouseDown(event) {
         event.preventDefault();
-        if(this.game.turn() !== this.color) return;
+        if(!this.draggable) return;
+
         const id = event.target.id;
 
         const piece = this.cells[this.convertToNumId(id)].piece;
         if(piece === null) return;
-        //console.log(this.game.moves({square: id, verbose: true}));
-        let availableCells = this.game.moves({square: id, verbose: true}).map(current => {
-            return this.convertToNumId(current.to);
-        });
-        availableCells.forEach((current) => {
-            this.cells[current].highlight = true;
-        });
-
         this.cells[this.convertToNumId(id)].piece = null;
+        this.removeAllHighlighters();
+        if(this.onDragStart) {
+            this.onDragStart(id);
+        }
+        if(this.highlightOnDragStart) {
+            let cellsToHighlight = this.highlightOnDragStart(id);
+            cellsToHighlight.forEach((cellId) => {
+                this.cells[this.convertToNumId(cellId)].highlight = true;
+            });
+        }
 
         this.travelingPiece = {
             piece: piece,
@@ -105,26 +148,28 @@ class ChessBoard extends Component {
         event.preventDefault();
         if(this.travelingPiece === null) return;
 
-        const id = event.target.id;
+        const idTo = event.target.id;
         const idFrom = this.state.travelingPiece.idFrom;
         const piece = this.state.travelingPiece.piece;
 
-        this.removeAllHighlighters();
         this.travelingPiece = null;
-
-        if(id !== idFrom) {
-            let move = this.game.move({ from: idFrom, to: id, promotion:"q" });
-            console.log(move);
-            if( move === null ) {
-                this.cells[this.convertToNumId(idFrom)].piece = piece;
+        this.removeAllHighlighters();
+        if(this.onDrop) {
+            if( this.onDrop(idFrom, idTo) ) {
+                this.cells[this.convertToNumId(idTo)].piece = piece;
             } else {
-                if(this.socket) {
-                    this.socket.emit("send_fen_to_server", this.game.fen());
-                }
-                this.setCellsFromGame();
+                this.cells[this.convertToNumId(idFrom)].piece = piece;
             }
         } else {
-            this.cells[this.convertToNumId(idFrom)].piece = piece;
+            this.cells[this.convertToNumId(idTo)].piece = piece;
+        }
+        if(this.highlightOnDrop) {
+            let cellsToHighlight = this.highlightOnDrop(idFrom, idTo);
+            if (cellsToHighlight) {
+                cellsToHighlight.forEach((cellId) => {
+                    this.cells[this.convertToNumId(cellId)].highlight = true;
+                });
+            }
         }
 
         this.setReactBoardState();
@@ -150,16 +195,17 @@ class ChessBoard extends Component {
         });
     }
 
-    setCellsFromGame() {
+    setCellsFromFen(fen) {
+        let game = new Chess(fen);
+        this.setCellsFromGame(game);
+    }
+
+    setCellsFromGame(game) {
         for(let i = 0; i < 64; i++) {
             const id = this.convertToStrId(i);
-            let piece = this.game.get(id);
+            let piece = game.get(id);
             if(piece !== null) {
-                if(piece.color === "w") {
-                    piece = piece.type.toUpperCase();
-                } else {
-                    piece = piece.type;
-                }
+                piece = piece.color + piece.type;
                 this.cells[i] = {id: id, piece: piece};
             } else {
                 this.cells[i] = {id: id, piece: piece};
@@ -171,7 +217,7 @@ class ChessBoard extends Component {
         this.setState({
             cells: this.cells,
             travelingPiece: this.travelingPiece,
-            reverse: this.reverse
+            orientation: this.orientation
         });
     }
 
@@ -197,7 +243,8 @@ class ChessBoard extends Component {
 
     render() {
         let cells = [];
-        if(this.state.reverse) {
+        console.log(this.state.orientation);
+        if(this.state.orientation === "b") {
             for(let i = 63; i >= 0; i--) {
                 cells.push(<Cell
                     key={this.state.cells[i].id}

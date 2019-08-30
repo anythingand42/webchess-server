@@ -56,6 +56,7 @@ const anonSocketHandler = async (io, socket, cookie) => {
                 opponentColor = "w";
             }
             room.id = cryptoRandomString({length: 15});
+            room.game_fen = "start";
             await room.save();
             thisAnon.activeRoomId = room.id;
             thisAnon.activeColor = thisAnonColor;

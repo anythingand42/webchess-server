@@ -1,12 +1,7 @@
 import styled from 'styled-components';
 
 const Styles = {
-    Container: styled.div`
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    `,
-    ContentDiv: styled.div`
+    MainDiv: styled.div`
         margin-top: 2%;
         display: grid;
         width: 100%;
@@ -19,11 +14,8 @@ const Styles = {
         height: 100%;
     `,
     BoardDiv: styled.div`
-        width: 600px;
-        height: 600px;
-    `,
-    Dummy: styled.div`
-        margin-top: 100%;
+        width: 100%;
+        height: 100%;
     `
 };
 
