@@ -11,15 +11,13 @@ class ChessGame extends Component {
         this.state = {
             fen: "start"
         };
-        // this.color = props.color;
-        this.game = new Chess();
 
+        this.game = new Chess();
         this.socket = props.socket;
     }
 
     componentDidMount() {
         this.socket.on("send_fen_to_client", (fen) => {
-            //this.game.move({from: move.from, to: move.to});
             if(this.state.fen !== fen) {
                 this.game = new Chess(fen);
                 this.setState({fen: fen});
@@ -37,20 +35,24 @@ class ChessGame extends Component {
                 <Styles.BoardDiv>
                     <ChessBoard
                         orientation={this.props.color}
-                        draggable={this.game.turn() === this.props.color}
+                        draggable={true}
                         position={this.state.fen}
                         highlightOnDragStart={(idFrom) => {
-                            return this.game.moves({square: idFrom, verbose: true}).map(current => {
-                                return current.to;
-                            });
+                            if (this.game.turn() === this.props.color) {
+                                return this.game.moves({square: idFrom, verbose: true}).map(current => {
+                                    return current.to;
+                                });
+                            }
                         }}
                         onDrop={(idFrom, idTo) => {
+                            if (this.game.turn() !== this.props.color) return false;
                             if(idFrom === idTo) return false;
 
                             let move = this.game.move({ from: idFrom, to: idTo, promotion:"q" });
                             if(move !== null) {
+                                let fen = this.game.fen();
                                 this.socket.emit("send_fen_to_server", this.game.fen());
-                                return true;
+                                return fen;
                             } else {
                                 return false;
                             }

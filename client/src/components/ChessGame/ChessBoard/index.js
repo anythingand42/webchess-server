@@ -129,9 +129,11 @@ class ChessBoard extends Component {
         }
         if(this.highlightOnDragStart) {
             let cellsToHighlight = this.highlightOnDragStart(id);
-            cellsToHighlight.forEach((cellId) => {
-                this.cells[this.convertToNumId(cellId)].highlight = true;
-            });
+            if(cellsToHighlight) {
+                cellsToHighlight.forEach((cellId) => {
+                    this.cells[this.convertToNumId(cellId)].highlight = true;
+                });
+            }
         }
 
         this.travelingPiece = {
@@ -155,8 +157,10 @@ class ChessBoard extends Component {
         this.travelingPiece = null;
         this.removeAllHighlighters();
         if(this.onDrop) {
-            if( this.onDrop(idFrom, idTo) ) {
-                this.cells[this.convertToNumId(idTo)].piece = piece;
+            let fen = this.onDrop(idFrom, idTo);
+            if( fen ) {
+                // this.cells[this.convertToNumId(idTo)].piece = piece;
+                this.setCellsFromFen(fen);
             } else {
                 this.cells[this.convertToNumId(idFrom)].piece = piece;
             }
@@ -243,7 +247,6 @@ class ChessBoard extends Component {
 
     render() {
         let cells = [];
-        console.log(this.state.orientation);
         if(this.state.orientation === "b") {
             for(let i = 63; i >= 0; i--) {
                 cells.push(<Cell

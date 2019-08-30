@@ -8,7 +8,6 @@ class Cell extends Component {
 
     shouldComponentUpdate(nextProps, nextState, nextContext) {
         if(this.props.piece !== nextProps.piece || this.props.highlight !== nextProps.highlight) {
-            console.log(this.props.id + " update");
             return true;
         } else {
             return false;
