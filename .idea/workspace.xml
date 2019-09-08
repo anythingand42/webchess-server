@@ -2,120 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1d03f3a5-9326-4593-a29b-0c4f6e1f36c3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/client/newDist/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newDist/main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newDist/normalize.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newSrc/App.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/Cell/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/Cell/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/Piece/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/Piece/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/from_wiki/bb.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/from_wiki/bk.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/from_wiki/bn.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/from_wiki/bp.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/from_wiki/bq.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/from_wiki/br.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/from_wiki/link.odt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/from_wiki/wb.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/from_wiki/wk.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/from_wiki/wn.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/from_wiki/wp.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/from_wiki/wq.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/from_wiki/wr.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/mycustom/bb.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/mycustom/bk.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/mycustom/bn.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/mycustom/bp.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/mycustom/bq.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/mycustom/br.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/mycustom/wb.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/mycustom/wk.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/mycustom/wn.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/mycustom/wp.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/mycustom/wq.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/mycustom/wr.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/standart/bb.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/standart/bk.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/standart/bn.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/standart/bp.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/standart/bq.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/standart/br.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/standart/wb.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/standart/wk.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/standart/wn.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/standart/wp.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/standart/wq.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/standart/wr.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessGame.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newSrc/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newSrc/store/ChessGame/actions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newSrc/store/ChessGame/reducers.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/newSrc/store/reducers.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/StandartChessGame/ChessBoard/Cell/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/StandartChessGame/ChessBoard/Cell/styles.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/StandartChessGame/ChessBoard/Piece/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/StandartChessGame/ChessBoard/Piece/styles.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/StandartChessGame/ChessBoard/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/StandartChessGame/ChessBoard/piecesImages/from_wiki/bb.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/StandartChessGame/ChessBoard/piecesImages/from_wiki/bk.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/StandartChessGame/ChessBoard/piecesImages/from_wiki/bn.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/StandartChessGame/ChessBoard/piecesImages/from_wiki/bp.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/StandartChessGame/ChessBoard/piecesImages/from_wiki/bq.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/StandartChessGame/ChessBoard/piecesImages/from_wiki/br.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/StandartChessGame/ChessBoard/piecesImages/from_wiki/link.odt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/StandartChessGame/ChessBoard/piecesImages/from_wiki/wb.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/StandartChessGame/ChessBoard/piecesImages/from_wiki/wk.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/StandartChessGame/ChessBoard/piecesImages/from_wiki/wn.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/StandartChessGame/ChessBoard/piecesImages/from_wiki/wp.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/StandartChessGame/ChessBoard/piecesImages/from_wiki/wq.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/StandartChessGame/ChessBoard/piecesImages/from_wiki/wr.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/StandartChessGame/ChessBoard/piecesImages/mycustom/bb.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/StandartChessGame/ChessBoard/piecesImages/mycustom/bk.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/StandartChessGame/ChessBoard/piecesImages/mycustom/bn.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/StandartChessGame/ChessBoard/piecesImages/mycustom/bp.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/StandartChessGame/ChessBoard/piecesImages/mycustom/bq.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/StandartChessGame/ChessBoard/piecesImages/mycustom/br.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/StandartChessGame/ChessBoard/piecesImages/mycustom/wb.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/StandartChessGame/ChessBoard/piecesImages/mycustom/wk.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/StandartChessGame/ChessBoard/piecesImages/mycustom/wn.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/StandartChessGame/ChessBoard/piecesImages/mycustom/wp.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/StandartChessGame/ChessBoard/piecesImages/mycustom/wq.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/StandartChessGame/ChessBoard/piecesImages/mycustom/wr.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/StandartChessGame/ChessBoard/piecesImages/standart/bb.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/StandartChessGame/ChessBoard/piecesImages/standart/bk.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/StandartChessGame/ChessBoard/piecesImages/standart/bn.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/StandartChessGame/ChessBoard/piecesImages/standart/bp.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/StandartChessGame/ChessBoard/piecesImages/standart/bq.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/StandartChessGame/ChessBoard/piecesImages/standart/br.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/StandartChessGame/ChessBoard/piecesImages/standart/wb.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/StandartChessGame/ChessBoard/piecesImages/standart/wk.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/StandartChessGame/ChessBoard/piecesImages/standart/wn.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/StandartChessGame/ChessBoard/piecesImages/standart/wp.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/StandartChessGame/ChessBoard/piecesImages/standart/wq.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/StandartChessGame/ChessBoard/piecesImages/standart/wr.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/StandartChessGame/ChessBoard/styles.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/StandartChessGame/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/StandartChessGame/styles.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/dist/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/dist/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ChessGame/ChessBoard/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ChessGame/ChessBoard/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ChessGame/ChessTimer/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ChessGame/ChessTimer/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ChessGame/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ChessGame/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Main/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Main/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/webpack.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/anon.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/anon.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/game.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/game.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sockets/anonSocketHandler.js" beforeDir="false" afterPath="$PROJECT_DIR$/sockets/anonSocketHandler.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sockets/createSocketConnection.js" beforeDir="false" afterPath="$PROJECT_DIR$/sockets/createSocketConnection.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -134,7 +21,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="10.16.3" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
@@ -227,7 +114,7 @@
       <workItem from="1567886869059" duration="838000" />
       <workItem from="1567890467320" duration="3456000" />
       <workItem from="1567946123470" duration="16076000" />
-      <workItem from="1567971239656" duration="1747000" />
+      <workItem from="1567971239656" duration="2748000" />
     </task>
     <servers />
   </component>

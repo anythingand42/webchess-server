@@ -1,17 +1,17 @@
 import React from "react";
 import "./style.css";
-import wk from "../piecesImages/from_wiki/wk.svg";
-import wq from "../piecesImages/from_wiki/wq.svg";
-import wr from "../piecesImages/from_wiki/wr.svg";
-import wb from "../piecesImages/from_wiki/wb.svg";
-import wn from "../piecesImages/from_wiki/wn.svg";
-import wp from "../piecesImages/from_wiki/wp.svg";
-import bk from "../piecesImages/from_wiki/bk.svg";
-import bq from "../piecesImages/from_wiki/bq.svg";
-import br from "../piecesImages/from_wiki/br.svg";
-import bb from "../piecesImages/from_wiki/bb.svg";
-import bn from "../piecesImages/from_wiki/bn.svg";
-import bp from "../piecesImages/from_wiki/bp.svg";
+import wk from "../piecesImages/alpha/wk.svg";
+import wq from "../piecesImages/alpha/wq.svg";
+import wr from "../piecesImages/alpha/wr.svg";
+import wb from "../piecesImages/alpha/wb.svg";
+import wn from "../piecesImages/alpha/wn.svg";
+import wp from "../piecesImages/alpha/wp.svg";
+import bk from "../piecesImages/alpha/bk.svg";
+import bq from "../piecesImages/alpha/bq.svg";
+import br from "../piecesImages/alpha/br.svg";
+import bb from "../piecesImages/alpha/bb.svg";
+import bn from "../piecesImages/alpha/bn.svg";
+import bp from "../piecesImages/alpha/bp.svg";
 const pieces = { wk, wq, wr, wb, wn, wp, bk, bq, br, bb, bn, bp};
 
 class PieceInCell extends React.PureComponent {
