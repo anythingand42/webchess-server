@@ -16,7 +16,7 @@ const anonSocketHandler = async (io, socket, cookie) => {
         const anon = new Anon();
         anon.token = token;
         anon.socketId = socket.id;
-        anon.activeRoomId = null;
+        anon.activeGame = null;
         await anon.save();
         socket.emit("anon_cookie", token);
         cookie = {
@@ -27,8 +27,8 @@ const anonSocketHandler = async (io, socket, cookie) => {
         thisAnon = await Anon.findOne({ token: cookie.webchessAnon });
         thisAnon.socketId = socket.id;
         await thisAnon.save();
-        if(thisAnon.activeRoomId !== null) {
-            await socket.emit("start_game", thisAnon.activeColor);
+        if(thisAnon.activeGame !== null) {
+            await socket.emit("start_game", thisAnon.activeGame.color);
         }
     }
 
@@ -57,15 +57,37 @@ const anonSocketHandler = async (io, socket, cookie) => {
             }
             room.id = cryptoRandomString({length: 15});
             room.game_fen = "start";
+            room.options = options;
+            const parsedOptions =  options.split("+");
+            const timeInMs = Number(parsedOptions[0]) * 60 * 1000;
+            const incInMs = Number(parsedOptions[1]) * 1000;
             await room.save();
-            thisAnon.activeRoomId = room.id;
-            thisAnon.activeColor = thisAnonColor;
+            thisAnon.activeGame = {
+                roomId: room.id,
+                color: thisAnonColor,
+                restOfTime: timeInMs,
+                inc: incInMs
+            };
             await thisAnon.save();
-            opponent.activeColor = opponentColor;
-            opponent.activeRoomId = room.id;
+            opponent.activeGame = {
+                roomId: room.id,
+                color: opponentColor,
+                restOfTime: timeInMs,
+                inc: incInMs
+            };
             await opponent.save();
-            await io.to(opponent.socketId).emit("start_game", opponentColor);
-            await socket.emit("start_game", thisAnonColor);
+            const opponentGameOptions = {
+                color: opponentColor,
+                restOfTime: timeInMs,
+                inc: incInMs
+            };
+            const thisAnonGameOptions = {
+                color: thisAnonColor,
+                restOfTime: timeInMs,
+                inc: incInMs
+            };
+            await io.to(opponent.socketId).emit("start_game", opponentGameOptions);
+            await socket.emit("start_game", thisAnonGameOptions);
 
             return;
         }
@@ -90,7 +112,7 @@ const anonSocketHandler = async (io, socket, cookie) => {
 
     socket.on("send_msg", async (msg) => {
         const anon = await Anon.findOne({ token: cookie.webchessAnon });
-        const room = await Room.findOne({id: anon.activeRoomId});
+        const room = await Room.findOne({id: anon.activeGame.roomId});
         let opponent;
         let prefix;
         if(room.whitePlayerId === anon._id.toString()) {
@@ -104,9 +126,11 @@ const anonSocketHandler = async (io, socket, cookie) => {
         socket.emit("get_msg", prefix + msg);
     });
 
-    socket.on("send_fen_to_server", async (fen) => {
+    socket.on("send_fen_to_server", async (fen, restOfTime) => {
         const anon = await Anon.findOne({ token: cookie.webchessAnon });
-        const room = await Room.findOne({id: anon.activeRoomId});
+        anon.activeGame.restOfTime = restOfTime;
+        await anon.save();
+        const room = await Room.findOne({id: anon.activeGame.roomId});
         room.game_fen = fen;
         await room.save();
         let opponent;
@@ -115,12 +139,12 @@ const anonSocketHandler = async (io, socket, cookie) => {
         } else {
             opponent = await Anon.findById(room.whitePlayerId);
         }
-        io.to(opponent.socketId).emit("send_fen_to_client", fen);
+        io.to(opponent.socketId).emit("send_fen_to_client", fen, opponent.activeGame.restOfTime);
     });
 
     socket.on("get_fen_from_server", async () => {
         const anon = await Anon.findOne({ token: cookie.webchessAnon });
-        const room = await Room.findOne({id: anon.activeRoomId});
+        const room = await Room.findOne({id: anon.activeGame.roomId});
         socket.emit("send_fen_to_client", room.game_fen);
     });
 

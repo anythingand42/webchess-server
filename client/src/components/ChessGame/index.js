@@ -9,7 +9,8 @@ class ChessGame extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            fen: "start"
+            fen: "start",
+            restOfTime: props.restOfTime
         };
 
         this.game = new Chess();
@@ -17,10 +18,13 @@ class ChessGame extends Component {
     }
 
     componentDidMount() {
-        this.socket.on("send_fen_to_client", (fen) => {
+        this.socket.on("send_fen_to_client", (fen, restOfTime) => {
             if(this.state.fen !== fen) {
                 this.game = new Chess(fen);
-                this.setState({fen: fen});
+                this.setState({
+                    fen: fen,
+                    restOfTime: restOfTime
+                });
             }
         });
         this.socket.emit("get_fen_from_server");
@@ -59,7 +63,10 @@ class ChessGame extends Component {
                         }}
                     />
                 </Styles.BoardDiv>
-                <ChessTimer/>
+                <ChessTimer
+                    value={this.state.restOfTime}
+                    isRunning={this.game.turn() === this.props.color}
+                />
             </Styles.MainDiv>
         );
     }

@@ -1,0 +1,59 @@
+.piece-div {
+    position: absolute;
+    pointer-events: none;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+}
+
+.piece-div__wk {
+    background-image: url(../piecesImages/from_wiki/wk.svg);
+}
+
+.piece-div__wq {
+    background-image: url(../piecesImages/from_wiki/wq.svg);
+}
+
+.piece-div__wr {
+    background-image: url(../piecesImages/from_wiki/wr.svg);
+}
+
+.piece-div__wb {
+    background-image: url(../piecesImages/from_wiki/wb.svg);
+}
+
+.piece-div__wn {
+    background-image: url(../piecesImages/from_wiki/wn.svg);
+}
+
+.piece-div__wp {
+    background-image: url(../piecesImages/from_wiki/wp.svg);
+}
+
+.piece-div__bk {
+    background-image: url(../piecesImages/from_wiki/bk.svg);
+}
+
+.piece-div__bq {
+    background-image: url(../piecesImages/from_wiki/bq.svg);
+}
+
+.piece-div__br {
+    background-image: url(../piecesImages/from_wiki/br.svg);
+}
+
+.piece-div__bb {
+    background-image: url(../piecesImages/from_wiki/bb.svg);
+}
+
+.piece-div__bn {
+    background-image: url(../piecesImages/from_wiki/bn.svg);
+}
+
+.piece-div__bp {
+    background-image: url(../piecesImages/from_wiki/bp.svg);
+}
+
+

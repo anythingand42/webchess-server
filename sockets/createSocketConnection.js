@@ -2,7 +2,8 @@ const anonSocketHandler = require("./anonSocketHandler.js");
 // const gameroomSocket = require("./gameroom.js");
 // const userSocketHandler = require("./user.js");
 const cookieParser = require("cookie-parse");
-const cryptoRandomString = require('crypto-random-string');
+const handleUserConnection = require("./handleUserConnection");
+const handleAnonConnection = require("./handleAnonConnection");
  
 function createSocketConnection(server) {
   const io = require("socket.io")(server);
@@ -14,33 +15,17 @@ function createSocketConnection(server) {
       user = cookie.webchessUser;
     }
 
+    // if(user === undefined) {
+    //   anonSocketHandler(io, socket, cookie);
+    // }
+
     if(user === undefined) {
-      anonSocketHandler(io, socket, cookie);
+      handleAnonConnection(io, socket, cookie);
     }
 
-    // socket.on("add_challenge", () => {
-    //   const cookie = cookieParser.parse(socket.handshake.headers.cookie);
-    //   let user = cookie.webchessUser;
-    //
-    //   if(user === undefined) {
-    //     anonSocketHandler(io, socket);
-    //   }
-    //
-    // });
+    if(user) {
 
-    // socket.on("url(anon)_connect", () => {
-    //   anonSocket(io, socket);
-    // });
-    //
-    // socket.on("url(gameroom)_connect", (id) => {
-    //   gameroomSocket(io, socket, id);
-    // });
-    //
-    // socket.on("user", () => {
-    //   userSocketHandler(io, socket);
-    // });
-
-    // socket.emit("which_url");
+    }
 
   }); 
 

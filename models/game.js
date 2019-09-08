@@ -7,7 +7,8 @@ const StandartGameSchema = new Schema(
         roomId: String,
         whiteSocketId: String,
         blackSocketId: String,
-        fen: String
+        fen: String,
+        options: String
     }
 );
 

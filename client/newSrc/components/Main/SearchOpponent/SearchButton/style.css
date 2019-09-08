@@ -1,0 +1,9 @@
+.search-buttons-group__search-button {
+    width: 100%;
+    height: auto;
+    margin-bottom: auto;
+}
+
+.search-buttons-group__search-button:last-child {
+    margin-bottom: 0;
+}

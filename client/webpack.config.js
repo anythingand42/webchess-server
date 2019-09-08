@@ -1,15 +1,15 @@
 const path = require("path");
 
 module.exports = {
-    entry: "./src/index.js",
+    entry: "./newSrc/index.js",
     mode: "development",
     output: {
         filename: "./main.js",
-        path: path.join(__dirname, "dist"),
+        path: path.join(__dirname, "newDist"),
     },
     devServer: {
-        contentBase: path.join(__dirname, "dist"),
-        compress: true,
+        contentBase: path.join(__dirname, "newDist"),
+        compress: false,
         port: 9000,
         watchContentBase: true,
         progress: true
@@ -31,7 +31,7 @@ module.exports = {
                     {
                         loader: "css-loader",
                         options: {
-                            modules: true
+                            modules: false
                         }
                     }
                 ]

@@ -71,26 +71,6 @@ class ChessBoard extends Component {
         return true;
     }
 
-    // shouldComponentUpdate(nextProps, nextState, nextContext) {
-    //     this.draggable = !!nextProps.draggable;
-    //     this.position = nextProps.position;
-    //     this.onDragStart = nextProps.onDragStart;
-    //     this.onDrop = nextProps.onDrop;
-    //     this.highlightOnDragStart = nextProps.highlightOnDragStart;
-    //     this.highlightOnDrop = nextProps.highlightOnDrop;
-    //     this.orientation = nextProps.orientation || "w";
-    //
-    //     if(!this.position) {
-    //         this.setEmptyBoard();
-    //     } else if (this.position === "start") {
-    //         this.setStartPosition();
-    //     } else {
-    //         this.setCellsFromFen(this.position);
-    //     }
-    //
-    //     return true;
-    // }
-
     turnBoard() {
         if(this.orientation === "w") {
             this.orientation = "b";

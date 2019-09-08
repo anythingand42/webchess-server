@@ -3,12 +3,33 @@ import React, {Component} from "react";
 class ChessTimer extends Component {
     constructor(props) {
         super(props);
-        this.state = { formattedValue: {}, valueInMs: 120000 };
+        this.state = {
+            formattedValue: {}
+        };
+        this.valueInMs = props.value;
+        this.isRunning = props.isRunning;
         this.timer = null;
         this.startTimer = this.startTimer.bind(this);
         this.countDown = this.countDown.bind(this);
-        // this.socket = props.socket;
-        // this.socket.on("send_fen_to_client", this.startTimer());
+    }
+
+    componentDidMount() {
+        this.setState({
+            formattedValue: this.formatValue(this.valueInMs)
+        });
+        if(this.isRunning) {
+            this.startTimer();
+        }
+    }
+
+    UNSAFE_componentWillReceiveProps(nextProps, nextContext) {
+        this.valueInMs = nextProps.value;
+        this.setState({
+            formattedValue: this.formatValue(this.valueInMs)
+        });
+        if(this.isRunning) {
+            this.startTimer();
+        }
     }
 
     formatValue(ms) {
@@ -37,29 +58,23 @@ class ChessTimer extends Component {
         };
     }
 
-    componentDidMount() {
-        let timeLeft = this.formatValue(this.state.valueInMs);
-        this.setState({ formattedValue: timeLeft });
-    }
-
     startTimer() {
-        if (this.timer === null && this.state.valueInMs > 0) {
+        if (this.timer === null && this.valueInMs > 0) {
             this.timer = setInterval(this.countDown, 100);
         }
     }
 
-    pause() {
+    pauseTimer() {
         clearInterval(this.timer);
     }
 
     countDown() {
-        let ms = this.state.valueInMs - 100;
+        this.valueInMs = this.valueInMs - 100;
         this.setState({
-            formattedValue: this.formatValue(ms),
-            valueInMs: ms
+            formattedValue: this.formatValue(this.valueInMs)
         });
 
-        if (ms <= 0) {
+        if (this.valueInMs <= 0) {
             clearInterval(this.timer);
         }
     }
