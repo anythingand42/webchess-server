@@ -2,18 +2,21 @@ import React from "react";
 import { connect } from "react-redux";
 import SearchOpponent from "./SearchOpponent.js";
 import {
-    setChallengesSearchOpponent,
-    setCanClickSearchOpponent
+    searchButtonSetAvailability,
+    lobbySetChallenges,
+    searchButtonSetPressed
 } from "../../../store/SearchOpponent/actions";
 
 class ConnectedSearchOpponent extends React.Component {
     render() {
         return(
             <SearchOpponent
+                socket={this.props.socket}
+                buttons={this.props.buttons}
                 challenges={this.props.challenges}
-                canClick={this.props.canClick}
-                setChallengesSearchOpponent={this.props.setChallengesSearchOpponent}
-                setCanClickSearchOpponent={this.props.setCanClickSearchOpponent}
+                searchButtonSetAvailability={this.props.searchButtonSetAvailability}
+                searchButtonSetPressed={this.props.searchButtonSetPressed}
+                lobbySetChallenges={this.props.lobbySetChallenges}
             />
         );
     }
@@ -21,14 +24,15 @@ class ConnectedSearchOpponent extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        challenges: state.searchOpponent.challenges,
-        canClick: state.searchOpponent.canClick
+        buttons: state.searchOpponent.buttons,
+        challenges: state.searchOpponent.challenges
     }
 };
 
 const mapDispatchToProps = {
-    setChallengesSearchOpponent: setChallengesSearchOpponent,
-    setCanClickSearchOpponent: setCanClickSearchOpponent
+    searchButtonSetAvailability: searchButtonSetAvailability,
+    searchButtonSetPressed: searchButtonSetPressed,
+    lobbySetChallenges: lobbySetChallenges
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ConnectedSearchOpponent);

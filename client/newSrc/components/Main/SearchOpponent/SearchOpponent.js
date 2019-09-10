@@ -3,7 +3,6 @@ import SearchButton from "./SearchButton";
 import Lobby from "./Lobby";
 import "./style.css";
 import "../../Button/style.css";
-// import io from "socket.io-client/dist/socket.io";
 import {Link} from "react-router-dom";
 
 class SearchOpponent extends React.Component {
@@ -13,24 +12,38 @@ class SearchOpponent extends React.Component {
         this.refreshLobby = this.refreshLobby.bind(this);
     }
 
-    // componentDidMount() {
-    //     this.socket = io();
-    //     this.socket.on("refresh_lobby", this.refreshLobby);
-    //     this.socket.on("challenge_added", );
-    // }
-    //
-    // componentWillUnmount() {
-    //     this.socket.removeAllListeners("refresh_lobby");
-    // }
+    componentDidMount() {
+        this.props.socket.on("change_in_challenges", this.refreshLobby);
+        this.props.socket.on("send_challenges_to_client", this.refreshLobby);
+        this.props.socket.emit("get_challenges_from_server");
 
-    refreshLobby(challenges) {
-        this.props.setChallengesSearchOpponent(challenges);
+        this.props.socket.on("challenge_is_added", (time) => {
+            const buttonName = time;
+            this.props.searchButtonSetAvailability(buttonName, true);
+        });
+
+        this.props.socket.on("challenge_is_removed", (time) => {
+            const buttonName = time;
+            this.props.searchButtonSetAvailability(buttonName, true);
+        });
     }
 
-    handleSearchButtonClick(options) {
-        if(this.props.canClick) {
-            this.socket.emit("add_challenge", options);
-            this.props.setCanClickSearchOpponent(false);
+    refreshLobby(challenges) {
+        this.props.lobbySetChallenges(challenges);
+    }
+
+    handleSearchButtonClick(time, mode) {
+        const buttonName = time;
+        if(this.props.buttons[buttonName].isAvailable) {
+            if(!this.props.buttons[buttonName].isPressed) {
+                this.props.searchButtonSetPressed(buttonName, true);
+                this.props.searchButtonSetAvailability(buttonName, false);
+                this.props.socket.emit("add_challenge", time, mode);
+            } else {
+                this.props.searchButtonSetPressed(buttonName, false);
+                this.props.searchButtonSetAvailability(buttonName, false);
+                this.props.socket.emit("remove_challenge", time, mode);
+            }
         }
     }
 
@@ -38,12 +51,48 @@ class SearchOpponent extends React.Component {
         return (
             <div className="search-opponent-container">
                 <div className="search-opponent-container__search-buttons-group">
-                    <SearchButton text="bullet 1+0" options="1+0" onClick={this.handleSearchButtonClick}/>
-                    <SearchButton text="bullet 1+1" options="1+1" onClick={this.handleSearchButtonClick}/>
-                    <SearchButton text="bullet 2+1" options="2+1" onClick={this.handleSearchButtonClick}/>
-                    <SearchButton text="blitz 3+0" options="3+0" onClick={this.handleSearchButtonClick}/>
-                    <SearchButton text="blitz 3+2" options="3+2" onClick={this.handleSearchButtonClick}/>
-                    <SearchButton text="blitz 5+3" options="5+3" onClick={this.handleSearchButtonClick}/>
+                    <SearchButton
+                        text="bullet 1+0"
+                        time="1+0"
+                        mode="standard"
+                        isPressed={this.props.buttons["1+0"].isPressed}
+                        onClick={this.handleSearchButtonClick}
+                    />
+                    <SearchButton
+                        text="bullet 1+1"
+                        time="1+1"
+                        mode="standard"
+                        isPressed={this.props.buttons["1+1"].isPressed}
+                        onClick={this.handleSearchButtonClick}
+                    />
+                    <SearchButton
+                        text="bullet 2+1"
+                        time="2+1"
+                        mode="standard"
+                        isPressed={this.props.buttons["2+1"].isPressed}
+                        onClick={this.handleSearchButtonClick}
+                    />
+                    <SearchButton
+                        text="blitz 3+0"
+                        time="3+0"
+                        mode="standard"
+                        isPressed={this.props.buttons["3+0"].isPressed}
+                        onClick={this.handleSearchButtonClick}
+                    />
+                    <SearchButton
+                        text="blitz 3+2"
+                        time="3+2"
+                        mode="standard"
+                        isPressed={this.props.buttons["3+2"].isPressed}
+                        onClick={this.handleSearchButtonClick}
+                    />
+                    <SearchButton
+                        text="blitz 5+3"
+                        time="5+3"
+                        mode="standard"
+                        isPressed={this.props.buttons["5+3"].isPressed}
+                        onClick={this.handleSearchButtonClick}
+                    />
                 </div>
                 {/*<h3 className="search-opponent-container__center-header">challenges:</h3>*/}
                 <Lobby

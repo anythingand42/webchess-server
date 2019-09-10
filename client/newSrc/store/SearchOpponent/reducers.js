@@ -1,25 +1,67 @@
 import {
-    SET_CHALLENGES_SEARCH_OPPONENT,
-    SET_CAN_CLICK_SEARCH_OPPONENT
+    SEARCH_BUTTON_SET_AVAILABILITY,
+    SEARCH_BUTTON_SET_PRESSED,
+    LOBBY_SET_CHALLENGES
 } from "./actions.js"
 
 const defaultState = {
     challenges: null,
-    canClick: true
+    buttons: {
+        "1+0": {
+            isAvailable: true,
+            isPressed: false
+        },
+        "1+1": {
+            isAvailable: true,
+            isPressed: false
+        },
+        "2+1": {
+            isAvailable: true,
+            isPressed: false
+        },
+        "3+0": {
+            isAvailable: true,
+            isPressed: false
+        },
+        "3+2": {
+            isAvailable: true,
+            isPressed: false
+        },
+        "5+3": {
+            isAvailable: true,
+            isPressed: false
+        }
+    }
 };
 
 export const searchOpponentReducer = (state = defaultState, action) => {
     switch (action.type) {
-        case SET_CHALLENGES_SEARCH_OPPONENT:
+        case SEARCH_BUTTON_SET_AVAILABILITY:
+            return {
+                ...state,
+                buttons: {
+                    ...state.buttons,
+                    [action.payload.buttonName]: {
+                        ...state.buttons[action.payload.buttonName],
+                        isAvailable: action.payload.isAvailable
+                    }
+                }
+            };
+        case SEARCH_BUTTON_SET_PRESSED:
+            return {
+                ...state,
+                buttons: {
+                    ...state.buttons,
+                    [action.payload.buttonName]: {
+                        ...state.buttons[action.payload.buttonName],
+                        isPressed: action.payload.isPressed
+                    }
+                }
+            };
+        case LOBBY_SET_CHALLENGES:
             return {
                 ...state,
                 challenges: action.payload
-            };
-
-        case SET_CAN_CLICK_SEARCH_OPPONENT:
-            return {
-                ...state,
-                canClick: action.payload
             };
 
         default:

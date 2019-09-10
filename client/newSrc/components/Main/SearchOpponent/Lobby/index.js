@@ -10,8 +10,8 @@ class Lobby extends React.Component {
                 if (!challenge.player) {
                     name = "anonymous";
                     rating = "-";
-                    time = challenge.options;
-                    mode = "standard";
+                    time = challenge.time;
+                    mode = challenge.mode;
                 } else {
                     name = challenge.player.name;
                     rating = challenge.player.rating;

@@ -8,23 +8,16 @@ const handleAnonConnection = require("./handleAnonConnection");
 function createSocketConnection(server) {
   const io = require("socket.io")(server);
   io.on("connection", function(socket) {
-    let cookie = socket.handshake.headers.cookie;
+    const cookie = socket.handshake.headers.cookie;
     let user;
+    let parsedCookie;
     if (cookie !== undefined) {
-      cookie = cookieParser.parse(socket.handshake.headers.cookie);
-      user = cookie.webchessUser;
+      parsedCookie = cookieParser.parse(cookie);
+      user = parsedCookie.webchessUser;
     }
-
-    // if(user === undefined) {
-    //   anonSocketHandler(io, socket, cookie);
-    // }
 
     if(user === undefined) {
       handleAnonConnection(io, socket, cookie);
-    }
-
-    if(user) {
-
     }
 
   }); 

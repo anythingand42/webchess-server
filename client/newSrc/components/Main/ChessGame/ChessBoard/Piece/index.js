@@ -1,7 +1,7 @@
 import React from "react";
 import "./style.css";
 
-class Piece extends React.Component {
+class Piece extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -9,6 +9,7 @@ class Piece extends React.Component {
             left: props.left
         };
         this.handleMouseMove = this.handleMouseMove.bind(this);
+        this.piece = this.props.piece;
     }
 
     handleMouseMove(event) {
@@ -27,12 +28,9 @@ class Piece extends React.Component {
     }
 
     render() {
-        if(!this.props.piece) {
-            throw new Error('attribute "piece" is necessary');
-        }
         return (
             <div
-                className={`piece-div piece-div__${this.props.piece}`}
+                className={`piece-div piece-div__${this.piece}`}
                 style={{
                     top: this.state.top - this.props.height / 2 + "px",
                     left: this.state.left - this.props.width / 2 + "px",

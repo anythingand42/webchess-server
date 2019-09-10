@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
-mongoose.set('useFindAndModify', false);
 
 const Schema = mongoose.Schema;
 
 const AnonChallengeSchema = new Schema(
     {
-        anonId: String,
-        options: String
+        mode: String,
+        time: String,
+        challengerSocketId: String
     }
 );
 

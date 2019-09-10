@@ -8,12 +8,8 @@
 
 .lobby {
     box-shadow: 0 0 5px rgba(0,0,0,0.5);
-    /*border-width: 1px;*/
-    /*border-style: solid;*/
     border-radius: 2px;
-    /*border-color: rgb(130, 130, 130);*/
     background-color: rgb(220, 220, 220);
-    /*background-color: rgb(110, 110, 110);*/
     color: rgb(30, 30, 30);
     user-select: none;
 }
@@ -24,9 +20,9 @@
     justify-items: center;
     align-items: center;
     height: 1.5em;
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
-    border-bottom-color: rgb(130, 130, 130);
+    /*border-bottom-style: solid;*/
+    /*border-bottom-width: 1px;*/
+    /*border-bottom-color: rgb(130, 130, 130);*/
 }
 
 .lobby__line:hover {

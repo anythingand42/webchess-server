@@ -3,6 +3,29 @@
   <component name="ChangeListManager">
     <list default="true" id="1d03f3a5-9326-4593-a29b-0c4f6e1f36c3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/newDist/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/newDist/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/Piece/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/Piece/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/Header/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/newSrc/components/Main/Header/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/Header/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/newSrc/components/Main/Header/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/Main.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/newSrc/components/Main/Main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/Register/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/newSrc/components/Main/SignUp/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/Register/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/newSrc/components/Main/SignUp/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/SearchOpponent/Lobby/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/newSrc/components/Main/SearchOpponent/Lobby/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/SearchOpponent/Lobby/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/newSrc/components/Main/SearchOpponent/Lobby/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/SearchOpponent/SearchButton/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/newSrc/components/Main/SearchOpponent/SearchButton/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/SearchOpponent/SearchButton/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/newSrc/components/Main/SearchOpponent/SearchButton/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/SearchOpponent/SearchOpponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/newSrc/components/Main/SearchOpponent/SearchOpponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/SearchOpponent/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/newSrc/components/Main/SearchOpponent/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/newSrc/components/Main/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/newSrc/store/Main/actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/newSrc/store/Main/actions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/newSrc/store/SearchOpponent/actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/newSrc/store/SearchOpponent/actions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/newSrc/store/SearchOpponent/reducers.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/newSrc/store/SearchOpponent/reducers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/anonChallenge.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/anonChallenge.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sockets/createSocketConnection.js" beforeDir="false" afterPath="$PROJECT_DIR$/sockets/createSocketConnection.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sockets/gameroom.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sockets/handleAnonConnection/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/sockets/handleAnonConnection/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sockets/user.js" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,24 +44,24 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="10.16.3" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/client/newSrc/components/Main/Register" />
-      <recent name="$PROJECT_DIR$/client/newSrc/store/Lobby" />
-      <recent name="$PROJECT_DIR$/client/newSrc/store/Main" />
-      <recent name="$PROJECT_DIR$/client/newSrc/components/SearhOpponent" />
-      <recent name="$PROJECT_DIR$/client/newSrc/store/SearchOpponent" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/client/newSrc/components/Main" />
       <recent name="$PROJECT_DIR$/client/newSrc/components/ChessGame" />
       <recent name="$PROJECT_DIR$/client/newSrc/store" />
       <recent name="$PROJECT_DIR$/client/newSrc/store/ChessBoard" />
       <recent name="$PROJECT_DIR$/client/src/components/Chat" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages" />
+      <recent name="$PROJECT_DIR$/client/newSrc/components/Main/Register" />
+      <recent name="$PROJECT_DIR$/client/newSrc/store/Lobby" />
+      <recent name="$PROJECT_DIR$/client/newSrc/store/Main" />
+      <recent name="$PROJECT_DIR$/client/newSrc/components/SearhOpponent" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -114,7 +137,10 @@
       <workItem from="1567886869059" duration="838000" />
       <workItem from="1567890467320" duration="3456000" />
       <workItem from="1567946123470" duration="16076000" />
-      <workItem from="1567971239656" duration="2748000" />
+      <workItem from="1567971239656" duration="3581000" />
+      <workItem from="1568014644684" duration="5953000" />
+      <workItem from="1568115573867" duration="10000" />
+      <workItem from="1568133089060" duration="8962000" />
     </task>
     <servers />
   </component>

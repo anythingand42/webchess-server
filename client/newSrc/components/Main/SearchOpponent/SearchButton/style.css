@@ -7,3 +7,11 @@
 .search-buttons-group__search-button:last-child {
     margin-bottom: 0;
 }
+
+.search-button_pressed {
+    background-color: rgb(130, 130, 130);
+}
+
+.search-button_pressed:hover {
+    background-color: rgb(120, 120, 120);
+}

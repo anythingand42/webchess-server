@@ -19,9 +19,9 @@ function Header(props) {
                         log in
                     </button>
                 </Link>
-                <Link className="header__register-button" to="/register">
+                <Link className="header__register-button" to="/signup">
                     <button className="button_gray">
-                        register
+                        sign up
                     </button>
                 </Link>
             </div>

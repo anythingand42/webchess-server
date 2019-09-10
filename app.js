@@ -11,6 +11,7 @@ const dev_db_url = 'mongodb+srv://mposk:fjkjkzpj@cluster0-g09ah.mongodb.net/loca
 //const dev_db_url = 'mongodb://localhost:27017/webchess';
 const mongoDB = process.env.MONGODB_URI || dev_db_url;
 mongoose.connect(mongoDB, { useNewUrlParser: true });
+mongoose.set('useFindAndModify', false);
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
