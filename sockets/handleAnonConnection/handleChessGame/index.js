@@ -16,7 +16,6 @@ const handleChessGame = async (io, socket, gameId, color) => {
         orientation: color,
         opponentSocketId: chessGame[opponentColor].socketId
     };
-
     socket.emit("send_game_options_to_client", options);
 
     socket.on("send_move_to_server", async (data) => {
@@ -25,6 +24,12 @@ const handleChessGame = async (io, socket, gameId, color) => {
         chessGame["b"].restOfTime = data.blackRestOfTime;
         await chessGame.save();
         io.to(data.opponentSocketId).emit("send_move_to_client", data);
+    });
+
+    socket.on("game_over", async (data) => {
+        io.to(data.opponentSocketId).emit("game_over", { result: data.result });
+        socket.emit("game_over", { result: data.result });
+        await ChessGame.findOneAndDelete({id: gameId});
     });
 };
 

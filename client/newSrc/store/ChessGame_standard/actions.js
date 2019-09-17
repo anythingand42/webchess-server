@@ -7,6 +7,7 @@ export const SET_ORIENTATION = "SET_ORIENTATION";
 export const SET_OPPONENT_SOCKET_ID = "SET_OPPONENT_SOCKET_ID";
 export const SET_WHITE_REST_OF_TIME = "SET_WHITE_REST_OF_TIME";
 export const SET_BLACK_REST_OF_TIME = "SET_BLACK_REST_OF_TIME";
+export const SET_RESULT = "SET_RESULT";
 
 export const setTravelingPiece = (travelingPiece) => {
     return {
@@ -70,3 +71,10 @@ export const setBlackRestOfTime = (blackRestOfTime) => {
         payload: blackRestOfTime
     };
 };
+
+export const setResult = (result) => {
+    return {
+        type: SET_RESULT,
+        payload: result
+    };
+}

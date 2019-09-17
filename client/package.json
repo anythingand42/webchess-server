@@ -21,6 +21,7 @@
     "webpack-dev-server": "^3.8.0"
   },
   "dependencies": {
+    "browser-cookies": "^1.2.0",
     "chess.js": "^0.10.2",
     "chessboardjsx": "^2.4.1",
     "file-loader": "^4.2.0",

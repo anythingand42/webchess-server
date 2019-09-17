@@ -3,6 +3,10 @@ import React from "react";
 class ChessTimer extends React.PureComponent {
 
     formatValue(ms) {
+        if(ms <= 0) {
+            ms = 0;
+        }
+
         let hours = Math.floor(ms / (60 * 60 * 1000));
 
         let minutes = Math.floor( ms / (60 * 1000) );

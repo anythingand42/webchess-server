@@ -1,6 +1,7 @@
 import React from "react";
 import ChessBoard from "../ChessBoard";
-import ChessTimer from "../ChessTimer"
+import ChessTimer from "../ChessTimer";
+import cookies from "browser-cookies";
 import "./style.css";
 
 class ChessGame_standard extends React.PureComponent {
@@ -19,11 +20,23 @@ class ChessGame_standard extends React.PureComponent {
     componentDidMount() {
         this.props.socket.on("send_move_to_client", this.handleSendMoveToClient);
         this.props.socket.on("send_game_options_to_client", this.handleSendGameOptionsToClient);
+        this.props.socket.on("game_over", (data) => {
+            this.props.setResult(data.result);
+            clearInterval(this.whiteTimer);
+            clearInterval(this.blackTimer);
+            cookies.erase("webchessGame");
+            this.props.mainSetGame(null);
+            this.props.socket.removeAllListeners("send_move_to_client");
+            this.props.socket.removeAllListeners("send_game_options_to_client");
+            this.props.socket.removeAllListeners("game_over");
+        });
         this.props.socket.emit("chess_game_connection", document.cookie);
     }
 
     componentWillUnmount() {
         this.props.socket.removeAllListeners("send_move_to_client");
+        this.props.socket.removeAllListeners("send_game_options_to_client");
+        this.props.socket.removeAllListeners("game_over");
     }
 
     handleSendGameOptionsToClient(options) {
@@ -41,21 +54,6 @@ class ChessGame_standard extends React.PureComponent {
         this.setChessClock();
     }
 
-    setChessClock() {
-        if(this.props.game.turn() === "w") { 
-            clearInterval(this.blackTimer);
-            this.whiteTimer = setInterval(() => {
-                this.props.setWhiteRestOfTime(this.props.whiteRestOfTime - 100);
-            }, 100);
-        }
-        if(this.props.game.turn() === "b") { 
-            clearInterval(this.whiteTimer);
-            this.blackTimer = setInterval(() => {
-                this.props.setBlackRestOfTime(this.props.blackRestOfTime - 100);
-            }, 100);
-        }
-    }
-
     handleSendMoveToClient(data) {
         this.props.game.move({
             from: data.idFrom,
@@ -68,9 +66,29 @@ class ChessGame_standard extends React.PureComponent {
         this.props.setBlackRestOfTime(data.blackRestOfTime);
 
         this.setChessClock();
+        let result = this.props.game.game_over();
+        if(result) {
+            const opponentColor = this.props.orientation === "b" ? "w" : "b";
+
+            if(this.props.game.in_checkmate()) {
+                this.props.socket.emit("game_over", {
+                    result: opponentColor,
+                    opponentSocketId: this.props.opponentSocketId
+                });
+            }
+
+            if(this.props.game.in_draw()) {
+                this.props.socket.emit("game_over", {
+                    result: "d",
+                    opponentSocketId: this.props.opponentSocketId
+                });
+            }
+
+        }
     }
 
     handleMouseDownOnBoard(event) {
+        if(this.props.result) return;
         if(this.props.orientation !== this.props.game.turn()) return;
 
         const piece = this.props.game.get(event.target.id);
@@ -92,6 +110,7 @@ class ChessGame_standard extends React.PureComponent {
     }
 
     handleMouseUpOnBoard(event) {
+        if(this.props.result) return;
         if(!this.props.travelingPiece) return;
 
         const idFrom = this.props.travelingPiece.idFrom;
@@ -127,8 +146,48 @@ class ChessGame_standard extends React.PureComponent {
         this.props.setCellsToHighlight(null);
     }
 
+    setChessClock() {
+        if(this.props.game.turn() === "w") { 
+            clearInterval(this.blackTimer);
+            this.whiteTimer = setInterval(() => {
+                if(this.props.whiteRestOfTime > 0) {
+                    this.props.setWhiteRestOfTime(this.props.whiteRestOfTime - 100);
+                } else {
+                    clearInterval(this.whiteTimer);
+                    if(this.props.orientation === "w") {
+                        this.props.socket.emit("game_over", {
+                            result: "b",
+                            opponentSocketId: this.props.opponentSocketId
+                        });
+                    }
+                }
+            }, 100);
+        }
+        if(this.props.game.turn() === "b") { 
+            clearInterval(this.whiteTimer);
+            this.blackTimer = setInterval(() => {
+                if(this.props.blackRestOfTime > 0) {
+                    this.props.setBlackRestOfTime(this.props.blackRestOfTime - 100);
+                } else {
+                    clearInterval(this.blackTimer);
+                    if(this.props.orientation === "b") {
+                        this.props.socket.emit("game_over", {
+                            result: "w",
+                            opponentSocketId: this.props.opponentSocketId
+                        });
+                    }
+                }
+            }, 100);
+        }
+    }
+
+    getResultMsg(result) {
+        if(result === "w") return "white won";
+        if(result === "b") return "black won";
+        if(result === "d") return "draw";
+    }
+
     render() {
-        console.log(this.props)
         return(
             <div className="game-container">
                 <div />
@@ -144,12 +203,22 @@ class ChessGame_standard extends React.PureComponent {
                 {this.props.orientation === "b" &&
                     <div>
                         <ChessTimer valueInMs={this.props.whiteRestOfTime}/>
+                        {this.props.result &&
+                            <div>
+                                {this.getResultMsg(this.props.result)}
+                            </div>
+                        }
                         <ChessTimer valueInMs={this.props.blackRestOfTime}/>
                     </div>
                 }
                 {this.props.orientation === "w" &&
                     <div>
                         <ChessTimer valueInMs={this.props.blackRestOfTime}/>
+                        {this.props.result &&
+                            <div>
+                                {this.getResultMsg(this.props.result)}
+                            </div>
+                        }
                         <ChessTimer valueInMs={this.props.whiteRestOfTime}/>
                     </div>
                 }

@@ -9,7 +9,8 @@ import {
     SET_ORIENTATION,
     SET_OPPONENT_SOCKET_ID,
     SET_WHITE_REST_OF_TIME,
-    SET_BLACK_REST_OF_TIME
+    SET_BLACK_REST_OF_TIME,
+    SET_RESULT
 } from "./actions";
 
 const defaultState = {
@@ -21,7 +22,8 @@ const defaultState = {
     orientation: "w",
     opponentSocketId: null,
     whiteRestOfTime: 0,
-    blackRestOfTime: 0
+    blackRestOfTime: 0,
+    result: null
 };
 
 export const chessGameStandardReducer = (state = defaultState, action) => {
@@ -70,6 +72,11 @@ export const chessGameStandardReducer = (state = defaultState, action) => {
             return {
                 ...state,
                 blackRestOfTime: action.payload
+            };
+        case SET_RESULT:
+            return {
+                ...state,
+                result: action.payload
             };
         default:
             return state;

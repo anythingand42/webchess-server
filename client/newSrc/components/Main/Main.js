@@ -7,7 +7,7 @@ import SignUp from "./SignUp";
 import ChessGame from "./ChessGame";
 import ChessGame_standard from "./ChessGame_standard";
 import io from "socket.io-client/dist/socket.io";
-import setCookie from "set-cookie";
+import cookies from "browser-cookies";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
 class Main extends React.Component {
@@ -16,28 +16,15 @@ class Main extends React.Component {
         this.socket = io();
         this.activeGame = false;
         this.handleStartGame = this.handleStartGame.bind(this);
-        this.handleContinueGame = this.handleContinueGame.bind(this);
     }
 
     componentDidMount() {
         this.socket.on("start_game", this.handleStartGame);
-        this.socket.on("continue_game", this.handleContinueGame);
-    }
-
-    handleContinueGame(options) {
-        this.props.mainSetGame({
-            mode: "standard",
-            opponentSocketId: options.opponentSocketId,
-            color: options.color
-        });
     }
 
     handleStartGame(options) {
         if(options) {
-            setCookie('webchessGame', JSON.stringify({
-                gameId: options.gameId,
-                color: options.color
-            }), { maxAge: 3000 });
+            cookies.set("webchessGame", JSON.stringify({ gameId: options.gameId, color: options.color }) );
         }
 
         this.props.mainSetGame({
@@ -64,6 +51,7 @@ class Main extends React.Component {
                         path="/gameroom"
                         render={(props) => <ChessGame_standard
                             socket={this.socket}
+                            mainSetGame={this.props.mainSetGame}
                             {...props}
                         />}
                     />
