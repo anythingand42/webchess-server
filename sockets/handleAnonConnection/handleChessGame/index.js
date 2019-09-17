@@ -21,8 +21,10 @@ const handleChessGame = async (io, socket, gameId, color) => {
 
     socket.on("send_move_to_server", async (data) => {
         chessGame.pgn = data.pgn;
+        chessGame["w"].restOfTime = data.whiteRestOfTime;
+        chessGame["b"].restOfTime = data.blackRestOfTime;
         await chessGame.save();
-        io.to(data.opponentSocketId).emit("send_move_to_client", data.idFrom, data.idTo);
+        io.to(data.opponentSocketId).emit("send_move_to_client", data);
     });
 };
 

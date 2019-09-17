@@ -56,14 +56,16 @@ class ChessGame_standard extends React.PureComponent {
         }
     }
 
-    handleSendMoveToClient(idFrom, idTo) {
+    handleSendMoveToClient(data) {
         this.props.game.move({
-            from: idFrom,
-            to: idTo,
+            from: data.idFrom,
+            to: data.idTo,
             promotion: "q"
         });
         this.props.setGame(this.props.game);
         this.props.setFen(this.props.game.fen());
+        this.props.setWhiteRestOfTime(data.whiteRestOfTime);
+        this.props.setBlackRestOfTime(data.blackRestOfTime);
 
         this.setChessClock();
     }
@@ -108,7 +110,9 @@ class ChessGame_standard extends React.PureComponent {
                 idFrom: idFrom,
                 idTo: idTo,
                 opponentSocketId: this.props.opponentSocketId,
-                pgn: this.props.game.pgn()
+                pgn: this.props.game.pgn(),
+                whiteRestOfTime: this.props.whiteRestOfTime,
+                blackRestOfTime: this.props.blackRestOfTime
             });
             this.props.setGame(this.props.game);
             this.props.setFen(this.props.game.fen());

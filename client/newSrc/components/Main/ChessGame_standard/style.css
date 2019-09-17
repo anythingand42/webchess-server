@@ -4,3 +4,8 @@
     width: 100%;
     grid-template-columns: 30% 40% 30%;
 }
+
+.clock {
+    height: 100%;
+    width: 100%;
+}
