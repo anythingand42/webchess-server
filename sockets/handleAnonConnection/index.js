@@ -1,38 +1,43 @@
 "use strict";
 
-const AnonChallenge = require("../../models/anonChallenge.js");
+const handleSearchOpponent = require("./handleSearchOpponent");
+const handleChessGame = require("./handleChessGame");
+const cookieParser = require("cookie-parse");
+const ChessGame = require("../../models/chessGame.js");
 
-const handleAnonConnection = async (io, socket, cookie) => {
+const handleAnonConnection = async (io, socket, parsedCookie) => {
 
-    socket.on("get_challenges_from_sever", async () => {
-        socket.emit( "send_challenges_to_client", await AnonChallenge.find({}) );
+    socket.on("search_opponent_connection", async () => {
+        if(parsedCookie && parsedCookie.webchessGame) {
+            const webchessGame = JSON.parse(parsedCookie.webchessGame);
+            const chessGame = await ChessGame.findOne({ id: webchessGame.gameId });
+
+            const opponentColor = webchessGame.color === "b" ? "w" : "b";
+            chessGame[webchessGame.color].socketId = socket.id;
+            await chessGame.save();
+
+            io.to(chessGame[opponentColor].socketId).emit("send_game_options_to_client", { opponentSocketId: socket.id });
+            socket.emit("start_game");
+        } else {
+            await handleSearchOpponent(io, socket);
+        }
     });
 
-    socket.on("add_challenge", async (time, mode) => {
-        const challenge = new AnonChallenge();
-        challenge.mode = mode;
-        challenge.time = time;
-        challenge.challengerSocketId = socket.id;
-        await challenge.save();
-        socket.emit("challenge_is_added", time, mode);
-        io.emit( "change_in_challenges", await AnonChallenge.find({}) );
+    socket.on("chess_game_connection", async (cookie) => {
+        let parsedCookie;
+        if (cookie) {
+            parsedCookie = cookieParser.parse(cookie);
+        }
+        if(parsedCookie && parsedCookie.webchessGame) {
+            const webchessGame = JSON.parse(parsedCookie.webchessGame);
+            await handleChessGame(
+                io,
+                socket,
+                webchessGame.gameId,
+                webchessGame.color
+            );
+        }
     });
-
-    socket.on("remove_challenge", async (time, mode) => {
-        await AnonChallenge.findOneAndRemove({
-            mode: mode,
-            time: time,
-            challengerSocketId: socket.id
-        });
-        socket.emit("challenge_is_removed", time, mode);
-        io.emit( "change_in_challenges", await AnonChallenge.find({}) );
-    });
-
-    socket.on("disconnect", async () => {
-        await AnonChallenge.deleteMany({challengerSocketId: socket.id});
-        io.emit( "change_in_challenges", await AnonChallenge.find({}) );
-    });
-
 };
 
 module.exports = handleAnonConnection;

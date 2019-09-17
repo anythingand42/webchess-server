@@ -22,16 +22,6 @@ class ChessTimer extends Component {
         }
     }
 
-    UNSAFE_componentWillReceiveProps(nextProps, nextContext) {
-        this.valueInMs = nextProps.value;
-        this.setState({
-            formattedValue: this.formatValue(this.valueInMs)
-        });
-        if(this.isRunning) {
-            this.startTimer();
-        }
-    }
-
     formatValue(ms) {
         let hours = Math.floor(ms / (60 * 60 * 1000));
 

@@ -15,7 +15,6 @@ class SearchOpponent extends React.Component {
     componentDidMount() {
         this.props.socket.on("change_in_challenges", this.refreshLobby);
         this.props.socket.on("send_challenges_to_client", this.refreshLobby);
-        this.props.socket.emit("get_challenges_from_server");
 
         this.props.socket.on("challenge_is_added", (time) => {
             const buttonName = time;
@@ -26,6 +25,17 @@ class SearchOpponent extends React.Component {
             const buttonName = time;
             this.props.searchButtonSetAvailability(buttonName, true);
         });
+
+        this.props.socket.emit("get_challenges_from_server");
+
+        this.props.socket.emit("search_opponent_connection");
+    }
+
+    componentWillUnmount() {
+        this.props.socket.removeAllListeners("change_in_challenges");
+        this.props.socket.removeAllListeners("send_challenges_to_client");
+        this.props.socket.removeAllListeners("challenge_is_added");
+        this.props.socket.removeAllListeners("challenge_is_removed");
     }
 
     refreshLobby(challenges) {
@@ -101,7 +111,7 @@ class SearchOpponent extends React.Component {
                 {/*<h3 className="search-opponent-container__left-header">add challenge:</h3>*/}
                 <div className="search-opponent-container__right-buttons-group">
                     <button className="button_gray right-buttons-group__button">create custom game</button>
-                    <Link to="/gameroom" className="right-buttons-group__button">
+                    <Link to="/trainingroom" className="right-buttons-group__button">
                         <button className="button_gray">play with yourself</button>
                     </Link>
                 </div>
