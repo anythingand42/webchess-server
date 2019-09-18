@@ -3,15 +3,16 @@
 const AnonChallenge = require("../../../models/anonChallenge.js");
 const ChessGame = require("../../../models/chessGame.js");
 
-const handleChessGame = require("../handleChessGame");
-
 const cryptoRandomString = require('crypto-random-string');
 
 const handleSearchOpponent = async (io, socket) => {
 
-    socket.on("get_challenges_from_server", async () => {
-        socket.emit( "send_challenges_to_client", await AnonChallenge.find({}) );
-    });
+    socket.removeAllListeners("add_challenge");
+    socket.removeAllListeners("remove_challenge");
+    socket.removeAllListeners("disconnect");
+    socket.removeAllListeners("search_opponent_disconnect");
+
+    socket.emit( "send_challenges_to_client", await AnonChallenge.find({}) );
 
     socket.on("add_challenge", async (time, mode) => {
 
@@ -87,6 +88,15 @@ const handleSearchOpponent = async (io, socket) => {
     socket.on("disconnect", async () => {
         await AnonChallenge.deleteMany({challengerSocketId: socket.id});
         io.emit( "change_in_challenges", await AnonChallenge.find({}) );
+    });
+
+    socket.on("search_opponent_disconnect", async () => {
+        await AnonChallenge.deleteMany({challengerSocketId: socket.id});
+        io.emit( "change_in_challenges", await AnonChallenge.find({}) );
+        socket.removeAllListeners("add_challenge");
+        socket.removeAllListeners("remove_challenge");
+        socket.removeAllListeners("disconnect");
+        socket.removeAllListeners("search_opponent_disconnect");
     });
 };
 

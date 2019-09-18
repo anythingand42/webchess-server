@@ -1,22 +1,19 @@
-import Chess from "chess.js";
-
 import {
-    SET_TRAVELING_PIECE,
-    SET_CELLS_TO_HIGHLIGHT,
-    SET_GAME,
-    SET_PGN,
-    SET_FEN,
-    SET_ORIENTATION,
-    SET_OPPONENT_SOCKET_ID,
-    SET_WHITE_REST_OF_TIME,
-    SET_BLACK_REST_OF_TIME,
-    SET_RESULT
+    STANDARD_CHESS_GAME_SET_DRAGGED_PIECE,
+    STANDARD_CHESS_GAME_SET_CELLS_TO_HIGHLIGHT,
+    STANDARD_CHESS_GAME_SET_PGN,
+    STANDARD_CHESS_GAME_SET_FEN,
+    STANDARD_CHESS_GAME_SET_ORIENTATION,
+    STANDARD_CHESS_GAME_SET_OPPONENT_SOCKET_ID,
+    STANDARD_CHESS_GAME_SET_WHITE_REST_OF_TIME,
+    STANDARD_CHESS_GAME_SET_BLACK_REST_OF_TIME,
+    STANDARD_CHESS_GAME_SET_RESULT,
+    STANDARD_CHESS_GAME_RESET
 } from "./actions";
 
 const defaultState = {
-    travelingPiece: null,
+    draggedPiece: null,
     cellsToHighlight: null,
-    game: new Chess(),
     pgn: null,
     fen: "start",
     orientation: "w",
@@ -28,56 +25,53 @@ const defaultState = {
 
 export const chessGameStandardReducer = (state = defaultState, action) => {
     switch (action.type) {
-        case SET_TRAVELING_PIECE:
+        case STANDARD_CHESS_GAME_SET_DRAGGED_PIECE:
             return {
                 ...state,
-                travelingPiece: action.payload
+                draggedPiece: action.payload
             };
-        case SET_CELLS_TO_HIGHLIGHT:
+        case STANDARD_CHESS_GAME_SET_CELLS_TO_HIGHLIGHT:
             return {
                 ...state,
                 cellsToHighlight: action.payload
             };
-        case SET_GAME:
-            return {
-                ...state,
-                game: action.payload
-            };
-        case SET_PGN:
+        case STANDARD_CHESS_GAME_SET_PGN:
             return {
                 ...state,
                 pgn: action.payload
             };
-        case SET_FEN:
+        case STANDARD_CHESS_GAME_SET_FEN:
             return {
                 ...state,
                 fen: action.payload
             };
-        case SET_ORIENTATION:
+        case STANDARD_CHESS_GAME_SET_ORIENTATION:
             return {
                 ...state,
                 orientation: action.payload
             };
-        case SET_OPPONENT_SOCKET_ID:
+        case STANDARD_CHESS_GAME_SET_OPPONENT_SOCKET_ID:
             return {
                 ...state,
                 opponentSocketId: action.payload
             };
-        case SET_WHITE_REST_OF_TIME:
+        case STANDARD_CHESS_GAME_SET_WHITE_REST_OF_TIME:
             return {
                 ...state,
                 whiteRestOfTime: action.payload
             };
-        case SET_BLACK_REST_OF_TIME:
+        case STANDARD_CHESS_GAME_SET_BLACK_REST_OF_TIME:
             return {
                 ...state,
                 blackRestOfTime: action.payload
             };
-        case SET_RESULT:
+        case STANDARD_CHESS_GAME_SET_RESULT:
             return {
                 ...state,
                 result: action.payload
             };
+        case STANDARD_CHESS_GAME_RESET:
+            return defaultState;
         default:
             return state;
     }

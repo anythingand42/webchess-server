@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import Main from "./Main.js";
 import {
     mainSetUserName,
-    mainSetGame
+    mainSetGame,
+    reset
 } from "../../store/Main/actions";
 
 class ConnectedMain extends React.Component {
@@ -14,6 +15,7 @@ class ConnectedMain extends React.Component {
                 game={this.props.game}
                 setUserName={this.props.mainSetUserName}
                 mainSetGame={this.props.mainSetGame}
+                reset={this.props.reset}
             />
         );
     }
@@ -27,8 +29,9 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-    mainSetUserName: mainSetUserName,
-    mainSetGame: mainSetGame
+    mainSetUserName,
+    mainSetGame,
+    reset
 };
 
 

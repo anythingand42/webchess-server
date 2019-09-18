@@ -7,7 +7,9 @@ function SearchButton(props) {
     return(
         <button
             className={`button_gray search-buttons-group__search-button${pressed}`}
-            onClick={() => props.onClick(props.time, props.mode)}
+            onClick={() => {
+                return props.onClick(props.time, props.mode)
+            }}
         >
             {props.text}
         </button>

@@ -1,6 +1,7 @@
 export const SEARCH_BUTTON_SET_AVAILABILITY = "SEARCH_BUTTON_SET_AVAILABILITY";
 export const SEARCH_BUTTON_SET_PRESSED = "SEARCH_BUTTON_SET_PRESSED";
 export const LOBBY_SET_CHALLENGES = "LOBBY_SET_CHALLENGES";
+export const SEARCH_OPPONENT_RESET = "SEARCH_OPPONENT_RESET";
 
 export const searchButtonSetAvailability = (buttonName, isAvailable) => ({
     type: SEARCH_BUTTON_SET_AVAILABILITY,
@@ -21,4 +22,8 @@ export const searchButtonSetPressed = (buttonName, isPressed) => ({
 export const lobbySetChallenges = (challenges) => ({
     type: LOBBY_SET_CHALLENGES,
     payload: challenges
+});
+
+export const reset = () => ({
+    type: SEARCH_OPPONENT_RESET
 });

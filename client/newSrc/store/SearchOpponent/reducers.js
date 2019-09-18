@@ -1,7 +1,8 @@
 import {
     SEARCH_BUTTON_SET_AVAILABILITY,
     SEARCH_BUTTON_SET_PRESSED,
-    LOBBY_SET_CHALLENGES
+    LOBBY_SET_CHALLENGES,
+    SEARCH_OPPONENT_RESET
 } from "./actions.js"
 
 const defaultState = {
@@ -63,6 +64,9 @@ export const searchOpponentReducer = (state = defaultState, action) => {
                 ...state,
                 challenges: action.payload
             };
+
+        case SEARCH_OPPONENT_RESET:
+            return defaultState;
 
         default:
             return state;

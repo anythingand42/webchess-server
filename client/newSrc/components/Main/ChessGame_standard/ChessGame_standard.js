@@ -3,6 +3,7 @@ import ChessBoard from "../ChessBoard";
 import ChessTimer from "../ChessTimer";
 import cookies from "browser-cookies";
 import "./style.css";
+import Chess from "chess.js";
 
 class ChessGame_standard extends React.PureComponent {
     constructor(props) {
@@ -15,6 +16,8 @@ class ChessGame_standard extends React.PureComponent {
         this.setChessClock = this.setChessClock.bind(this);
         this.whiteTimer = null;
         this.blackTimer = null;
+        this.chessGame = new Chess();
+        this.isActive = false;
     }
 
     componentDidMount() {
@@ -25,10 +28,10 @@ class ChessGame_standard extends React.PureComponent {
             clearInterval(this.whiteTimer);
             clearInterval(this.blackTimer);
             cookies.erase("webchessGame");
-            this.props.mainSetGame(null);
             this.props.socket.removeAllListeners("send_move_to_client");
             this.props.socket.removeAllListeners("send_game_options_to_client");
             this.props.socket.removeAllListeners("game_over");
+            this.props.mainSetGame(null);
         });
         this.props.socket.emit("chess_game_connection", document.cookie);
     }
@@ -37,6 +40,9 @@ class ChessGame_standard extends React.PureComponent {
         this.props.socket.removeAllListeners("send_move_to_client");
         this.props.socket.removeAllListeners("send_game_options_to_client");
         this.props.socket.removeAllListeners("game_over");
+        clearInterval(this.whiteTimer);
+        clearInterval(this.blackTimer);
+        this.props.reset();
     }
 
     handleSendGameOptionsToClient(options) {
@@ -44,40 +50,38 @@ class ChessGame_standard extends React.PureComponent {
         if(options.orientation) this.props.setOrientation(options.orientation);
         if(options.pgn) {
             this.props.setPgn(options.pgn);
-            this.props.game.load_pgn(options.pgn);
-            this.props.setGame(this.props.game);
-            this.props.setFen(this.props.game.fen());
+            this.chessGame.load_pgn(options.pgn);
+            this.props.setFen(this.chessGame.fen());
         }
-        console.log("options", options);
         if(options.whiteRestOfTime) this.props.setWhiteRestOfTime(options.whiteRestOfTime);
         if(options.blackRestOfTime) this.props.setBlackRestOfTime(options.blackRestOfTime);
         this.setChessClock();
+        this.isActive = true;
     }
 
     handleSendMoveToClient(data) {
-        this.props.game.move({
+        this.chessGame.move({
             from: data.idFrom,
             to: data.idTo,
             promotion: "q"
         });
-        this.props.setGame(this.props.game);
-        this.props.setFen(this.props.game.fen());
+        this.props.setFen(this.chessGame.fen());
         this.props.setWhiteRestOfTime(data.whiteRestOfTime);
         this.props.setBlackRestOfTime(data.blackRestOfTime);
 
         this.setChessClock();
-        let result = this.props.game.game_over();
+        let result = this.chessGame.game_over();
         if(result) {
             const opponentColor = this.props.orientation === "b" ? "w" : "b";
 
-            if(this.props.game.in_checkmate()) {
+            if(this.chessGame.in_checkmate()) {
                 this.props.socket.emit("game_over", {
                     result: opponentColor,
                     opponentSocketId: this.props.opponentSocketId
                 });
             }
 
-            if(this.props.game.in_draw()) {
+            if(this.chessGame.in_draw()) {
                 this.props.socket.emit("game_over", {
                     result: "d",
                     opponentSocketId: this.props.opponentSocketId
@@ -88,19 +92,21 @@ class ChessGame_standard extends React.PureComponent {
     }
 
     handleMouseDownOnBoard(event) {
+        if(!this.isActive) return;
         if(this.props.result) return;
-        if(this.props.orientation !== this.props.game.turn()) return;
+        //if(this.props.orientation !== this.chessGame.turn()) return;
 
-        const piece = this.props.game.get(event.target.id);
+        const piece = this.chessGame.get(event.target.id);
         if(piece) {
-            this.props.setTravelingPiece({
+            if(this.props.orientation !== piece.color) return;
+            this.props.setDraggedPiece({
                 left: event.clientX,
                 top: event.clientY,
                 piece: `${piece.color}${piece.type}`,
                 idFrom: event.target.id
             });
 
-            const cellsToHighlight = this.props.game.moves({
+            const cellsToHighlight = this.chessGame.moves({
                 square: event.target.id,
                 verbose: true
             }).map(move => move.to);
@@ -111,17 +117,17 @@ class ChessGame_standard extends React.PureComponent {
 
     handleMouseUpOnBoard(event) {
         if(this.props.result) return;
-        if(!this.props.travelingPiece) return;
+        if(!this.props.draggedPiece) return;
 
-        const idFrom = this.props.travelingPiece.idFrom;
+        const idFrom = this.props.draggedPiece.idFrom;
         const idTo = event.target.id;
-        const move = this.props.game.move({
+        const move = this.chessGame.move({
             from: idFrom,
             to: idTo,
             promotion: "q"
         });
 
-        this.props.setTravelingPiece(null);
+        this.props.setDraggedPiece(null);
         this.props.setCellsToHighlight(null);
 
         if(move) {
@@ -129,25 +135,24 @@ class ChessGame_standard extends React.PureComponent {
                 idFrom: idFrom,
                 idTo: idTo,
                 opponentSocketId: this.props.opponentSocketId,
-                pgn: this.props.game.pgn(),
+                pgn: this.chessGame.pgn(),
                 whiteRestOfTime: this.props.whiteRestOfTime,
                 blackRestOfTime: this.props.blackRestOfTime
             });
-            this.props.setGame(this.props.game);
-            this.props.setFen(this.props.game.fen());
+            this.props.setFen(this.chessGame.fen());
 
             this.setChessClock();
         }
     }
 
     handleMouseLeaveFromBoard(event) {
-        if(!this.props.travelingPiece) return;
-        this.props.setTravelingPiece(null);
+        if(!this.props.draggedPiece) return;
+        this.props.setDraggedPiece(null);
         this.props.setCellsToHighlight(null);
     }
 
     setChessClock() {
-        if(this.props.game.turn() === "w") { 
+        if(this.chessGame.turn() === "w") { 
             clearInterval(this.blackTimer);
             this.whiteTimer = setInterval(() => {
                 if(this.props.whiteRestOfTime > 0) {
@@ -163,7 +168,7 @@ class ChessGame_standard extends React.PureComponent {
                 }
             }, 100);
         }
-        if(this.props.game.turn() === "b") { 
+        if(this.chessGame.turn() === "b") { 
             clearInterval(this.whiteTimer);
             this.blackTimer = setInterval(() => {
                 if(this.props.blackRestOfTime > 0) {
@@ -194,7 +199,7 @@ class ChessGame_standard extends React.PureComponent {
                 <ChessBoard
                     fen={this.props.fen}
                     cellsToHighlight={this.props.cellsToHighlight}
-                    travelingPiece = {this.props.travelingPiece}
+                    draggedPiece = {this.props.draggedPiece}
                     onMouseDown={this.handleMouseDownOnBoard}
                     onMouseUp={this.handleMouseUpOnBoard}
                     onMouseLeave={this.handleMouseLeaveFromBoard}

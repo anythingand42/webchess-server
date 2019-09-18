@@ -22,11 +22,16 @@ class Main extends React.Component {
         this.socket.on("start_game", this.handleStartGame);
     }
 
+    componentWillUnmount() {
+        this.socket.removeAllListeners("start_game");
+        this.props.reset();
+    }
+
     handleStartGame(options) {
         if(options) {
             cookies.set("webchessGame", JSON.stringify({ gameId: options.gameId, color: options.color }) );
         }
-
+        
         this.props.mainSetGame({
             mode: "standard"
         });

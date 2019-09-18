@@ -4,7 +4,8 @@ import SearchOpponent from "./SearchOpponent.js";
 import {
     searchButtonSetAvailability,
     lobbySetChallenges,
-    searchButtonSetPressed
+    searchButtonSetPressed,
+    reset
 } from "../../../store/SearchOpponent/actions";
 
 class ConnectedSearchOpponent extends React.Component {
@@ -17,6 +18,7 @@ class ConnectedSearchOpponent extends React.Component {
                 searchButtonSetAvailability={this.props.searchButtonSetAvailability}
                 searchButtonSetPressed={this.props.searchButtonSetPressed}
                 lobbySetChallenges={this.props.lobbySetChallenges}
+                reset={this.props.reset}
             />
         );
     }
@@ -30,9 +32,10 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-    searchButtonSetAvailability: searchButtonSetAvailability,
-    searchButtonSetPressed: searchButtonSetPressed,
-    lobbySetChallenges: lobbySetChallenges
+    searchButtonSetAvailability,
+    searchButtonSetPressed,
+    lobbySetChallenges,
+    reset
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ConnectedSearchOpponent);

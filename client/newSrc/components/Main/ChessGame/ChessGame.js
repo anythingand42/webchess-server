@@ -13,7 +13,7 @@ class ChessGame extends React.PureComponent {
     handleMouseDownOnBoard(event) {
         const piece = this.props.game.get(event.target.id);
         if(piece) {
-            this.props.setTravelingPiece({
+            this.props.setDraggedPiece({
                 left: event.clientX,
                 top: event.clientY,
                 piece: `${piece.color}${piece.type}`,
@@ -30,11 +30,11 @@ class ChessGame extends React.PureComponent {
     }
 
     handleMouseUpOnBoard(event) {
-        if(!this.props.travelingPiece) return;
-        this.props.setTravelingPiece(null);
+        if(!this.props.draggedPiece) return;
+        this.props.setDraggedPiece(null);
         this.props.setCellsToHighlight(null);
         const move = this.props.game.move({
-            from: this.props.travelingPiece.idFrom,
+            from: this.props.draggedPiece.idFrom,
             to: event.target.id,
             promotion: "q"
         });
@@ -44,8 +44,8 @@ class ChessGame extends React.PureComponent {
     }
 
     handleMouseLeaveFromBoard(event) {
-        if(!this.props.travelingPiece) return;
-        this.props.setTravelingPiece(null);
+        if(!this.props.draggedPiece) return;
+        this.props.setDraggedPiece(null);
         this.props.setCellsToHighlight(null);
     }
 
@@ -56,7 +56,7 @@ class ChessGame extends React.PureComponent {
                 <ChessBoard
                     fen={this.props.game.fen()}
                     cellsToHighlight={this.props.cellsToHighlight}
-                    travelingPiece = {this.props.travelingPiece}
+                    draggedPiece = {this.props.draggedPiece}
                     onMouseDown={this.handleMouseDownOnBoard}
                     onMouseUp={this.handleMouseUpOnBoard}
                     onMouseLeave={this.handleMouseLeaveFromBoard}

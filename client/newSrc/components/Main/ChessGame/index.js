@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import ChessGame from "./ChessGame.js";
 import {
-    setTravelingPiece,
+    setDraggedPiece,
     setCellsToHighlight,
     setGame
 } from "../../../store/ChessGame/actions";
@@ -12,9 +12,9 @@ class ConnectedChessGame extends React.Component {
         return(
             <ChessGame
                 game={this.props.game}
-                travelingPiece={this.props.travelingPiece}
+                draggedPiece={this.props.draggedPiece}
                 cellsToHighlight={this.props.cellsToHighlight}
-                setTravelingPiece={this.props.setTravelingPiece}
+                setDraggedPiece={this.props.setDraggedPiece}
                 setCellsToHighlight={this.props.setCellsToHighlight}
                 setGame={this.props.setGame}
             />
@@ -24,16 +24,16 @@ class ConnectedChessGame extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        travelingPiece: state.chessGame.travelingPiece,
+        draggedPiece: state.chessGame.draggedPiece,
         cellsToHighlight: state.chessGame.cellsToHighlight,
         game: state.chessGame.game
     }
 };
 
 const mapDispatchToProps = {
-    setTravelingPiece: setTravelingPiece,
-    setCellsToHighlight: setCellsToHighlight,
-    setGame: setGame
+    setDraggedPiece,
+    setCellsToHighlight,
+    setGame
 };
 
 

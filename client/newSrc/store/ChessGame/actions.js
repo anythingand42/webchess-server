@@ -1,11 +1,11 @@
-export const SET_TRAVELING_PIECE = "SET_TRAVELING_PIECE";
+export const SET_DRAGGED_PIECE = "SET_DRAGGED_PIECE";
 export const SET_CELLS_TO_HIGHLIGHT = "SET_CELLS_TO_HIGHLIGHT";
 export const SET_GAME = "SET_GAME";
 
-export const setTravelingPiece = (travelingPiece) => {
+export const setDraggedPiece = (draggedPiece) => {
     return {
-        type: SET_TRAVELING_PIECE,
-        payload: travelingPiece
+        type: SET_DRAGGED_PIECE,
+        payload: draggedPiece
     };
 };
 

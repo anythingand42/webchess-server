@@ -2,16 +2,16 @@ import React from "react";
 import { connect } from "react-redux";
 import ChessGame from "./ChessGame_standard.js";
 import {
-    setTravelingPiece,
+    setDraggedPiece,
     setCellsToHighlight,
-    setGame,
     setFen,
     setPgn,
     setOrientation,
     setOpponentSocketId,
     setWhiteRestOfTime,
     setBlackRestOfTime,
-    setResult
+    setResult,
+    reset
 } from "../../../store/ChessGame_standard/actions";
 
 class ConnectedChessGame extends React.Component {
@@ -19,19 +19,17 @@ class ConnectedChessGame extends React.Component {
         return(
             <ChessGame
                 socket={this.props.socket}
-                game={this.props.game}
                 fen={this.props.fen}
                 pgn={this.props.pgn}
                 orientation={this.props.orientation}
-                travelingPiece={this.props.travelingPiece}
+                draggedPiece={this.props.draggedPiece}
                 cellsToHighlight={this.props.cellsToHighlight}
-                setTravelingPiece={this.props.setTravelingPiece}
+                setDraggedPiece={this.props.setDraggedPiece}
                 setCellsToHighlight={this.props.setCellsToHighlight}
                 opponentSocketId={this.props.opponentSocketId}
                 whiteRestOfTime={this.props.whiteRestOfTime}
                 blackRestOfTime={this.props.blackRestOfTime}
                 result={this.props.result}
-                setGame={this.props.setGame}
                 setFen={this.props.setFen}
                 setPgn={this.props.setPgn}
                 setOrientation={this.props.setOrientation}
@@ -40,6 +38,7 @@ class ConnectedChessGame extends React.Component {
                 setBlackRestOfTime={this.props.setBlackRestOfTime}
                 setResult={this.props.setResult}
                 mainSetGame={this.props.mainSetGame}
+                reset={this.props.reset}
             />
         );
     }
@@ -47,9 +46,8 @@ class ConnectedChessGame extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        travelingPiece: state.chessGame_standard.travelingPiece,
+        draggedPiece: state.chessGame_standard.draggedPiece,
         cellsToHighlight: state.chessGame_standard.cellsToHighlight,
-        game: state.chessGame_standard.game,
         fen: state.chessGame_standard.fen,
         pgn: state.chessGame_standard.pgn,
         orientation: state.chessGame_standard.orientation,
@@ -61,16 +59,16 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-    setTravelingPiece,
+    setDraggedPiece,
     setCellsToHighlight,
-    setGame,
     setFen,
     setPgn,
     setOrientation,
     setOpponentSocketId,
     setWhiteRestOfTime,
     setBlackRestOfTime,
-    setResult
+    setResult,
+    reset
 };
 
 

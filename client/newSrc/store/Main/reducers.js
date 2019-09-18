@@ -1,6 +1,7 @@
 import {
     MAIN_SET_USER_NAME,
-    MAIN_SET_GAME
+    MAIN_SET_GAME,
+    MAIN_RESET
 } from "./actions";
 
 const defaultState = {
@@ -21,6 +22,10 @@ export const mainReducer = (state = defaultState, action) => {
                 ...state,
                 game: action.payload
             };
+
+        case MAIN_RESET:
+            return defaultState;
+            
         default:
             return state;
     }

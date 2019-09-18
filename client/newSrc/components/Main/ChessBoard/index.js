@@ -108,9 +108,9 @@ class ChessBoard extends Component {
     render() {
         let cells = this.getCellsFromFen(this.props.fen);
 
-        if(this.props.travelingPiece) {
-            if(this.props.travelingPiece.idFrom) {
-                cells[this.convertToNumId(this.props.travelingPiece.idFrom)].transparentPiece = true;
+        if(this.props.draggedPiece) {
+            if(this.props.draggedPiece.idFrom) {
+                cells[this.convertToNumId(this.props.draggedPiece.idFrom)].transparentPiece = true;
             }
         }
 
@@ -136,13 +136,13 @@ class ChessBoard extends Component {
                         {reactCells}
                     </div>
                 </div>
-                {this.props.travelingPiece &&
+                {this.props.draggedPiece &&
                     <Piece
                         width={this.board.current ? this.board.current.offsetWidth/8 : 50}
                         height={this.board.current ? this.board.current.offsetHeight/8 : 50}
-                        top={this.props.travelingPiece.top}
-                        left={this.props.travelingPiece.left}
-                        piece={this.props.travelingPiece.piece}
+                        top={this.props.draggedPiece.top}
+                        left={this.props.draggedPiece.left}
+                        piece={this.props.draggedPiece.piece}
                     />
                 }
             </div>
