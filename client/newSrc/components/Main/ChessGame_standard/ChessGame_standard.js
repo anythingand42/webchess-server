@@ -38,6 +38,7 @@ class ChessGame_standard extends React.PureComponent {
     }
 
     componentWillUnmount() {
+        this.props.socket.emit("standard_chess_game_disconnect");
         this.props.socket.removeAllListeners("send_move_to_client");
         this.props.socket.removeAllListeners("send_game_options_to_client");
         this.props.socket.removeAllListeners("game_over");
@@ -165,8 +166,10 @@ class ChessGame_standard extends React.PureComponent {
     }
 
     setChessClock() {
-        if(this.chessGame.turn() === "w") { 
-            clearInterval(this.blackTimer);
+        clearInterval(this.whiteTimer);
+        clearInterval(this.blackTimer);
+
+        if(this.chessGame.turn() === "w") {
 
             this.whiteTimer = setInterval(() => {
                 if(this.props.whiteRestOfTime > 0) {
@@ -182,8 +185,7 @@ class ChessGame_standard extends React.PureComponent {
                 }
             }, 100);
         }
-        if(this.chessGame.turn() === "b") { 
-            clearInterval(this.whiteTimer);
+        if(this.chessGame.turn() === "b") {
 
             this.blackTimer = setInterval(() => {
                 if(this.props.blackRestOfTime > 0) {
