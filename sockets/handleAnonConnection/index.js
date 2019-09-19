@@ -7,9 +7,6 @@ const ChessGame = require("../../models/chessGame.js");
 
 const handleAnonConnection = async (io, socket, parsedCookie) => {
 
-    socket.removeAllListeners("search_opponent_connection");
-    socket.removeAllListeners("chess_game_connection");
-
     socket.on("search_opponent_connection", async () => {
         if(parsedCookie && parsedCookie.webchessGame) {
             const webchessGame = JSON.parse(parsedCookie.webchessGame);

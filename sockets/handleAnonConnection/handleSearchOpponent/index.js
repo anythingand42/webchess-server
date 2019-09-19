@@ -7,10 +7,10 @@ const cryptoRandomString = require('crypto-random-string');
 
 const handleSearchOpponent = async (io, socket) => {
 
-    socket.removeAllListeners("add_challenge");
-    socket.removeAllListeners("remove_challenge");
-    socket.removeAllListeners("disconnect");
-    socket.removeAllListeners("search_opponent_disconnect");
+    // socket.removeAllListeners("add_challenge");
+    // socket.removeAllListeners("remove_challenge");
+    // socket.removeAllListeners("disconnect");
+    // socket.removeAllListeners("search_opponent_disconnect");
 
     socket.emit( "send_challenges_to_client", await AnonChallenge.find({}) );
 
@@ -25,6 +25,7 @@ const handleSearchOpponent = async (io, socket) => {
 
             let chessGame = new ChessGame();
             chessGame.id = cryptoRandomString({length: 15});
+            chessGame.turn = "w";
             chessGame.pgn = "";
             chessGame.time = time;
             const parsedTime =  time.split("+");
@@ -95,8 +96,8 @@ const handleSearchOpponent = async (io, socket) => {
         io.emit( "change_in_challenges", await AnonChallenge.find({}) );
         socket.removeAllListeners("add_challenge");
         socket.removeAllListeners("remove_challenge");
-        socket.removeAllListeners("disconnect");
         socket.removeAllListeners("search_opponent_disconnect");
+        socket.removeAllListeners("disconnect");
     });
 };
 

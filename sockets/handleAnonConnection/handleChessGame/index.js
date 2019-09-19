@@ -4,17 +4,26 @@ const ChessGame = require("../../../models/chessGame.js");
 
 const handleChessGame = async (io, socket, gameId, color) => {
 
-    socket.removeAllListeners("send_move_to_server");
-    socket.removeAllListeners("game_over");
-    socket.removeAllListeners("standard_chess_game_disconnect");
-    socket.removeAllListeners("disconnect");
+    // socket.removeAllListeners("send_move_to_server");
+    // socket.removeAllListeners("game_over");
+    // socket.removeAllListeners("standard_chess_game_disconnect");
+    // socket.removeAllListeners("disconnect");
 
     const opponentColor = color === "b" ? "w" : "b";
     const chessGame = await ChessGame.findOne({ id: gameId });
+    let isGameOver = false;
+
+    // let restOfTime = {
+    //     "w": chessGame["w"].restOfTime,
+    //     "b": chessGame["b"].restOfTime
+    // };
 
     if(chessGame[color].disconnectFlag) {
         const delta = new Date().getTime() - chessGame[color].sendOptionsDate;
-        chessGame[color].restOfTime = chessGame[color].restOfTime - delta - 500;
+        if(chessGame.turn === color) {
+            chessGame[color].restOfTime = chessGame[color].restOfTime - delta - 200;
+            // restOfTime[color] = chessGame[color].restOfTime;
+        }
         chessGame[color].disconnectFlag = false;
         await chessGame.save();
     }
@@ -36,6 +45,7 @@ const handleChessGame = async (io, socket, gameId, color) => {
     socket.on("send_move_to_server", async (data) => {
         try {
             chessGame.pgn = data.pgn;
+            chessGame.turn = data.turn;
             chessGame["w"].restOfTime = data.whiteRestOfTime;
             chessGame["b"].restOfTime = data.blackRestOfTime;
             chessGame[opponentColor].sendOptionsDate = new Date().getTime();
@@ -48,6 +58,7 @@ const handleChessGame = async (io, socket, gameId, color) => {
 
     socket.on("game_over", async (data) => {
         try {
+            isGameOver = true;
             await ChessGame.findOneAndDelete({id: gameId});
             socket.removeAllListeners("send_move_to_server");
             socket.removeAllListeners("game_over");
@@ -61,21 +72,25 @@ const handleChessGame = async (io, socket, gameId, color) => {
     });
 
     socket.on("standard_chess_game_disconnect", async () => {
-        socket.removeAllListeners("send_move_to_server");
-        socket.removeAllListeners("game_over");
-        socket.removeAllListeners("standard_chess_game_disconnect");
-        socket.removeAllListeners("disconnect");
-        chessGame[color].disconnectFlag = true;
-        await chessGame.save();
+        try {
+            socket.removeAllListeners("send_move_to_server");
+            socket.removeAllListeners("game_over");
+            socket.removeAllListeners("standard_chess_game_disconnect");
+            socket.removeAllListeners("disconnect");
+            if(!isGameOver) {
+                chessGame[color].disconnectFlag = true;
+                await chessGame.save();
+            }
+        } catch(err) {
+            console.log("Error in: event 'standard_chess_game_disconnect'", err);
+        }
     });
 
     socket.on("disconnect", async () => {
-        socket.removeAllListeners("send_move_to_server");
-        socket.removeAllListeners("game_over");
-        socket.removeAllListeners("standard_chess_game_disconnect");
-        socket.removeAllListeners("disconnect");
-        chessGame[color].disconnectFlag = true;
-        await chessGame.save();
+        if(!isGameOver) {
+            chessGame[color].disconnectFlag = true;
+            await chessGame.save();
+        }
     });
 };
 

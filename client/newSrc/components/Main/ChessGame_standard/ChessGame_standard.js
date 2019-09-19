@@ -144,6 +144,7 @@ class ChessGame_standard extends React.PureComponent {
                 idTo: idTo,
                 opponentSocketId: this.props.opponentSocketId,
                 pgn: this.chessGame.pgn(),
+                turn: this.chessGame.turn(),
                 whiteRestOfTime: this.props.orientation === "w" ? this.props.whiteRestOfTime + this.incInMs : this.props.whiteRestOfTime,
                 blackRestOfTime: this.props.orientation === "b" ? this.props.blackRestOfTime + this.incInMs : this.props.blackRestOfTime,
             });

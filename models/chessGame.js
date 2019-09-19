@@ -9,6 +9,7 @@ const ChessGameSchema = new Schema(
         pgn: String,
         timeInMs: Number,
         incInMs: Number,
+        turn: String,
         "w": {
             restOfTime: Number,
             socketId: String,
@@ -19,7 +20,7 @@ const ChessGameSchema = new Schema(
             restOfTime: Number,
             socketId: String,
             disconnectFlag: Boolean,
-            sendOptionsFlag: Number
+            sendOptionsDate: Number
         }
     }
 );
