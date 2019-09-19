@@ -5,7 +5,48 @@
     grid-template-columns: 30% 40% 30%;
 }
 
-.clock {
+.clock-container {
     height: 100%;
     width: 100%;
+}
+
+.clock-container__kostyl {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    padding-bottom: 133.3%;
+}
+
+.clock {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: 12.5% 31.25% 12.5% 31.25% 12.5%;
+    grid-template-areas: 
+        "up"
+        "."
+        "middle"
+        "."
+        "down";
+    color: rgb(30, 30, 30);
+    font-size: 2vw;
+    align-items: center;
+}
+
+.clock__up {
+    grid-area: up;
+    margin-left: 15px;
+}
+
+.clock__down {
+    grid-area: down;
+    margin-left: 15px;
+}
+
+.clock__middle {
+    grid-area: middle;
+    margin-left: 15px;
 }

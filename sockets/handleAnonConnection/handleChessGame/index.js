@@ -8,11 +8,10 @@ const handleChessGame = async (io, socket, gameId, color) => {
     socket.removeAllListeners("game_over");
 
     const opponentColor = color === "b" ? "w" : "b";
-    const chessGame = await ChessGame.findOne({ id: gameId});
+    const chessGame = await ChessGame.findOne({ id: gameId });
     const options = {
         mode: chessGame.mode,
         pgn: chessGame.pgn,
-        timeInMs: chessGame.timeInMs,
         incInMs: chessGame.incInMs,
         whiteRestOfTime: chessGame["w"].restOfTime,
         blackRestOfTime: chessGame["b"].restOfTime,

@@ -35,7 +35,7 @@ class ChessTimer extends React.PureComponent {
     render() {
         const formattedValue = this.formatValue(this.props.valueInMs);
         return(
-            <div>
+            <div className={this.props.className}>
                 {formattedValue.m}:{formattedValue.s}.{formattedValue.ds}
             </div>
         );
