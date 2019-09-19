@@ -14,7 +14,6 @@ const handleChessGame = async (io, socket, gameId, color) => {
 
     if(chessGame[color].disconnectFlag) {
         const delta = new Date().getTime() - chessGame[color].sendOptionsDate;
-        console.log(delta);
         chessGame[color].restOfTime = chessGame[color].restOfTime - delta - 500;
         chessGame[color].disconnectFlag = false;
         await chessGame.save();
