@@ -143,11 +143,11 @@ class ChessGame_standard extends React.PureComponent {
                 idTo: idTo,
                 opponentSocketId: this.props.opponentSocketId,
                 pgn: this.chessGame.pgn(),
-                whiteRestOfTime: this.props.whiteRestOfTime + this.incInMs,
-                blackRestOfTime: this.props.blackRestOfTime + this.incInMs
+                whiteRestOfTime: this.props.orientation === "w" ? this.props.whiteRestOfTime + this.incInMs : this.props.whiteRestOfTime,
+                blackRestOfTime: this.props.orientation === "b" ? this.props.blackRestOfTime + this.incInMs : this.props.blackRestOfTime,
             });
             this.props.setFen(this.chessGame.fen());
-            
+
             if(this.props.orientation === "w") {
                 this.props.setWhiteRestOfTime(this.props.whiteRestOfTime + this.incInMs);
             } else {
