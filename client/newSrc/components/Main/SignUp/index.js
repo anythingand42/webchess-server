@@ -22,6 +22,7 @@ class SignUp extends React.Component {
                 });
             }
         });
+        this.props.socket.emit("sign_up_connection");
     }
 
     componentWillUnmount() {

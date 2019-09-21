@@ -2,7 +2,7 @@
     margin-top: 2%;
     display: grid;
     width: 100%;
-    grid-template-columns: 34% 32% 34%;
+    grid-template-columns: 30% 40% 30%;
 }
 
 .clock-container {
