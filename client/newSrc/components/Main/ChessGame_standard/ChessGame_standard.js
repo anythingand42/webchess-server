@@ -111,9 +111,7 @@ class ChessGame_standard extends React.PureComponent {
                 });
 
             }, 100);
-        }
-
-        if(this.chessGame.turn() === "b") {
+        } else {
 
             this.setState({
                 whiteTime: this.whiteRestOfTime,

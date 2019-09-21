@@ -20,6 +20,7 @@ class Piece extends React.PureComponent {
     }
 
     componentDidMount() {
+        document.body.removeEventListener("mousemove", this.handleMouseMove);
         document.body.addEventListener("mousemove", this.handleMouseMove);
     }
 
