@@ -1,6 +1,19 @@
 import React from "react";
 
-class ChessTimer extends React.PureComponent {
+class ChessTimer extends React.Component {
+    constructor(props) {
+        super(props);
+        // this.timer = null;
+        // this.state = {
+        //     valueInMs: this.props.valueInMs
+        // };
+    }
+
+    // UNSAFE_componentWillReceiveProps(nextProps) {
+    //     this.setState({
+    //         valueInMs: nextProps.valueInMs
+    //     });
+    // }
 
     formatValue(ms) {
         if(ms <= 0) {
@@ -33,6 +46,14 @@ class ChessTimer extends React.PureComponent {
     }
 
     render() {
+        // const startDate = this.props.startDate;
+        // if(startDate) {
+        //     this.timer = setTimeout(() => {
+        //         this.setState({
+        //             valueInMs: this.props.valueInMs - (new Date().getTime() - startDate)
+        //         });
+        //     }, 100);
+        // };
         const formattedValue = this.formatValue(this.props.valueInMs);
         return(
             <div className={this.props.className}>

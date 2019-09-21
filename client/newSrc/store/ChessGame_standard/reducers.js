@@ -5,8 +5,6 @@ import {
     STANDARD_CHESS_GAME_SET_FEN,
     STANDARD_CHESS_GAME_SET_ORIENTATION,
     STANDARD_CHESS_GAME_SET_OPPONENT_SOCKET_ID,
-    STANDARD_CHESS_GAME_SET_WHITE_REST_OF_TIME,
-    STANDARD_CHESS_GAME_SET_BLACK_REST_OF_TIME,
     STANDARD_CHESS_GAME_SET_RESULT,
     STANDARD_CHESS_GAME_RESET
 } from "./actions";
@@ -18,8 +16,6 @@ const defaultState = {
     fen: "start",
     orientation: "w",
     opponentSocketId: null,
-    whiteRestOfTime: 0,
-    blackRestOfTime: 0,
     result: null
 };
 
@@ -54,16 +50,6 @@ export const chessGameStandardReducer = (state = defaultState, action) => {
             return {
                 ...state,
                 opponentSocketId: action.payload
-            };
-        case STANDARD_CHESS_GAME_SET_WHITE_REST_OF_TIME:
-            return {
-                ...state,
-                whiteRestOfTime: action.payload
-            };
-        case STANDARD_CHESS_GAME_SET_BLACK_REST_OF_TIME:
-            return {
-                ...state,
-                blackRestOfTime: action.payload
             };
         case STANDARD_CHESS_GAME_SET_RESULT:
             return {

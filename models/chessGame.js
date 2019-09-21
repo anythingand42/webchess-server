@@ -13,15 +13,15 @@ const ChessGameSchema = new Schema(
         "w": {
             restOfTime: Number,
             socketId: String,
-            disconnectFlag: Boolean,
-            sendOptionsDate: Number
+            disconnectFlag: Boolean
         },
         "b": {
             restOfTime: Number,
             socketId: String,
-            disconnectFlag: Boolean,
-            sendOptionsDate: Number
-        }
+            disconnectFlag: Boolean
+        },
+        isGameOver: Boolean,
+        lastUpdateDate: Number
     }
 );
 

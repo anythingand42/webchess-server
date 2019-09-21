@@ -11,6 +11,8 @@ import {
     setWhiteRestOfTime,
     setBlackRestOfTime,
     setResult,
+    setWhiteTimerStartDate,
+    setBlackTimerStartDate,
     reset
 } from "../../../store/ChessGame_standard/actions";
 
@@ -27,15 +29,11 @@ class ConnectedChessGame extends React.Component {
                 setDraggedPiece={this.props.setDraggedPiece}
                 setCellsToHighlight={this.props.setCellsToHighlight}
                 opponentSocketId={this.props.opponentSocketId}
-                whiteRestOfTime={this.props.whiteRestOfTime}
-                blackRestOfTime={this.props.blackRestOfTime}
                 result={this.props.result}
                 setFen={this.props.setFen}
                 setPgn={this.props.setPgn}
                 setOrientation={this.props.setOrientation}
                 setOpponentSocketId={this.props.setOpponentSocketId}
-                setWhiteRestOfTime={this.props.setWhiteRestOfTime}
-                setBlackRestOfTime={this.props.setBlackRestOfTime}
                 setResult={this.props.setResult}
                 mainSetGame={this.props.mainSetGame}
                 reset={this.props.reset}
@@ -52,8 +50,6 @@ const mapStateToProps = (state) => {
         pgn: state.chessGame_standard.pgn,
         orientation: state.chessGame_standard.orientation,
         opponentSocketId: state.chessGame_standard.opponentSocketId,
-        whiteRestOfTime: state.chessGame_standard.whiteRestOfTime,
-        blackRestOfTime: state.chessGame_standard.blackRestOfTime,
         result: state.chessGame_standard.result
     }
 };
@@ -65,8 +61,6 @@ const mapDispatchToProps = {
     setPgn,
     setOrientation,
     setOpponentSocketId,
-    setWhiteRestOfTime,
-    setBlackRestOfTime,
     setResult,
     reset
 };

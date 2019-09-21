@@ -19,6 +19,15 @@ class ChessGame_standard extends React.PureComponent {
         this.chessGame = new Chess();
         this.isActive = false;
         this.incInMs = 0;
+        this.state = {
+            whiteTime: 0,
+            blackTime: 0
+        }
+        this.whiteTimer = null;
+        this.blackTimer = null;
+        this.whiteRestOfTime = null;
+        this.blackRestOfTime = null;
+        this.startClockFlag = false;
     }
 
     componentDidMount() {
@@ -35,9 +44,11 @@ class ChessGame_standard extends React.PureComponent {
             this.props.mainSetGame(null);
         });
         this.props.socket.emit("chess_game_connection", document.cookie);
+
     }
 
     componentWillUnmount() {
+        this.blurDate = null;
         this.props.socket.emit("standard_chess_game_disconnect");
         this.props.socket.removeAllListeners("send_move_to_client");
         this.props.socket.removeAllListeners("send_game_options_to_client");
@@ -49,17 +60,86 @@ class ChessGame_standard extends React.PureComponent {
 
     handleSendGameOptionsToClient(options) {
         if(options.opponentSocketId) this.props.setOpponentSocketId(options.opponentSocketId);
-        if(options.orientation) this.props.setOrientation(options.orientation);
-        if(options.pgn) {
-            this.props.setPgn(options.pgn);
-            this.chessGame.load_pgn(options.pgn);
+
+        if(options.game) {
+            this.props.setOrientation(options.game.orientation);
+            this.whiteRestOfTime = options.game.whiteRestOfTime;
+            this.blackRestOfTime = options.game.blackRestOfTime;
+            this.incInMs = options.game.incInMs;
+            this.props.setPgn(options.game.pgn);
+            this.chessGame.load_pgn(options.game.pgn);
             this.props.setFen(this.chessGame.fen());
+            this.isActive = true;
+            this.setChessClock(options.game.lastUpdateDate);
         }
-        if(options.whiteRestOfTime) this.props.setWhiteRestOfTime(options.whiteRestOfTime);
-        if(options.blackRestOfTime) this.props.setBlackRestOfTime(options.blackRestOfTime);
-        if(options.incInMs) this.incInMs = options.incInMs;
-        this.setChessClock();
-        this.isActive = true;
+    }
+
+    setChessClock(startDate) {
+        clearInterval(this.whiteTimer);
+        clearInterval(this.blackTimer);
+
+        if(!this.startClockFlag) {
+            const splittedFen = this.chessGame.fen().split(" ");
+            const numberOfMove = Number(splittedFen[splittedFen.length - 1]);
+            if(numberOfMove > 1) this.startClockFlag = true;
+        }
+
+        if(this.chessGame.turn() === "w") {
+
+            this.setState({
+                whiteTime: startDate ? this.whiteRestOfTime - (new Date().getTime() - startDate) : this.whiteRestOfTime,
+                blackTime: this.blackRestOfTime
+            });
+
+            if(!this.startClockFlag) return;
+
+            if(!startDate) startDate = new Date().getTime();
+
+            this.whiteTimer = setInterval(() => {
+                const time = this.whiteRestOfTime - (new Date().getTime() - startDate);
+            
+                if(time <= 0 && this.props.orientation === "w") {
+                    this.props.socket.emit("game_over", {
+                        result: "b",
+                        opponentSocketId: this.props.opponentSocketId
+                    });
+                    clearInterval(this.whiteTimer);
+                }
+
+                this.setState({
+                    whiteTime: time
+                });
+
+            }, 100);
+        }
+
+        if(this.chessGame.turn() === "b") {
+
+            this.setState({
+                whiteTime: this.whiteRestOfTime,
+                blackTime: startDate ? this.blackRestOfTime - (new Date().getTime() - startDate) : this.blackRestOfTime,
+            });
+
+            if(!this.startClockFlag) return;
+
+            if(!startDate) startDate = new Date().getTime();
+
+            this.blackTimer = setInterval(() => {
+                const time = this.blackRestOfTime - (new Date().getTime() - startDate);
+
+                if(time <= 0 && this.props.orientation === "b") {
+                    this.props.socket.emit("game_over", {
+                        result: "w",
+                        opponentSocketId: this.props.opponentSocketId
+                    });
+                    clearInterval(this.blackTimer);
+                }
+
+                this.setState({
+                    blackTime: time
+                });
+            }, 100);
+        }
     }
 
     handleSendMoveToClient(data) {
@@ -68,12 +148,12 @@ class ChessGame_standard extends React.PureComponent {
             to: data.idTo,
             promotion: "q"
         });
+
         this.props.setCellsToHighlight([data.idFrom, data.idTo]);
         this.props.setFen(this.chessGame.fen());
-        this.props.setWhiteRestOfTime(data.whiteRestOfTime);
-        this.props.setBlackRestOfTime(data.blackRestOfTime);
+        this.whiteRestOfTime = data.whiteRestOfTime;
+        this.blackRestOfTime = data.blackRestOfTime;
 
-        this.setChessClock();
         let result = this.chessGame.game_over();
         if(result) {
             const opponentColor = this.props.orientation === "b" ? "w" : "b";
@@ -91,7 +171,8 @@ class ChessGame_standard extends React.PureComponent {
                     opponentSocketId: this.props.opponentSocketId
                 });
             }
-
+        } else {
+            this.setChessClock();
         }
     }
 
@@ -137,7 +218,8 @@ class ChessGame_standard extends React.PureComponent {
 
         if(move) {
 
-            console.log(this.props.whiteRestOfTime);
+            clearInterval(this.whiteTimer);
+            clearInterval(this.blackTimer);
 
             this.props.socket.emit("send_move_to_server", {
                 idFrom: idFrom,
@@ -145,15 +227,15 @@ class ChessGame_standard extends React.PureComponent {
                 opponentSocketId: this.props.opponentSocketId,
                 pgn: this.chessGame.pgn(),
                 turn: this.chessGame.turn(),
-                whiteRestOfTime: this.props.orientation === "w" ? this.props.whiteRestOfTime + this.incInMs : this.props.whiteRestOfTime,
-                blackRestOfTime: this.props.orientation === "b" ? this.props.blackRestOfTime + this.incInMs : this.props.blackRestOfTime,
+                whiteRestOfTime: this.props.orientation === "w" && this.startClockFlag ? this.state.whiteTime + this.incInMs : this.state.whiteTime,
+                blackRestOfTime: this.props.orientation === "b" && this.startClockFlag ? this.state.blackTime + this.incInMs : this.state.blackTime,
             });
             this.props.setFen(this.chessGame.fen());
 
             if(this.props.orientation === "w") {
-                this.props.setWhiteRestOfTime(this.props.whiteRestOfTime + this.incInMs);
+                this.whiteRestOfTime = this.startClockFlag ? this.state.whiteTime + this.incInMs : this.state.whiteTime;
             } else {
-                this.props.setBlackRestOfTime(this.props.blackRestOfTime + this.incInMs);
+                this.blackRestOfTime = this.startClockFlag ? this.state.blackTime + this.incInMs : this.state.blackTime;
             }
 
             this.setChessClock();
@@ -164,44 +246,6 @@ class ChessGame_standard extends React.PureComponent {
         if(!this.props.draggedPiece) return;
         this.props.setDraggedPiece(null);
         this.props.setCellsToHighlight(null);
-    }
-
-    setChessClock() {
-        clearInterval(this.whiteTimer);
-        clearInterval(this.blackTimer);
-
-        if(this.chessGame.turn() === "w") {
-
-            this.whiteTimer = setInterval(() => {
-                if(this.props.whiteRestOfTime > 0) {
-                    this.props.setWhiteRestOfTime(this.props.whiteRestOfTime - 100);
-                } else {
-                    clearInterval(this.whiteTimer);
-                    if(this.props.orientation === "w") {
-                        this.props.socket.emit("game_over", {
-                            result: "b",
-                            opponentSocketId: this.props.opponentSocketId
-                        });
-                    }
-                }
-            }, 100);
-        }
-        if(this.chessGame.turn() === "b") {
-
-            this.blackTimer = setInterval(() => {
-                if(this.props.blackRestOfTime > 0) {
-                    this.props.setBlackRestOfTime(this.props.blackRestOfTime - 100);
-                } else {
-                    clearInterval(this.blackTimer);
-                    if(this.props.orientation === "b") {
-                        this.props.socket.emit("game_over", {
-                            result: "w",
-                            opponentSocketId: this.props.opponentSocketId
-                        });
-                    }
-                }
-            }, 100);
-        }
     }
 
     getResultMsg(result) {
@@ -223,36 +267,25 @@ class ChessGame_standard extends React.PureComponent {
                     onMouseLeave={this.handleMouseLeaveFromBoard}
                     orientation={this.props.orientation}
                 />
-                {this.props.orientation === "b" &&
-                    <div className="clock-container">
-                        <div className="clock-container__kostyl">
-                            <div className="clock">
-                                <ChessTimer className="clock__up" valueInMs={this.props.whiteRestOfTime}/>
-                                {this.props.result &&
-                                    <div className="clock__middle">
-                                        {this.getResultMsg(this.props.result)}
-                                    </div>
-                                }
-                                <ChessTimer className="clock__down" valueInMs={this.props.blackRestOfTime}/>
-                            </div>
+                <div className="clock-container">
+                    <div className="clock-container__kostyl">
+                        <div className="clock">
+                            <ChessTimer
+                                className="clock__up"
+                                valueInMs={this.props.orientation === "b" ? this.state.whiteTime : this.state.blackTime}
+                            />
+                            {this.props.result &&
+                                <div className="clock__middle">
+                                    {this.getResultMsg(this.props.result)}
+                                </div>
+                            }
+                            <ChessTimer
+                                className="clock__down"
+                                valueInMs={this.props.orientation === "b" ? this.state.blackTime : this.state.whiteTime}
+                            />
                         </div>
                     </div>
-                }
-                {this.props.orientation === "w" &&
-                    <div className="clock-container">
-                        <div className="clock-container__kostyl">
-                            <div className="clock">
-                                <ChessTimer className="clock__up" valueInMs={this.props.blackRestOfTime}/>
-                                {this.props.result &&
-                                    <div className="clock__middle">
-                                        {this.getResultMsg(this.props.result)}
-                                    </div>
-                                }
-                                <ChessTimer className="clock__down" valueInMs={this.props.whiteRestOfTime}/>
-                            </div>
-                        </div>
-                    </div>
-                }
+                </div>
             </div>
         );
     }

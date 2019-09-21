@@ -4,8 +4,6 @@ export const STANDARD_CHESS_GAME_SET_PGN = "STANDARD_CHESS_GAME_SET_PGN";
 export const STANDARD_CHESS_GAME_SET_FEN = "STANDARD_CHESS_GAME_SET_FEN";
 export const STANDARD_CHESS_GAME_SET_ORIENTATION = "STANDARD_CHESS_GAME_SET_ORIENTATION";
 export const STANDARD_CHESS_GAME_SET_OPPONENT_SOCKET_ID = "STANDARD_CHESS_GAME_SET_OPPONENT_SOCKET_ID";
-export const STANDARD_CHESS_GAME_SET_WHITE_REST_OF_TIME = "STANDARD_CHESS_GAME_SET_WHITE_REST_OF_TIME";
-export const STANDARD_CHESS_GAME_SET_BLACK_REST_OF_TIME = "STANDARD_CHESS_GAME_SET_BLACK_REST_OF_TIME";
 export const STANDARD_CHESS_GAME_SET_RESULT = "STANDARD_CHESS_GAME_SET_RESULT";
 export const STANDARD_CHESS_GAME_RESET = "STANDARD_CHESS_GAME_STANDARD_CHESS_GAME_RESET";
 
@@ -48,20 +46,6 @@ export const setOpponentSocketId = (opponentSocketId) => {
     return {
         type: STANDARD_CHESS_GAME_SET_OPPONENT_SOCKET_ID,
         payload: opponentSocketId
-    };
-};
-
-export const setWhiteRestOfTime = (whiteRestOfTime) => {
-    return {
-        type: STANDARD_CHESS_GAME_SET_WHITE_REST_OF_TIME,
-        payload: whiteRestOfTime
-    };
-};
-
-export const setBlackRestOfTime = (blackRestOfTime) => {
-    return {
-        type: STANDARD_CHESS_GAME_SET_BLACK_REST_OF_TIME,
-        payload: blackRestOfTime
     };
 };
 
