@@ -13,7 +13,9 @@ function createSocketConnection(server) {
             user = parsedCookie.webchessUser;
         }
 
-        if(!user) {
+        if(user) {
+
+        } else {
             handleAnonConnection(io, socket, parsedCookie);
         }
 

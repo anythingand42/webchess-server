@@ -7,11 +7,6 @@ const cryptoRandomString = require('crypto-random-string');
 
 const handleSearchOpponent = async (io, socket) => {
 
-    // socket.removeAllListeners("add_challenge");
-    // socket.removeAllListeners("remove_challenge");
-    // socket.removeAllListeners("disconnect");
-    // socket.removeAllListeners("search_opponent_disconnect");
-
     socket.emit( "send_challenges_to_client", await AnonChallenge.find({}) );
 
     socket.on("add_challenge", async (time, mode) => {

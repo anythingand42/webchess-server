@@ -9,42 +9,36 @@ const crypto = require('crypto');
 const { Schema } = mongoose;
 
 const UserSchema = new Schema({
-  name: String,
-  hash: String,
-  salt: String,
-  token: String,
-  activeGame: {
-    roomId: String,
-    socketId: String,
-    opponentName: String,
-    color: String
-  }
+    name: String,
+    hash: String,
+    salt: String,
+    token: String
 });
 
 UserSchema.methods.setPassword = function(password) {
-  this.salt = crypto.randomBytes(16).toString('hex');
-  this.hash = crypto.pbkdf2Sync(password, this.salt, 10000, 512, 'sha512').toString('hex');
+    this.salt = crypto.randomBytes(16).toString('hex');
+    this.hash = crypto.pbkdf2Sync(password, this.salt, 10000, 512, 'sha512').toString('hex');
 };
 
 UserSchema.methods.validatePassword = function(password) {
-  const hash = crypto.pbkdf2Sync(password, this.salt, 10000, 512, 'sha512').toString('hex');
-  return this.hash === hash;
+    const hash = crypto.pbkdf2Sync(password, this.salt, 10000, 512, 'sha512').toString('hex');
+    return this.hash === hash;
 };
 
 UserSchema.methods.setToken = function() {
-  this.token = cryptoRandomString({length: 20});
+    this.token = cryptoRandomString({length: 20});
 };
 
 UserSchema.methods.getToken = function() {
-  return this.token;
+    return this.token;
 };
 
 UserSchema.methods.getUserForClient = function() {
-  return {
-    id: this._id,
-    token: this.token,
-    name: this.name
-  }
+    return {
+        id: this._id,
+        token: this.token,
+        name: this.name
+    }
 };
 
 // UserSchema.methods.generateJWT = function() {
