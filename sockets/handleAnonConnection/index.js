@@ -2,7 +2,7 @@
 
 const handleSearchOpponent = require("./handleSearchOpponent");
 const handleChessGame = require("./handleChessGame");
-const handleSignUp = require("./handleSignUp");
+//const handleSignUp = require("./handleSignUp");
 
 const cookieParser = require("cookie-parse");
 const ChessGame = require("../../models/chessGame.js");
@@ -41,9 +41,9 @@ const handleAnonConnection = async (io, socket, parsedCookie) => {
         }
     });
 
-    socket.on("sign_up_connection", async() => {
-        await handleSignUp(socket);
-    });
+    // socket.on("sign_up_connection", async() => {
+    //     await handleSignUp(socket);
+    // });
 
 };
 
