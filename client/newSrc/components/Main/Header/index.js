@@ -8,7 +8,11 @@ function Header(props) {
     if(props.userName) {
         rightContent = (
             <div className="header__right-content">
-                <div>{props.userName}</div>
+                <button
+                    onClick={props.onLogOut}
+                    className="header__log-out button_gray"
+                >log out</button>
+                <div className="header__user-name">{props.userName}</div>
             </div>
         );
     } else {

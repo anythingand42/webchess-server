@@ -5,9 +5,9 @@ const User = require("../../../models/user");
 const handleSignUp = async (socket) => {
 
     socket.on("sign_up_attempt", async (data) => {
-        if( await User.findOne({name: user.name}) === null ) {
+        if( await User.findOne({name: data.userName}) === null ) {
             const user = new User();
-            user.name = data.name;
+            user.name = data.userName;
             user.setPassword(data.password);
             await user.save();
             socket.emit("sign_up_answer", "success");

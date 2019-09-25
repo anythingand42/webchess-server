@@ -35,8 +35,16 @@
 }
 
 .header__user-name {
-    height: 80%;
-    margin-right: 5%;
-    width: 30%;
+    height: 40px;
+    margin-right: 10px;
+    width: 90px;
     grid-area: right;
+    text-align: center;
+    line-height: 40px;
+}
+
+.header__log-out {
+    height: 40px;
+    width: 90px;
+    margin-right: 10px;
 }

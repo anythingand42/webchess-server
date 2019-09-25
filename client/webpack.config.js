@@ -5,10 +5,10 @@ module.exports = {
     mode: "development",
     output: {
         filename: "./main.js",
-        path: path.join(__dirname, "newDist"),
+        path: path.join(__dirname, "dist"),
     },
     devServer: {
-        contentBase: path.join(__dirname, "newDist"),
+        contentBase: path.join(__dirname, "dist"),
         compress: false,
         port: 9000,
         watchContentBase: true,

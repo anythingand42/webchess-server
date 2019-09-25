@@ -8,15 +8,20 @@ function createSocketConnection(server) {
         const cookie = socket.handshake.headers.cookie;
         let user;
         let parsedCookie;
+        let webchessGame;
         if (cookie) {
             parsedCookie = cookieParser.parse(cookie);
             user = parsedCookie.webchessUser;
+            webchessGame = parsedCookie.webchessGame;
         }
 
-        if(user) {
+        const anonRoomName = "anonymous";
+        const userRoomName = "users";
 
+        if(user) {
+            handleUserConnection(io, socket, webchessGame, userRoomName);
         } else {
-            handleAnonConnection(io, socket, parsedCookie);
+            handleAnonConnection(io, socket, webchessGame, anonRoomName);
         }
 
     });

@@ -58,14 +58,15 @@ class SignUp extends React.Component {
     }
 
     render() {
+        console.log(this.state.message)
         return (
             <form onSubmit={this.handleSubmit}>
                 <input type="text" name="userName" placeholder="username"/>
-                <input type="text" name="password" placeholder="password"/>
-                <input type="text" name="repeatPassword" placeholder="repeat password"/>
+                <input type="password" name="password" placeholder="password"/>
+                <input type="password" name="repeatPassword" placeholder="repeat password"/>
                 <button type="submit">sign up</button>
                 {this.state.message &&
-                    <div>{this.message}</div>
+                    <div>{this.state.message}</div>
                 }
             </form>
         );

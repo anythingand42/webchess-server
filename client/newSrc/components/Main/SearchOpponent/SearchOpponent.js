@@ -25,7 +25,7 @@ class SearchOpponent extends React.Component {
             const buttonName = time;
             this.props.searchButtonSetAvailability(buttonName, true);
         });
-        this.props.socket.emit("search_opponent_connection");
+        this.props.socket.emit("search_opponent_connection", document.cookie);
     }
 
     componentWillUnmount() {
@@ -47,7 +47,7 @@ class SearchOpponent extends React.Component {
             if(!this.props.buttons[buttonName].isPressed) {
                 this.props.searchButtonSetPressed(buttonName, true);
                 this.props.searchButtonSetAvailability(buttonName, false);
-                this.props.socket.emit("add_challenge", time, mode);
+                this.props.socket.emit("add_challenge", time, mode, this.props.userName);
             } else {
                 this.props.searchButtonSetPressed(buttonName, false);
                 this.props.searchButtonSetAvailability(buttonName, false);

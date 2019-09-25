@@ -19,6 +19,7 @@ class ConnectedSearchOpponent extends React.Component {
                 searchButtonSetPressed={this.props.searchButtonSetPressed}
                 lobbySetChallenges={this.props.lobbySetChallenges}
                 reset={this.props.reset}
+                userName={this.props.userName}
             />
         );
     }

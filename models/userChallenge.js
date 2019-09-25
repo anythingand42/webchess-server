@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const AnonChallengeSchema = new Schema(
+const UserChallengeSchema = new Schema(
     {
         mode: String,
         time: String,
@@ -11,4 +11,4 @@ const AnonChallengeSchema = new Schema(
     }
 );
 
-module.exports = mongoose.model('AnonChallenge', AnonChallengeSchema);
+module.exports = mongoose.model('UserChallenge', UserChallengeSchema);

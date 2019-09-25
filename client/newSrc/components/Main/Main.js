@@ -16,6 +16,9 @@ class Main extends React.Component {
         this.socket = io();
         this.activeGame = false;
         this.handleStartGame = this.handleStartGame.bind(this);
+        this.handleLogOut = this.handleLogOut.bind(this);
+        const user = cookies.get("webchessUser");
+        this.userName = user ? JSON.parse(user).name : null;
     }
 
     componentDidMount() {
@@ -25,6 +28,11 @@ class Main extends React.Component {
     componentWillUnmount() {
         this.socket.removeAllListeners("start_game");
         this.props.reset();
+    }
+
+    handleLogOut() {
+        cookies.erase("webchessUser");
+        window.location.replace("/");
     }
 
     handleStartGame(options) {
@@ -41,24 +49,25 @@ class Main extends React.Component {
         return (
             <div className="main-container">
                 <Router>
-                    <Header userName={this.props.userName}/>
+                    <Header userName={this.userName} onLogOut={this.handleLogOut}/>
                     <Route exact path="/" render={(props) => (
                         this.props.game ? (
                             <Redirect to="/gameroom"/>
                         ) : (
-                            <SearchOpponent socket={this.socket} {...props} />
+                            <SearchOpponent socket={this.socket} userName={this.userName} {...props} />
                         )
                     )}/>
-                    <Route path="/login" render={(props) => <LogIn socket={this.socket} {...props} />} />
+                    <Route path="/login" render={(props) => <LogIn socket={this.socket} setUserName={this.props.setUserName} {...props} />} />
                     <Route path="/signup" render={(props) => <SignUp socket={this.socket} {...props} />} />
                     <Route path="/trainingroom" component={ChessGame} />
                     <Route
                         path="/gameroom"
-                        render={(props) => <ChessGame_standard
+                        render={(props) => (
+                            <ChessGame_standard
                             socket={this.socket}
                             mainSetGame={this.props.mainSetGame}
                             {...props}
-                        />}
+                        />)}
                     />
                 </Router>
             </div>

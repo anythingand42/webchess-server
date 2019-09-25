@@ -122,9 +122,9 @@ class ChessBoard extends Component {
 
         const reactCells = this.getReactCells(cells, this.props.orientation);
         return (
-            <div className="chess-board-container">
+            <div className={`chess-board-container ${this.props.className}`}>
                 <div 
-                    className="chess-board-kostyl"
+                    className="chess-board-wrapper"
                     onMouseDown={this.handleMouseDown}
                     onMouseUp={this.handleMouseUp}
                     onMouseLeave={this.handleMouseLeave}

@@ -13,12 +13,14 @@ const ChessGameSchema = new Schema(
         "w": {
             restOfTime: Number,
             socketId: String,
-            disconnectFlag: Boolean
+            disconnectFlag: Boolean,
+            userName: String
         },
         "b": {
             restOfTime: Number,
             socketId: String,
-            disconnectFlag: Boolean
+            disconnectFlag: Boolean,
+            userName: String
         },
         isGameOver: Boolean,
         lastUpdateDate: Number
