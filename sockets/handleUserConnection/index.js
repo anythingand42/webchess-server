@@ -7,7 +7,7 @@ const cookieParser = require("cookie-parse");
 const ChessGame = require("../../models/chessGame.js");
 const UserChallenge = require("../../models/userChallenge.js");
 
-const handleUserConnection = async (io, socket, webchessGame, room) => {
+const handleUserConnection = async (io, socket, room) => {
 
     socket.join(room);
 

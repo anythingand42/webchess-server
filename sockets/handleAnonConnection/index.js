@@ -9,7 +9,7 @@ const cookieParser = require("cookie-parse");
 const ChessGame = require("../../models/chessGame.js");
 const AnonChallenge = require("../../models/anonChallenge.js");
 
-const handleAnonConnection = async (io, socket, webchessGame, room) => {
+const handleAnonConnection = async (io, socket, room) => {
     
     socket.join(room);
 

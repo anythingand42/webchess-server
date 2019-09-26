@@ -19,9 +19,9 @@ function createSocketConnection(server) {
         const userRoomName = "users";
 
         if(user) {
-            handleUserConnection(io, socket, webchessGame, userRoomName);
+            handleUserConnection(io, socket, userRoomName);
         } else {
-            handleAnonConnection(io, socket, webchessGame, anonRoomName);
+            handleAnonConnection(io, socket, anonRoomName);
         }
 
     });
