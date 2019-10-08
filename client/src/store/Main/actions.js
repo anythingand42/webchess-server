@@ -1,10 +1,13 @@
-export const MAIN_SET_GAME = "MAIN_SET_GAME";
+export const MAIN_SET_GAME_FLAG = "MAIN_SET_GAME_FLAG";
 export const MAIN_RESET = "MAIN_RESET";
 
-export const mainSetGame = (game) => {
+export const MAIN_SET_USER_NAME = "MAIN_SET_USER_NAME";
+export const MAIN_SET_SOCKET_FLAG = "MAIN_SET_SOCKET_FLAG";
+
+export const mainSetGameFlag = (isGameActive) => {
     return {
-        type: MAIN_SET_GAME,
-        payload: game
+        type: MAIN_SET_GAME_FLAG,
+        payload: isGameActive
     };
 };
 

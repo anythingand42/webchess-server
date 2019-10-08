@@ -1,0 +1,61 @@
+import React from "react";
+import { connect } from "react-redux";
+import OnlineChessGame from "./OnlineChessGame.js";
+import {
+    fetchInitialState,
+    handleMouseDownOnBoard,
+    handleMouseUpOnBoard,
+    handleUnmount
+} from "../../../store/OnlineChessGame/sagaActions";
+
+class ConnectedOnlineChessGame extends React.Component {
+    render() {
+        return(
+            <OnlineChessGame
+                isActive={this.props.isActive}
+                fen={this.props.fen}
+                pgn={this.props.pgn}
+                orientation={this.props.orientation}
+                draggedPiece={this.props.draggedPiece}
+                cellsToHighlight={this.props.cellsToHighlight}
+                whiteUserName={this.props.whiteUserName}
+                blackUserName={this.props.blackUserName}
+                whiteRestOfTime={this.props.whiteRestOfTime}
+                blackRestOfTime={this.props.blackRestOfTime}
+                whiteTimerStartDate={this.props.whiteTimerStartDate}
+                blackTimerStartDate={this.props.blackTimerStartDate}
+                fetchInitialState={this.props.fetchInitialState}
+                handleMouseDownOnBoard={this.props.handleMouseDownOnBoard}
+                handleMouseUpOnBoard={this.props.handleMouseUpOnBoard}
+                handleUnmount={this.props.handleUnmount}
+            />
+        );
+    }
+}
+
+const mapStateToProps = (state) => {
+    return {
+        draggedPiece: state.onlineChessGame.draggedPiece,
+        cellsToHighlight: state.onlineChessGame.cellsToHighlight,
+        isActive: state.onlineChessGame.isActive,
+        fen: state.onlineChessGame.fen,
+        pgn: state.onlineChessGame.pgn,
+        orientation: state.onlineChessGame.orientation,
+        whiteUserName: state.onlineChessGame.whiteUserName,
+        blackUserName: state.onlineChessGame.blackUserName,
+        whiteRestOfTime: state.onlineChessGame.whiteRestOfTime,
+        blackRestOfTime: state.onlineChessGame.blackRestOfTime,
+        whiteTimerStartDate: state.onlineChessGame.whiteTimerStartDate,
+        blackTimerStartDate: state.onlineChessGame.blackTimerStartDate
+    }
+};
+
+const mapDispatchToProps = {
+    fetchInitialState,
+    handleMouseDownOnBoard,
+    handleMouseUpOnBoard,
+    handleUnmount
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(ConnectedOnlineChessGame);

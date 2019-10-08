@@ -1,22 +1,52 @@
 import React from "react";
 
-class ChessTimer extends React.Component {
+class ChessTimer extends React.PureComponent {
     constructor(props) {
         super(props);
-        // this.timer = null;
-        // this.state = {
-        //     valueInMs: this.props.valueInMs
-        // };
+        this.timer = null;
+        this.state = {
+            valueInMs: props.valueInMs
+        }
     }
 
-    // UNSAFE_componentWillReceiveProps(nextProps) {
-    //     this.setState({
-    //         valueInMs: nextProps.valueInMs
-    //     });
-    // }
+    UNSAFE_componentWillReceiveProps(nextProps) {
+        if(nextProps.startRunningDate && !this.props.startRunningDate) {
+            this.timer = setInterval(() => {
+                const delta = new Date().getTime() - this.props.startRunningDate;
+                const newValue = this.props.valueInMs - delta;
+
+                this.setState({
+                    valueInMs: newValue
+                });
+
+                if(newValue <= 0) clearInterval(this.timer);
+            }, 100);
+        }
+        if(!nextProps.startRunningDate) {
+            clearInterval(this.timer);
+            this.setState({
+                valueInMs: nextProps.valueInMs
+            });
+        }
+    }
+
+    componentDidMount() {
+        if(this.props.startRunningDate) {
+            this.timer = setInterval(() => {
+                const delta = new Date().getTime() - this.props.startRunningDate;
+                const newValue = this.props.valueInMs - delta;
+
+                this.setState({
+                    valueInMs: newValue
+                });
+
+                if(newValue <= 0) clearInterval(this.timer);
+            }, 100);
+        }
+    }
 
     formatValue(ms) {
-        if(ms <= 0) {
+        if(ms <= 0 || !ms) {
             ms = 0;
         }
 
@@ -46,15 +76,8 @@ class ChessTimer extends React.Component {
     }
 
     render() {
-        // const startDate = this.props.startDate;
-        // if(startDate) {
-        //     this.timer = setTimeout(() => {
-        //         this.setState({
-        //             valueInMs: this.props.valueInMs - (new Date().getTime() - startDate)
-        //         });
-        //     }, 100);
-        // };
-        const formattedValue = this.formatValue(this.props.valueInMs);
+
+        const formattedValue = this.formatValue(this.state.valueInMs);
         return(
             <div className={this.props.className}>
                 {formattedValue.m}:{formattedValue.s}.{formattedValue.ds}

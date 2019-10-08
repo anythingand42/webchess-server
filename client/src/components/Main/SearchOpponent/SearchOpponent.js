@@ -9,49 +9,22 @@ class SearchOpponent extends React.Component {
     constructor(props) {
         super(props);
         this.handleSearchButtonClick = this.handleSearchButtonClick.bind(this);
-        this.refreshLobby = this.refreshLobby.bind(this);
     }
 
     componentDidMount() {
-        this.props.socket.on("change_in_challenges", this.refreshLobby);
-        this.props.socket.on("send_challenges_to_client", this.refreshLobby);
-
-        this.props.socket.on("challenge_is_added", (time) => {
-            const buttonName = time;
-            this.props.searchButtonSetAvailability(buttonName, true);
-        });
-
-        this.props.socket.on("challenge_is_removed", (time) => {
-            const buttonName = time;
-            this.props.searchButtonSetAvailability(buttonName, true);
-        });
-        this.props.socket.emit("search_opponent_connection", document.cookie);
+        this.props.fetchInitialState();
     }
 
     componentWillUnmount() {
-        this.props.socket.emit("search_opponent_disconnect");
-        this.props.socket.removeAllListeners("change_in_challenges");
-        this.props.socket.removeAllListeners("send_challenges_to_client");
-        this.props.socket.removeAllListeners("challenge_is_added");
-        this.props.socket.removeAllListeners("challenge_is_removed");
-        this.props.reset();
+        this.props.handleUnmount();
     }
 
-    refreshLobby(challenges) {
-        this.props.lobbySetChallenges(challenges);
-    }
-
-    handleSearchButtonClick(time, mode) {
-        const buttonName = time;
-        if(this.props.buttons[buttonName].isAvailable) {
-            if(!this.props.buttons[buttonName].isPressed) {
-                this.props.searchButtonSetPressed(buttonName, true);
-                this.props.searchButtonSetAvailability(buttonName, false);
-                this.props.socket.emit("add_challenge", time, mode, this.props.userName);
+    handleSearchButtonClick(time) { // перенести в сагу полностью
+        if(this.props.buttons[time].isAvailable) {
+            if(!this.props.buttons[time].isPressed) {
+                this.props.addChallenge(time);
             } else {
-                this.props.searchButtonSetPressed(buttonName, false);
-                this.props.searchButtonSetAvailability(buttonName, false);
-                this.props.socket.emit("remove_challenge", time, mode);
+                this.props.removeChallenge(time);
             }
         }
     }

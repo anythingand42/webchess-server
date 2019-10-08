@@ -9,7 +9,6 @@ class Piece extends React.PureComponent {
             left: props.left
         };
         this.handleMouseMove = this.handleMouseMove.bind(this);
-        this.piece = this.props.piece;
     }
 
     handleMouseMove(event) {
@@ -31,7 +30,7 @@ class Piece extends React.PureComponent {
     render() {
         return (
             <div
-                className={`piece-div piece-div__${this.piece}`}
+                className={`piece-div piece-div__${this.props.piece}`}
                 style={{
                     top: this.state.top - this.props.height / 2 + "px",
                     left: this.state.left - this.props.width / 2 + "px",

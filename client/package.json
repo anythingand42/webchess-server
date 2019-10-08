@@ -13,7 +13,10 @@
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
+    "@babel/runtime": "^7.6.2",
+    "babel-core": "^6.26.3",
     "babel-loader": "^8.0.6",
+    "babel-polyfill": "^6.26.0",
     "css-loader": "^3.2.0",
     "style-loader": "^1.0.0",
     "webpack": "^4.39.2",
@@ -21,6 +24,7 @@
     "webpack-dev-server": "^3.8.0"
   },
   "dependencies": {
+    "browser-cookie": "^1.2.1",
     "browser-cookies": "^1.2.0",
     "chess.js": "^0.10.2",
     "chessboardjsx": "^2.4.1",
@@ -30,9 +34,10 @@
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.0.1",
     "redux": "^4.0.4",
+    "redux-saga": "^1.1.1",
+    "redux-socket.io": "^1.4.0",
     "set-cookie": "0.0.4",
-    "socket.io": "^2.2.0",
-    "styled-components": "^4.3.2"
+    "socket.io": "^2.2.0"
   },
   "babel": {
     "presets": [

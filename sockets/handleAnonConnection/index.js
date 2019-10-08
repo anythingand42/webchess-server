@@ -19,7 +19,7 @@ const handleAnonConnection = async (io, socket, room) => {
             parsedCookie = cookieParser.parse(cookie);
         }
         if(parsedCookie && parsedCookie.webchessGame) {
-            webchessGame = JSON.parse(webchessGame);
+            const webchessGame = JSON.parse(parsedCookie.webchessGame);
             const chessGame = await ChessGame.findOne({ id: webchessGame.gameId });
 
             const opponentColor = webchessGame.color === "b" ? "w" : "b";
@@ -47,14 +47,6 @@ const handleAnonConnection = async (io, socket, room) => {
                 webchessGame.color
             );
         }
-    });
-
-    socket.on("sign_up_connection", async () => {
-        await handleSignUp(socket);
-    });
-
-    socket.on("log_in_connection", async () => {
-        await handleLogIn(socket);
     });
 
 };

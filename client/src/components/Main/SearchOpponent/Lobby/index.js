@@ -10,13 +10,12 @@ function Lobby(props) {
                 name = "anonymous";
                 rating = "-";
                 time = challenge.time;
-                mode = challenge.mode;
             } else {
                 name = challenge.challengerName;
                 rating = "-";
                 time = challenge.time;
-                mode = challenge.mode;
             }
+            mode = "standard";
             return (
                 <div key={challenge._id} className="lobby__line">
                     <div>{name}</div>

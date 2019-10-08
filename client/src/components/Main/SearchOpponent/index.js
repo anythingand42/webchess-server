@@ -2,23 +2,22 @@ import React from "react";
 import { connect } from "react-redux";
 import SearchOpponent from "./SearchOpponent.js";
 import {
-    searchButtonSetAvailability,
-    lobbySetChallenges,
-    searchButtonSetPressed,
-    reset
-} from "../../../store/SearchOpponent/actions";
+    fetchInitialState,
+    addChallenge,
+    removeChallenge,
+    handleUnmount
+} from "../../../store/SearchOpponent/sagaActions";
 
 class ConnectedSearchOpponent extends React.Component {
     render() {
         return(
             <SearchOpponent
-                socket={this.props.socket}
                 buttons={this.props.buttons}
                 challenges={this.props.challenges}
-                searchButtonSetAvailability={this.props.searchButtonSetAvailability}
-                searchButtonSetPressed={this.props.searchButtonSetPressed}
-                lobbySetChallenges={this.props.lobbySetChallenges}
-                reset={this.props.reset}
+                fetchInitialState={this.props.fetchInitialState}
+                addChallenge={this.props.addChallenge}
+                removeChallenge={this.props.removeChallenge}
+                handleUnmount={this.props.handleUnmount}
                 userName={this.props.userName}
             />
         );
@@ -28,15 +27,16 @@ class ConnectedSearchOpponent extends React.Component {
 const mapStateToProps = (state) => {
     return {
         buttons: state.searchOpponent.buttons,
-        challenges: state.searchOpponent.challenges
+        challenges: state.searchOpponent.challenges,
+        userName: state.main.userName
     }
 };
 
 const mapDispatchToProps = {
-    searchButtonSetAvailability,
-    searchButtonSetPressed,
-    lobbySetChallenges,
-    reset
+    addChallenge,
+    removeChallenge,
+    fetchInitialState,
+    handleUnmount
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ConnectedSearchOpponent);

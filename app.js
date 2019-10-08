@@ -1,6 +1,12 @@
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
+const indexRouter = require("./routes/index.js");
+const gameroomRouter = require("./routes/gameroom.js");
+const trainingroomRouter = require("./routes/trainingroom.js");
+const loginRouter = require("./routes/login.js");
+const logoutRouter = require("./routes/logout.js");
+const signupRouter = require("./routes/signup.js");
 
 const app = express();
 
@@ -16,19 +22,16 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 app.use(express.static(path.join(__dirname, 'client/dist/')));
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.get("/", (req, res) => {
-    res.sendFile('main.html', {root: path.join(__dirname, 'client/dist/')});
-});
-
-app.get("/gameroom", (req, res) => {
-    res.redirect("/");
-});
-
-app.use("/trainingroom", (req, res) => {
-    res.sendFile('main.html', {root: path.join(__dirname, 'client/dist/')});
-});
+app.use("/", indexRouter);
+app.use("/gameroom", gameroomRouter);
+app.use("/trainingroom", trainingroomRouter);
+app.use("/login", loginRouter);
+app.use("/logout", logoutRouter);
+app.use("/signup", signupRouter);
 
 
 module.exports = app;

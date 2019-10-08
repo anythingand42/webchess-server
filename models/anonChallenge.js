@@ -7,7 +7,8 @@ const AnonChallengeSchema = new Schema(
         mode: String,
         time: String,
         challengerSocketId: String,
-        challengerName: String
+        challengerName: String,
+        challengerId: String
     }
 );
 

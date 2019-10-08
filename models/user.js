@@ -12,7 +12,9 @@ const UserSchema = new Schema({
     name: String,
     hash: String,
     salt: String,
-    token: String
+    token: String,
+    activeGameId: String,
+    activeGameColor: String
 });
 
 UserSchema.methods.setPassword = function(password) {
@@ -33,13 +35,13 @@ UserSchema.methods.getToken = function() {
     return this.token;
 };
 
-UserSchema.methods.getUserForClient = function() {
-    return {
-        id: this._id,
-        token: this.token,
-        name: this.name
-    }
-};
+// UserSchema.methods.getUserForClient = function() {
+//     return {
+//         id: this._id,
+//         token: this.token,
+//         name: this.name
+//     }
+// };
 
 // UserSchema.methods.generateJWT = function() {
 //   const today = new Date();

@@ -86,15 +86,19 @@ class ChessBoard extends Component {
 
     handleMouseDown(event) {
         event.preventDefault();
+        const id = event.target.id;
+        const clientX = event.clientX;
+        const clientY = event.clientY;
         if(this.props.onMouseDown) {
-            this.props.onMouseDown(event);
+            this.props.onMouseDown(id, clientX, clientY);
         }
     }
 
     handleMouseUp(event) {
         event.preventDefault();
+        const id = event.target.id;
         if(this.props.onMouseUp) {
-            this.props.onMouseUp(event);
+            this.props.onMouseUp(id);
         }
     }
 
