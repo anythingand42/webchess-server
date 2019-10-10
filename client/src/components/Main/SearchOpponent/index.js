@@ -4,6 +4,7 @@ import SearchOpponent from "./SearchOpponent.js";
 import {
     fetchInitialState,
     handleSearchButtonClick,
+    handleChallengeClick,
     handleUnmount
 } from "../../../store/SearchOpponent/sagaActions";
 
@@ -15,6 +16,7 @@ class ConnectedSearchOpponent extends React.Component {
                 challenges={this.props.challenges}
                 fetchInitialState={this.props.fetchInitialState}
                 handleSearchButtonClick={this.props.handleSearchButtonClick}
+                handleChallengeClick={this.props.handleChallengeClick}
                 handleUnmount={this.props.handleUnmount}
                 userName={this.props.userName}
             />
@@ -32,6 +34,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
     handleSearchButtonClick,
+    handleChallengeClick,
     fetchInitialState,
     handleUnmount
 };

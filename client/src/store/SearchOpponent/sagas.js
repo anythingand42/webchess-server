@@ -1,10 +1,9 @@
 import { put, takeEvery, all, select } from "redux-saga/effects";
 import {
     SEARCH_OPPONENT_FETCH_INITIAL_STATE,
-    ADD_CHALLENGE,
-    REMOVE_CHALLENGE,
     SEARCH_OPPONENT_UNMOUNT,
-    SEARCH_BUTTON_CLICK
+    SEARCH_BUTTON_CLICK,
+    CHALLENGE_CLICK
 } from "./sagaActions.js";
 import {
     LOBBY_SET_CHALLENGES,
@@ -20,7 +19,6 @@ function* searchOpponentSetInitialState() {
 }
 
 function* lobbySetChallenges(action) {
-    console.log("challenges", action.payload);
     yield put({
         type: LOBBY_SET_CHALLENGES,
         payload: action.payload
@@ -99,7 +97,7 @@ function* handleSearchButtonClick(action) {
     const store = yield select();
     const props = store.searchOpponent;
     const userName = store.main.userName;
-
+    
     if(props.buttons[time].isAvailable) {
         if(!props.buttons[time].isPressed) {
             yield* addChallenge(userName, time);
@@ -109,12 +107,38 @@ function* handleSearchButtonClick(action) {
     }
 }
 
+function* handleChallengeClick(action) {
+    const time = action.payload;
+    const store = yield select();
+    const props = store.searchOpponent;
+    const userName = store.main.userName;
+
+    if(!props.buttons[time].isAvailable) return;
+    if(props.buttons[time].isPressed) return;
+
+    yield put({
+        type: SEARCH_BUTTON_SET_AVAILABILITY,
+        payload: {
+            buttonName: time,
+            isAvailable: false
+        }
+    });
+    yield put({
+        type: "toServer/SearchOpponent/add_challenge",
+        payload: {
+            time: time,
+            challengerName: userName
+        }
+    });
+}
+
 export function* searchOpponentWatcherSaga() {
     yield all([
         takeEvery(SEARCH_OPPONENT_FETCH_INITIAL_STATE, searchOpponentSetInitialState),
         takeEvery("toClient/SearchOpponent/send_challenges", lobbySetChallenges),
         takeEvery("toClient/SearchOpponent/challenge_request_is_processed", searchButtonSetAvailability),
         takeEvery(SEARCH_OPPONENT_UNMOUNT, handleUnmount),
-        takeEvery(SEARCH_BUTTON_CLICK, handleSearchButtonClick)
+        takeEvery(SEARCH_BUTTON_CLICK, handleSearchButtonClick),
+        takeEvery(CHALLENGE_CLICK, handleChallengeClick)
     ]);
 }

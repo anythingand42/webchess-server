@@ -17,7 +17,7 @@ function Lobby(props) {
             }
             mode = "standard";
             return (
-                <div key={challenge._id} className="lobby__line">
+                <div key={challenge._id} className="lobby__line" onClick={() => props.handleChallengeClick(time)}>
                     <div>{name}</div>
                     <div>{rating}</div>
                     <div>{time}</div>

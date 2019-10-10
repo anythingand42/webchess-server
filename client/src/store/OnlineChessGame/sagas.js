@@ -38,7 +38,6 @@ function* onlineChessGameFetchGameOptions() {
 }
 
 function* setGameOptions(action) {
-    console.log(action);
     const chessGame = new Chess();
     chessGame.load_pgn(action.payload.pgn);
     const fen = chessGame.fen();
@@ -50,8 +49,6 @@ function* setGameOptions(action) {
         if(chessGame.turn() === "w") whiteTimerStartDate = action.payload.lastUpdateDate;
         else blackTimerStartDate = action.payload.lastUpdateDate;
     }
-
-    console.log(action.payload.chatMessages);
 
     yield all([
         put( setOrientation(action.payload.orientation) ),
@@ -206,7 +203,6 @@ function getChessClockPropsAfterMouseUp({
 
 function* handleSendMove(action) {
     const data = action.payload;
-    console.log(data);
 
     const chessGame = new Chess();
     chessGame.load_pgn(data.pgn);

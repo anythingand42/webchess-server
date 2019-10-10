@@ -10,7 +10,7 @@ import io from "socket.io-client";
 
 const socket = io();
 socket.on("action", (args) => {
-    console.log("che za nah", args);
+    console.log("action from server", args);
 });
 const socketIoMiddleware = createSocketIoMiddleware(socket, "toServer/");
 const sagaMiddleware = createSagaMiddleware();

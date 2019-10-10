@@ -64,6 +64,7 @@ class SearchOpponent extends React.Component {
                 </div>
                 <Lobby
                     challenges={this.props.challenges}
+                    handleChallengeClick={this.props.handleChallengeClick}
                 />
                 <div className="search-opponent-container__right-buttons-group">
                     <button className="button_gray right-buttons-group__button">create custom game</button>
