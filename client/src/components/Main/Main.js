@@ -6,36 +6,13 @@ import LogIn from "./LogIn";
 import SignUp from "./SignUp";
 import ChessGame from "./ChessGame";
 import OnlineChessGame from "./OnlineChessGame";
-import cookies from "browser-cookies";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
 class Main extends React.Component {
-    constructor(props) {
-        super(props);
-    }
 
     componentDidMount() {
         this.props.fetchInitialState();
     }
-
-    // componentWillUnmount() {
-    //     this.props.socket.removeAllListeners("start_game");
-    //     this.props.reset();
-    // }
-
-    // handleStartGame(options) {
-    //     if(options) {
-    //         cookies.set(
-    //             "webchessGame",
-    //             JSON.stringify({ gameId: options.gameId, color: options.color }),
-    //             { expires: 1, httponly: true, samesite: "Strict" }
-    //         );
-    //     }
-
-    //     this.props.mainSetGame({
-    //         mode: "standard"
-    //     });
-    // }
 
     render() {
         if(this.props.isSocketConnected) {

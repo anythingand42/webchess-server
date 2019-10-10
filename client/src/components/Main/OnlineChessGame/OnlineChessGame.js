@@ -17,29 +17,38 @@ class OnlineChessGame extends React.PureComponent {
     render() {
         let upTimerValue, downTimerValue;
         let upTimerStartDate, downTimerStartDate;
+        let upTimerHandleTimeOut, downTimerHandleTimeOut;
+        let upUserName, downUserName;
         if(this.props.orientation === "w") {
             upTimerValue = this.props.blackRestOfTime;
             downTimerValue = this.props.whiteRestOfTime;
             upTimerStartDate = this.props.blackTimerStartDate;
             downTimerStartDate = this.props.whiteTimerStartDate;
+            upTimerHandleTimeOut = this.props.blackTimerHandleTimeOut;
+            downTimerHandleTimeOut = this.props.whiteTimerHandleTimeOut;
+            upUserName = this.props.blackUserName || "anonymous";
+            downUserName = this.props.whiteUserName || "anonymous";
         } else {
             upTimerValue = this.props.whiteRestOfTime;
             downTimerValue = this.props.blackRestOfTime;
             upTimerStartDate = this.props.whiteTimerStartDate;
             downTimerStartDate = this.props.blackTimerStartDate;
+            upTimerHandleTimeOut = this.props.whiteTimerHandleTimeOut;
+            downTimerHandleTimeOut = this.props.blackTimerHandleTimeOut;
+            upUserName = this.props.whiteUserName || "anonymous";
+            downUserName = this.props.blackUserName || "anonymous";
         }
         
         return(
             <section className="game">
                 <div className="chat-container">
-                    {/* <div className="chat-container__wrapper">
+                    <div className="chat-container__wrapper">
                         <Chat
                             className="chat-container__chat"
-                            opponentSocketId={this.props.opponentSocketId}
-                            userName={this.props.orientation === "w" ? this.state.whiteUserName : this.state.blackUserName}
-                            socket={this.props.socket}
+                            messages={this.props.chatMessages}
+                            handleSubmit={this.props.chatHandleSubmit}
                         />
-                    </div> */}
+                    </div>
                 </div>
                 <ChessBoard
                     fen={this.props.fen}
@@ -51,7 +60,7 @@ class OnlineChessGame extends React.PureComponent {
                     orientation={this.props.orientation}
                     className="board"
                 />
-                {upTimerValue && downTimerValue &&
+                {(upTimerValue || upTimerValue === 0) && (downTimerValue || downTimerValue === 0) &&
                     <div className="info-container">
                         <div className="info-container__wrapper">
                             <div className="info">
@@ -59,22 +68,25 @@ class OnlineChessGame extends React.PureComponent {
                                     className="info__time--up"
                                     valueInMs={upTimerValue}
                                     startRunningDate={upTimerStartDate}
+                                    handleTimeOut={upTimerHandleTimeOut}
                                 />
                                 <div className="info__name--up">
-                                    {this.props.orientation === "b" ? this.props.whiteUserName : this.props.blackUserName}
+                                    {upUserName}
                                 </div>
                                 {this.props.result &&
                                     <div className="info__result">
-                                        {this.props.result}
+                                        <p>{this.props.resultReason}</p>
+                                        <p>{this.props.result}</p>
                                     </div>
                                 }
                                 <div className="info__name--down">
-                                    {this.props.orientation === "w" ? this.props.whiteUserName : this.props.blackUserName}
+                                    {downUserName}
                                 </div>
                                 <ChessTimer
                                     className="info__time--down"
                                     valueInMs={downTimerValue}
                                     startRunningDate={downTimerStartDate}
+                                    handleTimeOut={downTimerHandleTimeOut}
                                 />
                             </div>
                         </div>

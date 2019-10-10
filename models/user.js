@@ -4,7 +4,6 @@ const cryptoRandomString = require('crypto-random-string');
 
 const mongoose = require('mongoose');
 const crypto = require('crypto');
-// const jwt = require('jsonwebtoken');
 
 const { Schema } = mongoose;
 
@@ -14,7 +13,8 @@ const UserSchema = new Schema({
     salt: String,
     token: String,
     activeGameId: String,
-    activeGameColor: String
+    activeGameColor: String,
+    isConnected: Boolean
 });
 
 UserSchema.methods.setPassword = function(password) {

@@ -3,7 +3,10 @@ import {
     ONLINE_CHESS_GAME_FETCH_INITIAL_STATE,
     ONLINE_CHESS_GAME_MOUSE_DOWN_ON_BOARD,
     ONLINE_CHESS_GAME_MOUSE_UP_ON_BOARD,
-    ONLINE_CHESS_GAME_UNMOUNT
+    ONLINE_CHESS_GAME_UNMOUNT,
+    ONLINE_CHESS_GAME_WHITE_TIME_OUT,
+    ONLINE_CHESS_GAME_BLACK_TIME_OUT,
+    ONLINE_CHESS_GAME_CHAT_SUBMIT
 } from "./sagaActions.js";
 import {
     ONLINE_CHESS_GAME_SET_IS_ACTIVE,
@@ -19,8 +22,12 @@ import {
     setWhiteTimerStartDate,
     setBlackTimerStartDate,
     setIncrement,
-    reset
+    reset,
+    setResult,
+    chatSetMessages
 } from "./actions.js";
+
+import { mainSetGameFlag } from "../Main/actions.js";
 
 import Chess from "chess.js";
 
@@ -44,6 +51,8 @@ function* setGameOptions(action) {
         else blackTimerStartDate = action.payload.lastUpdateDate;
     }
 
+    console.log(action.payload.chatMessages);
+
     yield all([
         put( setOrientation(action.payload.orientation) ),
         put( setPgn(action.payload.pgn) ),
@@ -55,6 +64,7 @@ function* setGameOptions(action) {
         put( setIncrement(action.payload.incInMs) ),
         put( setWhiteTimerStartDate(whiteTimerStartDate) ),
         put( setBlackTimerStartDate(blackTimerStartDate) ),
+        put( chatSetMessages(action.payload.chatMessages || "") )
     ]);
 
     yield put({
@@ -65,9 +75,11 @@ function* setGameOptions(action) {
 }
 
 function* handleMouseDownOnBoard(action) {
-    const {id, clientX, clientY} = action.payload;
     const store = yield select();
     const props = store.onlineChessGame;
+    if(!props.isActive) return;
+
+    const {id, clientX, clientY} = action.payload;
     const chessGame = new Chess();
     chessGame.load_pgn(props.pgn);
 
@@ -93,13 +105,13 @@ function* handleMouseDownOnBoard(action) {
 }
 
 function* handleMouseUpOnBoard(action) {
-    const id = action.payload;
     const store = yield select();
     const props = store.onlineChessGame;
-    console.log(props);
 
     if(!props.isActive) return;
     if(!props.draggedPiece) return;
+
+    const id = action.payload;
 
     const chessGame = new Chess();
     chessGame.load_pgn(props.pgn);
@@ -220,37 +232,190 @@ function* handleSendMove(action) {
         put( setBlackTimerStartDate(blackTimerStartDate) )
     ]);
 
-    const result = chessGame.game_over();
-
-    if(result) {
-
-        yield put({
-            type: ONLINE_CHESS_GAME_SET_IS_ACTIVE,
-            payload: false
-        });
+    if(chessGame.game_over()) {
 
         const store = yield select();
         const props = store.onlineChessGame;
-        const opponentColor = props.orientation === "b" ? "w" : "b";
+        let result;
+        let resultReason;
 
         if(chessGame.in_checkmate()) {
+            result = props.orientation === "w" ? "black won" : "white won";
+            resultReason = "checkmate";
+
             yield put({
                 type: "toServer/OnlineChessGame/game_over",
-                payload: opponentColor
+                payload: {
+                    result: result,
+                    reason: resultReason,
+                    whiteRestOfTime: data.whiteRestOfTime,
+                    blackRestOfTime: data.blackRestOfTime
+                }
             });
         }
 
         if(chessGame.in_draw()) {
+            result = "draw";
+            resultReason = "50-move rule";
+            if(chessGame.in_stalemate()) resultReason = "stalemate";
+            if(chessGame.in_threefold_repetition()) resultReason = "threefold repetition";
+            if(chessGame.insufficient_material()) resultReason = "insufficient material";
+
             yield put({
                 type: "toServer/OnlineChessGame/game_over",
-                payload: "d"
+                payload: {
+                    result: result,
+                    reason: resultReason,
+                    whiteRestOfTime: data.whiteRestOfTime,
+                    blackRestOfTime: data.blackRestOfTime
+                }
             });
         }
+
+        yield all([
+            put({
+                type: ONLINE_CHESS_GAME_SET_IS_ACTIVE,
+                payload: false
+            }),
+            put( setWhiteTimerStartDate(null) ),
+            put( setBlackTimerStartDate(null) ),
+            put( setResult(result, resultReason) ),
+            put( mainSetGameFlag(false) )
+        ]);
     }
 }
 
+function* handleWhiteTimeOut() {
+
+    const store = yield select();
+    const props = store.onlineChessGame;
+    const orientation = props.orientation;
+    if(orientation !== "w") return;
+
+    yield all([
+        put({
+            type: ONLINE_CHESS_GAME_SET_IS_ACTIVE,
+            payload: false
+        }),
+        put( setWhiteTimerStartDate(null) ),
+        put( setBlackTimerStartDate(null) ),
+        put( setWhiteRestOfTime(0) ),
+        put( setResult("black won", "time out") ),
+        put( mainSetGameFlag(false) )
+    ]);
+
+    yield put({
+        type: "toServer/OnlineChessGame/game_over",
+        payload: {
+            result: "black won",
+            reason: "time out",
+            whiteRestOfTime: 0,
+            blackRestOfTime: props.blackRestOfTime
+        }
+    });
+}
+
+function* handleBlackTimeOut() {
+
+    const store = yield select();
+    const orientation = store.onlineChessGame.orientation;
+    if(orientation !== "b") return;
+
+    yield all([
+        put({
+            type: ONLINE_CHESS_GAME_SET_IS_ACTIVE,
+            payload: false
+        }),
+        put( setWhiteTimerStartDate(null) ),
+        put( setBlackTimerStartDate(null) ),
+        put( setBlackRestOfTime(0) ),
+        put( setResult("white won", "time out") ),
+        put( mainSetGameFlag(false) )
+    ]);
+
+    yield put({
+        type: "toServer/OnlineChessGame/game_over",
+        payload: {
+            result: "white won",
+            reason: "time out",
+            whiteRestOfTime: props.whiteRestOfTime,
+            blackRestOfTime: 0
+        }
+    });
+}
+
+function* handleGameOver(action) {
+    if(!action.payload.whiteRestOfTime || !action.payload.blackRestOfTime ) {
+        const store = yield select();
+        const props = store.onlineChessGame;
+        const chessGame = new Chess(props.fen);
+        let whiteRestOfTime = props.whiteRestOfTime;
+        let blackRestOfTime = props.blackRestOfTime;
+        if(chessGame.turn() === "w" && props.whiteTimerStartDate) {
+            whiteRestOfTime -= new Date().getTime() - props.whiteTimerStartDate;
+        }
+        if(chessGame.turn() === "b" && props.blackTimerStartDate) {
+            blackRestOfTime -= new Date().getTime() - props.blackTimerStartDate;
+        }
+
+        yield all([
+            put({
+                type: ONLINE_CHESS_GAME_SET_IS_ACTIVE,
+                payload: false
+            }),
+            put( setWhiteTimerStartDate(null) ),
+            put( setBlackTimerStartDate(null) ),
+            put( setWhiteRestOfTime(whiteRestOfTime) ),
+            put( setBlackRestOfTime(blackRestOfTime) ),
+            put( setResult(action.payload.result, action.payload.reason) ),
+            put( mainSetGameFlag(false) )
+        ]);
+        return;
+    }
+
+    yield all([
+        put({
+            type: ONLINE_CHESS_GAME_SET_IS_ACTIVE,
+            payload: false
+        }),
+        put( setWhiteTimerStartDate(null) ),
+        put( setBlackTimerStartDate(null) ),
+        put( setWhiteRestOfTime(action.payload.whiteRestOfTime) ),
+        put( setBlackRestOfTime(action.payload.blackRestOfTime) ),
+        put( setResult(action.payload.result, action.payload.reason) ),
+        put( mainSetGameFlag(false) )
+    ]);
+}
+
 function* handleUnmount() {
+    const store = yield select();
+    if(store.onlineChessGame.result) {
+        yield put({
+            type: "toServer/OnlineChessGame/user_left"
+        });
+    }
     yield put(reset());
+}
+
+function* chatHandleSubmit(action) {
+    const store = yield select();
+    let senderName = store.main.userName;
+    const inputMsg = action.payload;
+    if(!senderName) {
+        const orientation = store.onlineChessGame.orientation;
+        if(orientation === "w") senderName = "white";
+        else senderName = "black";
+    }
+    const msg = `${senderName}: ${inputMsg}`;
+    yield put({
+        type: "toServer/OnlineChessGame/send_chat_msg",
+        payload: msg
+    });
+}
+
+function* handleSendMsg(action) {
+    const store = yield select();
+    yield put( chatSetMessages(`${store.onlineChessGame.chatMessages}${action.payload}\n`) )
 }
 
 export function* onlineChessGameWatcherSaga() {
@@ -260,6 +425,11 @@ export function* onlineChessGameWatcherSaga() {
         takeEvery(ONLINE_CHESS_GAME_MOUSE_DOWN_ON_BOARD, handleMouseDownOnBoard),
         takeEvery(ONLINE_CHESS_GAME_MOUSE_UP_ON_BOARD, handleMouseUpOnBoard),
         takeEvery("toClient/OnlineChessGame/send_move", handleSendMove),
-        takeEvery(ONLINE_CHESS_GAME_UNMOUNT, handleUnmount)
+        takeEvery(ONLINE_CHESS_GAME_WHITE_TIME_OUT, handleWhiteTimeOut),
+        takeEvery(ONLINE_CHESS_GAME_BLACK_TIME_OUT, handleBlackTimeOut),
+        takeEvery(ONLINE_CHESS_GAME_UNMOUNT, handleUnmount),
+        takeEvery("toClient/OnlineChessGame/game_over", handleGameOver),
+        takeEvery(ONLINE_CHESS_GAME_CHAT_SUBMIT, chatHandleSubmit),
+        takeEvery("toClient/OnlineChessGame/send_chat_msg", handleSendMsg)
     ]);
 }

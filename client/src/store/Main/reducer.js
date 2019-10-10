@@ -13,6 +13,7 @@ const defaultState = {
 };
 
 export const mainReducer = (state = defaultState, action) => {
+    console.log(action);
     switch (action.type) {
         case MAIN_SET_SOCKET_FLAG:
             return {

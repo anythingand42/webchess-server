@@ -5,7 +5,10 @@ import {
     fetchInitialState,
     handleMouseDownOnBoard,
     handleMouseUpOnBoard,
-    handleUnmount
+    whiteTimerHandleTimeOut,
+    blackTimerHandleTimeOut,
+    handleUnmount,
+    chatHandleSubmit
 } from "../../../store/OnlineChessGame/sagaActions";
 
 class ConnectedOnlineChessGame extends React.Component {
@@ -24,10 +27,16 @@ class ConnectedOnlineChessGame extends React.Component {
                 blackRestOfTime={this.props.blackRestOfTime}
                 whiteTimerStartDate={this.props.whiteTimerStartDate}
                 blackTimerStartDate={this.props.blackTimerStartDate}
+                result={this.props.result}
+                resultReason={this.props.resultReason}
+                chatMessages={this.props.chatMessages}
                 fetchInitialState={this.props.fetchInitialState}
                 handleMouseDownOnBoard={this.props.handleMouseDownOnBoard}
                 handleMouseUpOnBoard={this.props.handleMouseUpOnBoard}
+                whiteTimerHandleTimeOut={this.props.whiteTimerHandleTimeOut}
+                blackTimerHandleTimeOut={this.props.blackTimerHandleTimeOut}
                 handleUnmount={this.props.handleUnmount}
+                chatHandleSubmit={this.props.chatHandleSubmit}
             />
         );
     }
@@ -46,7 +55,10 @@ const mapStateToProps = (state) => {
         whiteRestOfTime: state.onlineChessGame.whiteRestOfTime,
         blackRestOfTime: state.onlineChessGame.blackRestOfTime,
         whiteTimerStartDate: state.onlineChessGame.whiteTimerStartDate,
-        blackTimerStartDate: state.onlineChessGame.blackTimerStartDate
+        blackTimerStartDate: state.onlineChessGame.blackTimerStartDate,
+        result: state.onlineChessGame.result,
+        resultReason: state.onlineChessGame.resultReason,
+        chatMessages: state.onlineChessGame.chatMessages
     }
 };
 
@@ -54,7 +66,10 @@ const mapDispatchToProps = {
     fetchInitialState,
     handleMouseDownOnBoard,
     handleMouseUpOnBoard,
-    handleUnmount
+    whiteTimerHandleTimeOut,
+    blackTimerHandleTimeOut,
+    handleUnmount,
+    chatHandleSubmit
 };
 
 

@@ -3,8 +3,7 @@ import { connect } from "react-redux";
 import SearchOpponent from "./SearchOpponent.js";
 import {
     fetchInitialState,
-    addChallenge,
-    removeChallenge,
+    handleSearchButtonClick,
     handleUnmount
 } from "../../../store/SearchOpponent/sagaActions";
 
@@ -15,8 +14,7 @@ class ConnectedSearchOpponent extends React.Component {
                 buttons={this.props.buttons}
                 challenges={this.props.challenges}
                 fetchInitialState={this.props.fetchInitialState}
-                addChallenge={this.props.addChallenge}
-                removeChallenge={this.props.removeChallenge}
+                handleSearchButtonClick={this.props.handleSearchButtonClick}
                 handleUnmount={this.props.handleUnmount}
                 userName={this.props.userName}
             />
@@ -33,8 +31,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-    addChallenge,
-    removeChallenge,
+    handleSearchButtonClick,
     fetchInitialState,
     handleUnmount
 };

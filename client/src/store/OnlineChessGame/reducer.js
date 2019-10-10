@@ -13,7 +13,8 @@ import {
     ONLINE_CHESS_GAME_SET_BLACK_REST_OF_TIME,
     ONLINE_CHESS_GAME_SET_WHITE_TIMER_START_DATE,
     ONLINE_CHESS_GAME_SET_BLACK_TIMER_START_DATE,
-    ONLINE_CHESS_GAME_SET_INCREMENT
+    ONLINE_CHESS_GAME_SET_INCREMENT,
+    ONLINE_CHESS_GAME_SET_CHAT_MESSAGES
 } from "./actions";
 
 const defaultState = {
@@ -24,13 +25,15 @@ const defaultState = {
     fen: "start",
     orientation: "w",
     result: null,
+    resultReason: null,
     whiteUserName: null,
     blackUserName: null,
     whiteRestOfTime: null,
     blackRestOfTime: null,
     whiteTimerStartDate: null,
     blackTimerStartDate: null,
-    increment: null
+    increment: null,
+    chatMessages: ""
 };
 
 export const onlineChessGameReducer = (state = defaultState, action) => {
@@ -68,7 +71,8 @@ export const onlineChessGameReducer = (state = defaultState, action) => {
         case ONLINE_CHESS_GAME_SET_RESULT:
             return {
                 ...state,
-                result: action.payload
+                result: action.payload.result,
+                resultReason: action.payload.reason
             };
 
         case ONLINE_CHESS_GAME_SET_IS_ACTIVE:
@@ -118,6 +122,12 @@ export const onlineChessGameReducer = (state = defaultState, action) => {
                     ...state,
                     increment: action.payload
                 };
+
+        case ONLINE_CHESS_GAME_SET_CHAT_MESSAGES:
+            return {
+                ...state,
+                chatMessages: action.payload
+            };
 
         case ONLINE_CHESS_GAME_RESET:
             return defaultState;

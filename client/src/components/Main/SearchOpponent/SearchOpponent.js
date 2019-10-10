@@ -6,10 +6,6 @@ import "../../Button/style.css";
 import {Link} from "react-router-dom";
 
 class SearchOpponent extends React.Component {
-    constructor(props) {
-        super(props);
-        this.handleSearchButtonClick = this.handleSearchButtonClick.bind(this);
-    }
 
     componentDidMount() {
         this.props.fetchInitialState();
@@ -17,16 +13,6 @@ class SearchOpponent extends React.Component {
 
     componentWillUnmount() {
         this.props.handleUnmount();
-    }
-
-    handleSearchButtonClick(time) { // перенести в сагу полностью
-        if(this.props.buttons[time].isAvailable) {
-            if(!this.props.buttons[time].isPressed) {
-                this.props.addChallenge(time);
-            } else {
-                this.props.removeChallenge(time);
-            }
-        }
     }
 
     render() {
@@ -38,42 +24,42 @@ class SearchOpponent extends React.Component {
                         time="1+0"
                         mode="standard"
                         isPressed={this.props.buttons["1+0"].isPressed}
-                        onClick={this.handleSearchButtonClick}
+                        onClick={this.props.handleSearchButtonClick}
                     />
                     <SearchButton
                         text="bullet 1+1"
                         time="1+1"
                         mode="standard"
                         isPressed={this.props.buttons["1+1"].isPressed}
-                        onClick={this.handleSearchButtonClick}
+                        onClick={this.props.handleSearchButtonClick}
                     />
                     <SearchButton
                         text="bullet 2+1"
                         time="2+1"
                         mode="standard"
                         isPressed={this.props.buttons["2+1"].isPressed}
-                        onClick={this.handleSearchButtonClick}
+                        onClick={this.props.handleSearchButtonClick}
                     />
                     <SearchButton
                         text="blitz 3+0"
                         time="3+0"
                         mode="standard"
                         isPressed={this.props.buttons["3+0"].isPressed}
-                        onClick={this.handleSearchButtonClick}
+                        onClick={this.props.handleSearchButtonClick}
                     />
                     <SearchButton
                         text="blitz 3+2"
                         time="3+2"
                         mode="standard"
                         isPressed={this.props.buttons["3+2"].isPressed}
-                        onClick={this.handleSearchButtonClick}
+                        onClick={this.props.handleSearchButtonClick}
                     />
                     <SearchButton
                         text="blitz 5+3"
                         time="5+3"
                         mode="standard"
                         isPressed={this.props.buttons["5+3"].isPressed}
-                        onClick={this.handleSearchButtonClick}
+                        onClick={this.props.handleSearchButtonClick}
                     />
                 </div>
                 <Lobby

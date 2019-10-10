@@ -1,7 +1,6 @@
 const ChessGame = require("../../models/chessGame.js");
 
 async function manageMainActions({io, socket, payload, type, user}) {
-    console.log(user);
     if(type === "connect") {
         socket.emit("action", { type: "toClient/Main/connected" });
 

@@ -12,8 +12,8 @@ export const ONLINE_CHESS_GAME_SET_WHITE_REST_OF_TIME = "ONLINE_CHESS_GAME_SET_W
 export const ONLINE_CHESS_GAME_SET_BLACK_REST_OF_TIME = "ONLINE_CHESS_GAME_SET_BLACK_REST_OF_TIME";
 export const ONLINE_CHESS_GAME_SET_WHITE_TIMER_START_DATE = "ONLINE_CHESS_GAME_SET_WHITE_TIMER_START_DATE";
 export const ONLINE_CHESS_GAME_SET_BLACK_TIMER_START_DATE = "ONLINE_CHESS_GAME_SET_BLACK_TIMER_START_DATE";
-export const ONLINE_CHESS_GAME_SET_START_CLOCK_FLAG = "ONLINE_CHESS_GAME_SET_START_CLOCK_FLAG";
 export const ONLINE_CHESS_GAME_SET_INCREMENT = "ONLINE_CHESS_GAME_SET_INCREMENT";
+export const ONLINE_CHESS_GAME_SET_CHAT_MESSAGES = "ONLINE_CHESS_GAME_SET_CHAT_MESSAGES";
 
 export const setDraggedPiece = (draggedPiece) => {
     return {
@@ -50,10 +50,10 @@ export const setOrientation = (orientation) => {
     };
 };
 
-export const setResult = (result) => {
+export const setResult = (result, reason) => {
     return {
         type: ONLINE_CHESS_GAME_SET_RESULT,
-        payload: result
+        payload: { result, reason }
     };
 };
 
@@ -105,16 +105,16 @@ export const setBlackTimerStartDate = (startDate) => {
     };
 };
 
-export const setStartClockFlag = (flag) => {
-    return {
-        type: ONLINE_CHESS_GAME_SET_START_CLOCK_FLAG,
-        payload: flag
-    };
-};
-
 export const setIncrement = (inc) => {
     return {
         type: ONLINE_CHESS_GAME_SET_INCREMENT,
         payload: inc
+    };
+};
+
+export const chatSetMessages = (messages) => {
+    return {
+        type: ONLINE_CHESS_GAME_SET_CHAT_MESSAGES,
+        payload: messages
     };
 };

@@ -7,41 +7,41 @@ class ChessTimer extends React.PureComponent {
         this.state = {
             valueInMs: props.valueInMs
         }
+        this.runTimer = this.runTimer.bind(this);
     }
 
     UNSAFE_componentWillReceiveProps(nextProps) {
         if(nextProps.startRunningDate && !this.props.startRunningDate) {
-            this.timer = setInterval(() => {
-                const delta = new Date().getTime() - this.props.startRunningDate;
-                const newValue = this.props.valueInMs - delta;
-
-                this.setState({
-                    valueInMs: newValue
-                });
-
-                if(newValue <= 0) clearInterval(this.timer);
-            }, 100);
+            this.runTimer();
         }
         if(!nextProps.startRunningDate) {
             clearInterval(this.timer);
+
             this.setState({
                 valueInMs: nextProps.valueInMs
             });
         }
     }
 
+    runTimer() {
+        this.timer = setInterval(() => {
+            const delta = new Date().getTime() - this.props.startRunningDate;
+            const newValue = this.props.valueInMs - delta;
+            console.log("timer is running");
+            this.setState({
+                valueInMs: newValue
+            });
+
+            if(newValue <= 0) {
+                this.props.handleTimeOut();
+                clearInterval(this.timer);
+            }
+        }, 100);
+    }
+
     componentDidMount() {
         if(this.props.startRunningDate) {
-            this.timer = setInterval(() => {
-                const delta = new Date().getTime() - this.props.startRunningDate;
-                const newValue = this.props.valueInMs - delta;
-
-                this.setState({
-                    valueInMs: newValue
-                });
-
-                if(newValue <= 0) clearInterval(this.timer);
-            }, 100);
+            this.runTimer();
         }
     }
 

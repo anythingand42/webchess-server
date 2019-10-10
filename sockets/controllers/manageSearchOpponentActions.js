@@ -11,7 +11,7 @@ async function manageSearchOpponentActions({ io, socket, payload, type, user }) 
         Challenge = UserChallenge;
     }
     else {
-        room = "anomymous";
+        room = "anonymous";
         Challenge = AnonChallenge;
     }
 
@@ -77,7 +77,9 @@ async function manageSearchOpponentActions({ io, socket, payload, type, user }) 
             
             chessGame[playerColor].userName = user.name;
             chessGame[opponentColor].userName = opponent.name;
-            chessGame.setTokens();
+
+            chessGame[playerColor].userId = user._id;
+            chessGame[opponentColor].userId = opponent._id;
 
             await chessGame.save();
 
@@ -104,7 +106,6 @@ async function manageSearchOpponentActions({ io, socket, payload, type, user }) 
         challenge.challengerName = payload.challengerName;
         challenge.challengerSocketId = socket.id;
         challenge.challengerId = user._id;
-        console.log("challenge ", challenge);
         await challenge.save();
         socket.emit("action", { type: "toClient/SearchOpponent/challenge_request_is_processed", payload: payload.time });
         io.to(room).emit("action", {

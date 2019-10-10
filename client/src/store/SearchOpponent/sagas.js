@@ -3,7 +3,8 @@ import {
     SEARCH_OPPONENT_FETCH_INITIAL_STATE,
     ADD_CHALLENGE,
     REMOVE_CHALLENGE,
-    SEARCH_OPPONENT_UNMOUNT
+    SEARCH_OPPONENT_UNMOUNT,
+    SEARCH_BUTTON_CLICK
 } from "./sagaActions.js";
 import {
     LOBBY_SET_CHALLENGES,
@@ -19,60 +20,57 @@ function* searchOpponentSetInitialState() {
 }
 
 function* lobbySetChallenges(action) {
+    console.log("challenges", action.payload);
     yield put({
         type: LOBBY_SET_CHALLENGES,
         payload: action.payload
     });
 }
 
-function* addChallenge(action) {
-    const store = yield select();
-    const challengerName = store.main.userName;
+function* addChallenge(userName, time) {
     yield put({
         type: SEARCH_BUTTON_SET_AVAILABILITY,
         payload: {
-            buttonName: action.payload,
+            buttonName: time,
             isAvailable: false
         }
     });
     yield put({
         type: SEARCH_BUTTON_SET_PRESSED,
         payload: {
-            buttonName: action.payload,
+            buttonName: time,
             isPressed: true
         }
     });
     yield put({
         type: "toServer/SearchOpponent/add_challenge",
         payload: {
-            time: action.payload,
-            challengerName: challengerName
+            time: time,
+            challengerName: userName
         }
     });
 }
 
-function* removeChallenge(action) {
-    const store = yield select();
-    const challengerName = store.main.userName;
+function* removeChallenge(userName, time) {
     yield put({
         type: SEARCH_BUTTON_SET_AVAILABILITY,
         payload: {
-            buttonName: action.payload,
+            buttonName: time,
             isAvailable: false
         }
     });
     yield put({
         type: SEARCH_BUTTON_SET_PRESSED,
         payload: {
-            buttonName: action.payload,
+            buttonName: time,
             isPressed: false
         }
     });
     yield put({
         type: "toServer/SearchOpponent/remove_challenge",
         payload: {
-            time: action.payload,
-            challengerName: challengerName
+            time: time,
+            challengerName: userName
         }
     });
 }
@@ -96,13 +94,27 @@ function* handleUnmount() {
     });
 }
 
+function* handleSearchButtonClick(action) {
+    const time = action.payload;
+    const store = yield select();
+    const props = store.searchOpponent;
+    const userName = store.main.userName;
+
+    if(props.buttons[time].isAvailable) {
+        if(!props.buttons[time].isPressed) {
+            yield* addChallenge(userName, time);
+        } else {
+            yield* removeChallenge(userName, time);
+        }
+    }
+}
+
 export function* searchOpponentWatcherSaga() {
     yield all([
         takeEvery(SEARCH_OPPONENT_FETCH_INITIAL_STATE, searchOpponentSetInitialState),
         takeEvery("toClient/SearchOpponent/send_challenges", lobbySetChallenges),
-        takeEvery(ADD_CHALLENGE, addChallenge),
-        takeEvery(REMOVE_CHALLENGE, removeChallenge),
         takeEvery("toClient/SearchOpponent/challenge_request_is_processed", searchButtonSetAvailability),
-        takeEvery(SEARCH_OPPONENT_UNMOUNT, handleUnmount)
+        takeEvery(SEARCH_OPPONENT_UNMOUNT, handleUnmount),
+        takeEvery(SEARCH_BUTTON_CLICK, handleSearchButtonClick)
     ]);
 }
