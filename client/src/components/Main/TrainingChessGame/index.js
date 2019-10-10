@@ -1,16 +1,16 @@
 import React from "react";
 import { connect } from "react-redux";
-import ChessGame from "./ChessGame.js";
+import TrainingChessGame from "./TrainingChessGame.js";
 import {
     setDraggedPiece,
     setCellsToHighlight,
     setGame
-} from "../../../store/ChessGame/actions";
+} from "../../../store/TrainingChessGame/actions";
 
-class ConnectedChessGame extends React.Component {
+class ConnectedTrainingChessGame extends React.Component {
     render() {
         return(
-            <ChessGame
+            <TrainingChessGame
                 game={this.props.game}
                 draggedPiece={this.props.draggedPiece}
                 cellsToHighlight={this.props.cellsToHighlight}
@@ -37,4 +37,4 @@ const mapDispatchToProps = {
 };
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(ConnectedChessGame);
+export default connect(mapStateToProps, mapDispatchToProps)(ConnectedTrainingChessGame);

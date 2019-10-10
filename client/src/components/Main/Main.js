@@ -4,7 +4,7 @@ import Header from "./Header";
 import SearchOpponent from "./SearchOpponent";
 import LogIn from "./LogIn";
 import SignUp from "./SignUp";
-import ChessGame from "./ChessGame";
+import TrainingChessGame from "./TrainingChessGame";
 import OnlineChessGame from "./OnlineChessGame";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
@@ -29,7 +29,7 @@ class Main extends React.Component {
                         )}/>
                         <Route path="/login" component={LogIn} />
                         <Route path="/signup" component={SignUp} />
-                        <Route path="/trainingroom" component={ChessGame} />
+                        {/* <Route path="/trainingroom" component={TrainingChessGame} /> */}
                         <Route path="/gameroom" component={OnlineChessGame} />
                     </Router>
                 </div>

@@ -6,7 +6,8 @@ import {
     ONLINE_CHESS_GAME_UNMOUNT,
     ONLINE_CHESS_GAME_WHITE_TIME_OUT,
     ONLINE_CHESS_GAME_BLACK_TIME_OUT,
-    ONLINE_CHESS_GAME_CHAT_SUBMIT
+    ONLINE_CHESS_GAME_CHAT_SUBMIT,
+    ONLINE_CHESS_GAME_MOUSE_LEAVE_FROM_BOARD
 } from "./sagaActions.js";
 import {
     ONLINE_CHESS_GAME_SET_IS_ACTIVE,
@@ -162,6 +163,19 @@ function* handleMouseUpOnBoard(action) {
             }
         });
     }
+}
+
+function* handleMouseLeaveFromBoard() {
+    const store = yield select();
+    const props = store.onlineChessGame;
+
+    if(!props.isActive) return;
+    if(!props.draggedPiece) return;
+
+    yield all([
+        put( setDraggedPiece(null) ),
+        put( setCellsToHighlight(null) )
+    ]);
 }
 
 function getChessClockPropsAfterMouseUp({
@@ -420,6 +434,7 @@ export function* onlineChessGameWatcherSaga() {
         takeEvery("toClient/OnlineChessGame/send_game_options", setGameOptions),
         takeEvery(ONLINE_CHESS_GAME_MOUSE_DOWN_ON_BOARD, handleMouseDownOnBoard),
         takeEvery(ONLINE_CHESS_GAME_MOUSE_UP_ON_BOARD, handleMouseUpOnBoard),
+        takeEvery(ONLINE_CHESS_GAME_MOUSE_LEAVE_FROM_BOARD, handleMouseLeaveFromBoard),
         takeEvery("toClient/OnlineChessGame/send_move", handleSendMove),
         takeEvery(ONLINE_CHESS_GAME_WHITE_TIME_OUT, handleWhiteTimeOut),
         takeEvery(ONLINE_CHESS_GAME_BLACK_TIME_OUT, handleBlackTimeOut),

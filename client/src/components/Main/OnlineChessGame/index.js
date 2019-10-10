@@ -5,6 +5,7 @@ import {
     fetchInitialState,
     handleMouseDownOnBoard,
     handleMouseUpOnBoard,
+    handleMouseLeaveFromBoard,
     whiteTimerHandleTimeOut,
     blackTimerHandleTimeOut,
     handleUnmount,
@@ -33,6 +34,7 @@ class ConnectedOnlineChessGame extends React.Component {
                 fetchInitialState={this.props.fetchInitialState}
                 handleMouseDownOnBoard={this.props.handleMouseDownOnBoard}
                 handleMouseUpOnBoard={this.props.handleMouseUpOnBoard}
+                handleMouseLeaveFromBoard={this.props.handleMouseLeaveFromBoard}
                 whiteTimerHandleTimeOut={this.props.whiteTimerHandleTimeOut}
                 blackTimerHandleTimeOut={this.props.blackTimerHandleTimeOut}
                 handleUnmount={this.props.handleUnmount}
@@ -66,6 +68,7 @@ const mapDispatchToProps = {
     fetchInitialState,
     handleMouseDownOnBoard,
     handleMouseUpOnBoard,
+    handleMouseLeaveFromBoard,
     whiteTimerHandleTimeOut,
     blackTimerHandleTimeOut,
     handleUnmount,

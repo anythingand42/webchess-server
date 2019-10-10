@@ -2,7 +2,7 @@ import React from "react";
 import ChessBoard from "../ChessBoard";
 import "./style.css";
 
-class ChessGame extends React.PureComponent {
+class TrainingChessGame extends React.PureComponent {
     constructor(props) {
         super(props);
         this.handleMouseDownOnBoard = this.handleMouseDownOnBoard.bind(this);
@@ -54,7 +54,7 @@ class ChessGame extends React.PureComponent {
             <div className="game-container">
                 <div/>
                 <ChessBoard
-                    fen={this.props.game.fen()}
+                    fen={this.props.fen}
                     cellsToHighlight={this.props.cellsToHighlight}
                     draggedPiece = {this.props.draggedPiece}
                     onMouseDown={this.handleMouseDownOnBoard}
@@ -69,4 +69,4 @@ class ChessGame extends React.PureComponent {
 
 }
 
-export default ChessGame;
+export default TrainingChessGame;

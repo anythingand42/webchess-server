@@ -56,7 +56,7 @@ class OnlineChessGame extends React.PureComponent {
                     draggedPiece = {this.props.draggedPiece}
                     onMouseDown={this.props.handleMouseDownOnBoard}
                     onMouseUp={this.props.handleMouseUpOnBoard}
-                    onMouseLeave={this.handleMouseLeaveFromBoard}
+                    onMouseLeave={this.props.handleMouseLeaveFromBoard}
                     orientation={this.props.orientation}
                     className="board"
                 />

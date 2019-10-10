@@ -12,7 +12,7 @@ const defaultState = {
     game: new Chess()
 };
 
-export const chessGameReducer = (state = defaultState, action) => {
+export const trainingChessGameReducer = (state = defaultState, action) => {
     switch (action.type) {
         case SET_DRAGGED_PIECE:
             return {
