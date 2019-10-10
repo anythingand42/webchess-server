@@ -311,7 +311,9 @@ function* handleWhiteTimeOut() {
         put( setBlackTimerStartDate(null) ),
         put( setWhiteRestOfTime(0) ),
         put( setResult("black won", "time out") ),
-        put( mainSetGameFlag(false) )
+        put( mainSetGameFlag(false) ),
+        put( setDraggedPiece(null) ),
+        put( setCellsToHighlight(null) )
     ]);
 
     yield put({
@@ -328,7 +330,8 @@ function* handleWhiteTimeOut() {
 function* handleBlackTimeOut() {
 
     const store = yield select();
-    const orientation = store.onlineChessGame.orientation;
+    const props = store.onlineChessGame;
+    const orientation = props.orientation;
     if(orientation !== "b") return;
 
     yield all([
@@ -340,7 +343,9 @@ function* handleBlackTimeOut() {
         put( setBlackTimerStartDate(null) ),
         put( setBlackRestOfTime(0) ),
         put( setResult("white won", "time out") ),
-        put( mainSetGameFlag(false) )
+        put( mainSetGameFlag(false) ),
+        put( setDraggedPiece(null) ),
+        put( setCellsToHighlight(null) )
     ]);
 
     yield put({
@@ -378,7 +383,9 @@ function* handleGameOver(action) {
             put( setWhiteRestOfTime(whiteRestOfTime) ),
             put( setBlackRestOfTime(blackRestOfTime) ),
             put( setResult(action.payload.result, action.payload.reason) ),
-            put( mainSetGameFlag(false) )
+            put( mainSetGameFlag(false) ),
+            put( setDraggedPiece(null) ),
+            put( setCellsToHighlight(null) )
         ]);
         return;
     }
@@ -393,7 +400,9 @@ function* handleGameOver(action) {
         put( setWhiteRestOfTime(action.payload.whiteRestOfTime) ),
         put( setBlackRestOfTime(action.payload.blackRestOfTime) ),
         put( setResult(action.payload.result, action.payload.reason) ),
-        put( mainSetGameFlag(false) )
+        put( mainSetGameFlag(false) ),
+        put( setDraggedPiece(null) ),
+        put( setCellsToHighlight(null) )
     ]);
 }
 
