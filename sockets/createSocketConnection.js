@@ -32,6 +32,7 @@ function createSocketConnection(server) {
 
             if(user) {
                 user.isConnected = false;
+                user.isSessionActive = false;
                 await user.save();
 
                 await UserChallenge.deleteMany({challengerSocketId: socket.id});

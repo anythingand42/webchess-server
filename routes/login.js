@@ -10,6 +10,11 @@ router.get("/", (req, res) => {
 router.post("/", async (req, res) => {
     const user = await User.findOne({name: req.body.userName});
     if( user !== null && user.validatePassword(req.body.password) ) {
+        if(user.isSessionActive) {
+            res.status(422).send("you already have an active session");
+            return;
+        }
+        user.isSessionActive = true;
         user.setToken();
         await user.save();
         res.cookie("anonymous", null, { maxAge: -1 });

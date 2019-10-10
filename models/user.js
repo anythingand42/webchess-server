@@ -14,7 +14,8 @@ const UserSchema = new Schema({
     token: String,
     activeGameId: String,
     activeGameColor: String,
-    isConnected: Boolean
+    isConnected: Boolean,
+    isSessionActive: Boolean
 });
 
 UserSchema.methods.setPassword = function(password) {
