@@ -1,4 +1,4 @@
-import { put, takeEvery, all, select } from "redux-saga/effects";
+import { put, takeLeading, all, select } from "redux-saga/effects";
 import {
     SEARCH_OPPONENT_FETCH_INITIAL_STATE,
     SEARCH_OPPONENT_UNMOUNT,

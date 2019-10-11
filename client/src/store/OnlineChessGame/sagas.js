@@ -1,4 +1,4 @@
-import { put, takeEvery, all, select } from "redux-saga/effects";
+import { put, takeLeading, all, select } from "redux-saga/effects";
 import {
     ONLINE_CHESS_GAME_FETCH_INITIAL_STATE,
     ONLINE_CHESS_GAME_MOUSE_DOWN_ON_BOARD,

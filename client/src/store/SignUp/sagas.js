@@ -1,4 +1,4 @@
-import { takeEvery, put, all } from "redux-saga/effects";
+import { takeLeading, put, all } from "redux-saga/effects";
 import {
     SIGN_UP,
     SIGN_UP_UNMOUNT
