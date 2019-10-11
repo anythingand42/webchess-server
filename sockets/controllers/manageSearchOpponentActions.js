@@ -51,8 +51,7 @@ async function manageSearchOpponentActions({ io, socket, payload, type, user }) 
             });
 
             let chessGame = new ChessGame();
-            chessGame.turn = "w";
-            chessGame.pgn = "";
+            chessGame.fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
             chessGame.time = payload.time;
             const parsedTime = payload.time.split("+");
             const timeInMs = Number(parsedTime[0]) * 60 * 1000;

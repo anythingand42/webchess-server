@@ -45,7 +45,7 @@ async function manageOnlineChessGameActions({ io, socket, payload, type, user })
         if(chessGame.isGameOver) return;
 
         const options = {
-            pgn: chessGame.pgn,
+            fen: chessGame.fen,
             incInMs: chessGame.incInMs,
             whiteRestOfTime: chessGame["w"].restOfTime,
             blackRestOfTime: chessGame["b"].restOfTime,
@@ -70,7 +70,7 @@ async function manageOnlineChessGameActions({ io, socket, payload, type, user })
         const opponentColor = color === "b" ? "w" : "b";
         const data = payload;
 
-        chessGame.pgn = data.pgn;
+        chessGame.fen = data.fen;
         chessGame["w"].restOfTime = data.whiteRestOfTime;
         chessGame["b"].restOfTime = data.blackRestOfTime;
         chessGame.lastUpdateDate = new Date().getTime();
