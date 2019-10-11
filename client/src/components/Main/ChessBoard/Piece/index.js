@@ -12,6 +12,7 @@ class Piece extends React.PureComponent {
     }
 
     handleMouseMove(event) {
+        console.log("dragged piece", event.clientX, event.clientY);
         this.setState({
             top: event.clientY,
             left: event.clientX

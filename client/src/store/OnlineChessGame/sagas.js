@@ -439,17 +439,17 @@ function* handleSendMsg(action) {
 
 export function* onlineChessGameWatcherSaga() {
     yield all([
-        takeEvery(ONLINE_CHESS_GAME_FETCH_INITIAL_STATE, onlineChessGameFetchGameOptions),
-        takeEvery("toClient/OnlineChessGame/send_game_options", setGameOptions),
-        takeEvery(ONLINE_CHESS_GAME_MOUSE_DOWN_ON_BOARD, handleMouseDownOnBoard),
-        takeEvery(ONLINE_CHESS_GAME_MOUSE_UP_ON_BOARD, handleMouseUpOnBoard),
-        takeEvery(ONLINE_CHESS_GAME_MOUSE_LEAVE_FROM_BOARD, handleMouseLeaveFromBoard),
-        takeEvery("toClient/OnlineChessGame/send_move", handleSendMove),
-        takeEvery(ONLINE_CHESS_GAME_WHITE_TIME_OUT, handleWhiteTimeOut),
-        takeEvery(ONLINE_CHESS_GAME_BLACK_TIME_OUT, handleBlackTimeOut),
-        takeEvery(ONLINE_CHESS_GAME_UNMOUNT, handleUnmount),
-        takeEvery("toClient/OnlineChessGame/game_over", handleGameOver),
-        takeEvery(ONLINE_CHESS_GAME_CHAT_SUBMIT, chatHandleSubmit),
-        takeEvery("toClient/OnlineChessGame/send_chat_msg", handleSendMsg)
+        takeLeading(ONLINE_CHESS_GAME_FETCH_INITIAL_STATE, onlineChessGameFetchGameOptions),
+        takeLeading("toClient/OnlineChessGame/send_game_options", setGameOptions),
+        takeLeading(ONLINE_CHESS_GAME_MOUSE_DOWN_ON_BOARD, handleMouseDownOnBoard),
+        takeLeading(ONLINE_CHESS_GAME_MOUSE_UP_ON_BOARD, handleMouseUpOnBoard),
+        takeLeading(ONLINE_CHESS_GAME_MOUSE_LEAVE_FROM_BOARD, handleMouseLeaveFromBoard),
+        takeLeading("toClient/OnlineChessGame/send_move", handleSendMove),
+        takeLeading(ONLINE_CHESS_GAME_WHITE_TIME_OUT, handleWhiteTimeOut),
+        takeLeading(ONLINE_CHESS_GAME_BLACK_TIME_OUT, handleBlackTimeOut),
+        takeLeading(ONLINE_CHESS_GAME_UNMOUNT, handleUnmount),
+        takeLeading("toClient/OnlineChessGame/game_over", handleGameOver),
+        takeLeading(ONLINE_CHESS_GAME_CHAT_SUBMIT, chatHandleSubmit),
+        takeLeading("toClient/OnlineChessGame/send_chat_msg", handleSendMsg)
     ]);
 }

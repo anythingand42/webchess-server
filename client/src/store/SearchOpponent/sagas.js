@@ -134,11 +134,11 @@ function* handleChallengeClick(action) {
 
 export function* searchOpponentWatcherSaga() {
     yield all([
-        takeEvery(SEARCH_OPPONENT_FETCH_INITIAL_STATE, searchOpponentSetInitialState),
-        takeEvery("toClient/SearchOpponent/send_challenges", lobbySetChallenges),
-        takeEvery("toClient/SearchOpponent/challenge_request_is_processed", searchButtonSetAvailability),
-        takeEvery(SEARCH_OPPONENT_UNMOUNT, handleUnmount),
-        takeEvery(SEARCH_BUTTON_CLICK, handleSearchButtonClick),
-        takeEvery(CHALLENGE_CLICK, handleChallengeClick)
+        takeLeading(SEARCH_OPPONENT_FETCH_INITIAL_STATE, searchOpponentSetInitialState),
+        takeLeading("toClient/SearchOpponent/send_challenges", lobbySetChallenges),
+        takeLeading("toClient/SearchOpponent/challenge_request_is_processed", searchButtonSetAvailability),
+        takeLeading(SEARCH_OPPONENT_UNMOUNT, handleUnmount),
+        takeLeading(SEARCH_BUTTON_CLICK, handleSearchButtonClick),
+        takeLeading(CHALLENGE_CLICK, handleChallengeClick)
     ]);
 }

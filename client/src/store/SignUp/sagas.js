@@ -46,7 +46,7 @@ function* handleUnmount() {
 
 export function* signUpWatcherSaga() {
     yield all([
-        takeEvery(SIGN_UP, signUp),
-        takeEvery(SIGN_UP_UNMOUNT, handleUnmount)
+        takeLeading(SIGN_UP, signUp),
+        takeLeading(SIGN_UP_UNMOUNT, handleUnmount)
     ]);
 }
