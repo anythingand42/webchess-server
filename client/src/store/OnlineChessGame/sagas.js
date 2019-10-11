@@ -283,6 +283,7 @@ function* handleSendMove(action) {
             }),
             put( setWhiteTimerStartDate(null) ),
             put( setBlackTimerStartDate(null) ),
+            put( setDraggedPiece(null) ),
             put( setResult(result, resultReason) ),
             put( mainSetGameFlag(false) )
         ]);
