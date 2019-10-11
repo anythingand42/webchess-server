@@ -46,6 +46,7 @@ async function manageOnlineChessGameActions({ io, socket, payload, type, user })
 
         const options = {
             fen: chessGame.fen,
+            pgn: chessGame.pgn,
             incInMs: chessGame.incInMs,
             whiteRestOfTime: chessGame["w"].restOfTime,
             blackRestOfTime: chessGame["b"].restOfTime,
@@ -71,6 +72,7 @@ async function manageOnlineChessGameActions({ io, socket, payload, type, user })
         const data = payload;
 
         chessGame.fen = data.fen;
+        chessGame.pgn = data.pgn;
         chessGame["w"].restOfTime = data.whiteRestOfTime;
         chessGame["b"].restOfTime = data.blackRestOfTime;
         chessGame.lastUpdateDate = new Date().getTime();

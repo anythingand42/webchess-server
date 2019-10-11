@@ -6,6 +6,7 @@ const ChessGameSchema = new Schema(
     {
         mode: String,
         fen: String,
+        pgn: String,
         timeInMs: Number,
         incInMs: Number,
         "w": {

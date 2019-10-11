@@ -14,7 +14,7 @@ import {
     setDraggedPiece,
     setCellsToHighlight,
     setFen,
-    // setPgn,
+    setPgn,
     setOrientation,
     setWhiteUserName,
     setBlackUserName,
@@ -40,7 +40,8 @@ function* onlineChessGameFetchGameOptions() {
 
 function* setGameOptions(action) {
     const fen = action.payload.fen;
-    const chessGame = new Chess(fen);
+    const chessGame = new Chess();
+    chessGame.load_pgn(action.payload.pgn);
     const splittedFen = fen.split(" ");
     const numberOfMove = Number(splittedFen[splittedFen.length - 1]);
     let whiteTimerStartDate = null;
@@ -53,6 +54,7 @@ function* setGameOptions(action) {
     yield all([
         put( setOrientation(action.payload.orientation) ),
         put( setFen(fen) ),
+        put( setPgn(action.payload.pgn) ),
         put( setWhiteUserName(action.payload.whiteUserName) ),
         put( setBlackUserName(action.payload.blackUserName) ),
         put( setWhiteRestOfTime(action.payload.whiteRestOfTime) ),
@@ -108,8 +110,8 @@ function* handleMouseUpOnBoard(action) {
     if(!props.draggedPiece) return;
 
     const id = action.payload;
-    console.log(props.fen);
-    const chessGame = new Chess(props.fen);
+    const chessGame = new Chess();
+    chessGame.load_pgn(props.pgn);
 
     const idFrom = props.draggedPiece.idFrom;
     const idTo = id;
@@ -126,8 +128,6 @@ function* handleMouseUpOnBoard(action) {
 
     if(move) {
 
-        const fenAfterMove = chessGame.fen();
-
         const {
             whiteTimerStartDate,
             blackTimerStartDate,
@@ -142,8 +142,13 @@ function* handleMouseUpOnBoard(action) {
             increment: props.increment
         });
 
+        const fenAfterMove = chessGame.fen();
+        const pgnAfterMove = chessGame.pgn();
+        console.log(pgnAfterMove);
+
         yield all([
             put( setFen(fenAfterMove) ),
+            put( setPgn(pgnAfterMove) ),
             put( setWhiteTimerStartDate(whiteTimerStartDate) ),
             put( setBlackTimerStartDate(blackTimerStartDate) ),
             put( setWhiteRestOfTime(whiteTimeAfterMouseUp) ),
@@ -155,7 +160,8 @@ function* handleMouseUpOnBoard(action) {
             payload: {
                 idFrom: idFrom,
                 idTo: idTo,
-                fen: chessGame.fen(),
+                fen: fenAfterMove,
+                pgn: pgnAfterMove,
                 whiteRestOfTime: whiteTimeAfterMouseUp,
                 blackRestOfTime: blackTimeAfterMouseUp
             }
@@ -215,8 +221,8 @@ function getChessClockPropsAfterMouseUp({
 
 function* handleSendMove(action) {
     const data = action.payload;
-    const chessGame = new Chess(data.fen);
-
+    const chessGame = new Chess();
+    chessGame.load_pgn(data.pgn);
     const splittedFen = data.fen.split(" ");
     const numberOfMove = Number(splittedFen[splittedFen.length - 1]);
     let whiteTimerStartDate = null;
@@ -230,6 +236,7 @@ function* handleSendMove(action) {
     yield all([
         put( setCellsToHighlight([data.idFrom, data.idTo]) ),
         put( setFen(data.fen) ),
+        put( setPgn(data.pgn) ),
         put( setWhiteRestOfTime(data.whiteRestOfTime) ),
         put( setBlackRestOfTime(data.blackRestOfTime) ),
         put( setWhiteTimerStartDate(whiteTimerStartDate) ),
