@@ -78,8 +78,7 @@ function* handleMouseDownOnBoard(action) {
     if(!props.isActive) return;
 
     const {id, clientX, clientY} = action.payload;
-    const chessGame = new Chess();
-    chessGame.load_pgn(props.pgn);
+    const chessGame = new Chess(props.fen);
 
     const piece = chessGame.get(id);
     if(piece) {
@@ -111,8 +110,7 @@ function* handleMouseUpOnBoard(action) {
 
     const id = action.payload;
 
-    const chessGame = new Chess();
-    chessGame.load_pgn(props.pgn);
+    const chessGame = new Chess(props.fen);
 
     const idFrom = props.draggedPiece.idFrom;
     const idTo = id;
