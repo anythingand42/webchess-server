@@ -37,6 +37,8 @@ async function manageOnlineChessGameActions({ io, socket, payload, type, user })
             type: "toClient/OnlineChessGame/send_chat_msg",
             payload: msg
         });
+
+        return;
     }
 
     if(type === "connect") {
@@ -93,19 +95,6 @@ async function manageOnlineChessGameActions({ io, socket, payload, type, user })
             type: "toClient/OnlineChessGame/game_over",
             payload: payload
         });
-
-        // const opponent = await User.findById(chessGame[opponentColor].userId);
-        // opponent.activeGameId = null;
-        // opponent.activeGameColor = null;
-
-        // user.activeGameId = null;
-        // user.activeGameColor = null;
-
-        // await Promise.all([
-        //     opponent.save(),
-        //     user.save(),
-        //     chessGame.remove()
-        // ]);
 
         return;
     }

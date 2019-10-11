@@ -6,7 +6,7 @@ const User = require("../../models/user.js");
 async function manageSearchOpponentActions({ io, socket, payload, type, user }) {
     
     let room, Challenge;
-    if(user && user.name) { 
+    if(user.name) { 
         room = "users";
         Challenge = UserChallenge;
     }
