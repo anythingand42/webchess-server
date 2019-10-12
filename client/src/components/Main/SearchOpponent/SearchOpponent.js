@@ -69,7 +69,7 @@ class SearchOpponent extends React.Component {
                 <div className="search-opponent-container__right-buttons-group">
                     <button className="button_gray right-buttons-group__button">create custom game</button>
                     <Link to="/trainingroom" className="right-buttons-group__button">
-                        <button className="button_gray">play with yourself</button>
+                        <button className="button_gray">play with stockfish</button>
                     </Link>
                 </div>
             </div>
