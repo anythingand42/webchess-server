@@ -37,11 +37,12 @@ async function handleAnonDisconnect(user, io, socketId) {
                     reason: resultReason
                 }
             });
-            io.to(chessGame[opponentColor].socketId).emit("action", {
-                type: "toClient/OnlineChessGame/send_chat_msg",
-                payload: `${turn} left the game, so chat is off`
-            });
         }
+
+        io.to(chessGame[opponentColor].socketId).emit("action", {
+            type: "toClient/OnlineChessGame/send_chat_msg",
+            payload: `${turn} left the game, so chat is off`
+        });
 
         const opponent = await User.findById(chessGame[opponentColor].userId);
         opponent.activeGameId = null;

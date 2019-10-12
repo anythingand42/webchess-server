@@ -5,7 +5,6 @@ const Schema = mongoose.Schema;
 const ChessGameSchema = new Schema(
     {
         mode: String,
-        fen: String,
         pgn: String,
         timeInMs: Number,
         incInMs: Number,

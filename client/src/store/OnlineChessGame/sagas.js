@@ -31,6 +31,7 @@ import {
 import { mainSetGameFlag } from "../Main/actions.js";
 
 import Chess from "chess.js";
+let chessGame;
 
 function* onlineChessGameFetchGameOptions() {
     yield put({
@@ -39,9 +40,9 @@ function* onlineChessGameFetchGameOptions() {
 }
 
 function* setGameOptions(action) {
-    const fen = action.payload.fen;
-    const chessGame = new Chess();
-    chessGame.load_pgn(action.payload.pgn);
+    chessGame = new Chess();
+    action.payload.pgn && chessGame.load_pgn(action.payload.pgn);
+    const fen = chessGame.fen();
     const splittedFen = fen.split(" ");
     const numberOfMove = Number(splittedFen[splittedFen.length - 1]);
     let whiteTimerStartDate = null;
@@ -50,6 +51,7 @@ function* setGameOptions(action) {
         if(chessGame.turn() === "w") whiteTimerStartDate = action.payload.lastUpdateDate;
         else blackTimerStartDate = action.payload.lastUpdateDate;
     }
+    console.log(action.payload.chatMessages);
 
     yield all([
         put( setOrientation(action.payload.orientation) ),
@@ -78,8 +80,6 @@ function* handleMouseDownOnBoard(action) {
     if(!props.isActive) return;
 
     const {id, clientX, clientY} = action.payload;
-    const chessGame = new Chess(props.fen);
-    console.log(chessGame.fen());
 
     const piece = chessGame.get(id);
     if(piece) {
@@ -110,8 +110,6 @@ function* handleMouseUpOnBoard(action) {
     if(!props.draggedPiece) return;
 
     const id = action.payload;
-    const chessGame = new Chess();
-    chessGame.load_pgn(props.pgn);
 
     const idFrom = props.draggedPiece.idFrom;
     const idTo = id;
@@ -144,7 +142,6 @@ function* handleMouseUpOnBoard(action) {
 
         const fenAfterMove = chessGame.fen();
         const pgnAfterMove = chessGame.pgn();
-        console.log(pgnAfterMove);
 
         yield all([
             put( setFen(fenAfterMove) ),
@@ -160,7 +157,6 @@ function* handleMouseUpOnBoard(action) {
             payload: {
                 idFrom: idFrom,
                 idTo: idTo,
-                fen: fenAfterMove,
                 pgn: pgnAfterMove,
                 whiteRestOfTime: whiteTimeAfterMouseUp,
                 blackRestOfTime: blackTimeAfterMouseUp
@@ -221,9 +217,14 @@ function getChessClockPropsAfterMouseUp({
 
 function* handleSendMove(action) {
     const data = action.payload;
-    const chessGame = new Chess();
-    chessGame.load_pgn(data.pgn);
-    const splittedFen = data.fen.split(" ");
+    const isMoveValid = chessGame.move({
+        from: data.idFrom,
+        to: data.idTo,
+        promotion: "q"
+    });
+    if(!isMoveValid) throw new Error("invalid move from server");
+    const fen = chessGame.fen();
+    const splittedFen = fen.split(" ");
     const numberOfMove = Number(splittedFen[splittedFen.length - 1]);
     let whiteTimerStartDate = null;
     let blackTimerStartDate = null;
@@ -235,7 +236,7 @@ function* handleSendMove(action) {
 
     yield all([
         put( setCellsToHighlight([data.idFrom, data.idTo]) ),
-        put( setFen(data.fen) ),
+        put( setFen(fen) ),
         put( setPgn(data.pgn) ),
         put( setWhiteRestOfTime(data.whiteRestOfTime) ),
         put( setBlackRestOfTime(data.blackRestOfTime) ),
@@ -365,7 +366,6 @@ function* handleGameOver(action) {
     if(!action.payload.whiteRestOfTime || !action.payload.blackRestOfTime ) {
         const store = yield select();
         const props = store.onlineChessGame;
-        const chessGame = new Chess(props.fen);
         let whiteRestOfTime = props.whiteRestOfTime;
         let blackRestOfTime = props.blackRestOfTime;
         if(chessGame.turn() === "w" && props.whiteTimerStartDate) {

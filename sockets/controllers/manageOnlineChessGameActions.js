@@ -45,7 +45,6 @@ async function manageOnlineChessGameActions({ io, socket, payload, type, user })
         if(chessGame.isGameOver) return;
 
         const options = {
-            fen: chessGame.fen,
             pgn: chessGame.pgn,
             incInMs: chessGame.incInMs,
             whiteRestOfTime: chessGame["w"].restOfTime,
@@ -71,7 +70,6 @@ async function manageOnlineChessGameActions({ io, socket, payload, type, user })
         const opponentColor = color === "b" ? "w" : "b";
         const data = payload;
 
-        chessGame.fen = data.fen;
         chessGame.pgn = data.pgn;
         chessGame["w"].restOfTime = data.whiteRestOfTime;
         chessGame["b"].restOfTime = data.blackRestOfTime;
@@ -102,10 +100,8 @@ async function manageOnlineChessGameActions({ io, socket, payload, type, user })
     }
 
     if(type === "send_chat_msg") {
-        if(user.name) {
-            chessGame.chatMessages = `${chessGame.chatMessages || ""}${payload}\n`;
-            await chessGame.save();
-        }
+        chessGame.chatMessages = `${chessGame.chatMessages || ""}${payload}\n`;
+        await chessGame.save();
         const opponentColor = color === "b" ? "w" : "b";
         socket.emit("action", {
             type: "toClient/OnlineChessGame/send_chat_msg",
