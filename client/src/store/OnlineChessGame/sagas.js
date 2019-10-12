@@ -7,7 +7,8 @@ import {
     ONLINE_CHESS_GAME_WHITE_TIME_OUT,
     ONLINE_CHESS_GAME_BLACK_TIME_OUT,
     ONLINE_CHESS_GAME_CHAT_SUBMIT,
-    ONLINE_CHESS_GAME_MOUSE_LEAVE_FROM_BOARD
+    ONLINE_CHESS_GAME_MOUSE_LEAVE_FROM_BOARD,
+    ONLINE_CHESS_GAME_RESIGN
 } from "./sagaActions.js";
 import {
     ONLINE_CHESS_GAME_SET_IS_ACTIVE,
@@ -361,6 +362,56 @@ function* handleBlackTimeOut() {
     });
 }
 
+function* handleResign() {
+
+    const store = yield select();
+    const props = store.onlineChessGame;
+    const orientation = props.orientation;
+    let color, opponentColor;
+    let whiteTimeAfterResign = props.whiteRestOfTime;
+    let blackTimeAfterResign = props.blackRestOfTime;
+    if(orientation === "w") {
+        color = "white";
+        opponentColor = "black";
+        if(props.whiteTimerStartDate) {
+            whiteTimeAfterResign = props.whiteRestOfTime - (new Date().getTime() - props.whiteTimerStartDate);
+        }
+    } else {
+        color = "black";
+        opponentColor = "white";
+        if(props.blackTimerStartDate) {
+            blackTimeAfterResign = props.blackRestOfTime - (new Date().getTime() - props.blackTimerStartDate);
+        }
+    }
+    const result = `${opponentColor} won`;
+    const resultReason = `${color} resigned`;
+
+    yield all([
+        put({
+            type: ONLINE_CHESS_GAME_SET_IS_ACTIVE,
+            payload: false
+        }),
+        put( setWhiteTimerStartDate(null) ),
+        put( setBlackTimerStartDate(null) ),
+        put( setWhiteRestOfTime(whiteTimeAfterResign) ),
+        put( setBlackRestOfTime(blackTimeAfterResign) ),
+        put( setResult(result, resultReason) ),
+        put( mainSetGameFlag(false) ),
+        put( setDraggedPiece(null) ),
+        put( setCellsToHighlight(null) )
+    ]);
+
+    yield put({
+        type: "toServer/OnlineChessGame/game_over",
+        payload: {
+            result: result,
+            reason: resultReason,
+            whiteRestOfTime: whiteTimeAfterResign,
+            blackRestOfTime: blackTimeAfterResign
+        }
+    });
+}
+
 function* handleGameOver(action) {
     if(!action.payload.whiteRestOfTime || !action.payload.blackRestOfTime ) {
         const store = yield select();
@@ -451,6 +502,7 @@ export function* onlineChessGameWatcherSaga() {
         takeLeading(ONLINE_CHESS_GAME_UNMOUNT, handleUnmount),
         takeLeading("toClient/OnlineChessGame/game_over", handleGameOver),
         takeLeading(ONLINE_CHESS_GAME_CHAT_SUBMIT, chatHandleSubmit),
-        takeLeading("toClient/OnlineChessGame/send_chat_msg", handleSendMsg)
+        takeLeading("toClient/OnlineChessGame/send_chat_msg", handleSendMsg),
+        takeLeading(ONLINE_CHESS_GAME_RESIGN, handleResign)
     ]);
 }

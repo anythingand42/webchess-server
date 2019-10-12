@@ -3,6 +3,7 @@ import ChessBoard from "../ChessBoard";
 import ChessTimer from "../ChessTimer";
 import Chat from "../Chat";
 import "./style.css";
+import "../../Button/style.css";
 
 class OnlineChessGame extends React.PureComponent {
 
@@ -79,7 +80,7 @@ class OnlineChessGame extends React.PureComponent {
                                         <p>{this.props.result}</p>
                                     </div>
                                     :
-                                    <div/>
+                                    <button className="button_gray info__resign-button" onClick={this.props.handleResign}>resign</button>
                                 }
                                 <div className="info__name--down">
                                     {downUserName}

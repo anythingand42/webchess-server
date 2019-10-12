@@ -9,7 +9,8 @@ import {
     whiteTimerHandleTimeOut,
     blackTimerHandleTimeOut,
     handleUnmount,
-    chatHandleSubmit
+    chatHandleSubmit,
+    handleResign
 } from "../../../store/OnlineChessGame/sagaActions";
 
 class ConnectedOnlineChessGame extends React.Component {
@@ -39,6 +40,7 @@ class ConnectedOnlineChessGame extends React.Component {
                 blackTimerHandleTimeOut={this.props.blackTimerHandleTimeOut}
                 handleUnmount={this.props.handleUnmount}
                 chatHandleSubmit={this.props.chatHandleSubmit}
+                handleResign={this.props.handleResign}
             />
         );
     }
@@ -72,7 +74,8 @@ const mapDispatchToProps = {
     whiteTimerHandleTimeOut,
     blackTimerHandleTimeOut,
     handleUnmount,
-    chatHandleSubmit
+    chatHandleSubmit,
+    handleResign
 };
 
 

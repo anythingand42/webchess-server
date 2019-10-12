@@ -68,6 +68,13 @@
     align-self: end;
 }
 
+.info__resign-button {
+    grid-area: down-name;
+    width: 80px;
+    height: 40px;
+    align-self: start;
+}
+
 .chat-container {
     height: 100%;
     width: 100%;

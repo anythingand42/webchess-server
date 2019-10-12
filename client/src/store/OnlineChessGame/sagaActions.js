@@ -6,6 +6,8 @@ export const ONLINE_CHESS_GAME_WHITE_TIME_OUT = "ONLINE_CHESS_GAME_WHITE_TIME_OU
 export const ONLINE_CHESS_GAME_BLACK_TIME_OUT = "ONLINE_CHESS_GAME_BLACK_TIME_OUT";
 export const ONLINE_CHESS_GAME_UNMOUNT = "ONLINE_CHESS_GAME_UNMOUNT";
 export const ONLINE_CHESS_GAME_CHAT_SUBMIT = "ONLINE_CHESS_GAME_CHAT_SUBMIT";
+export const ONLINE_CHESS_GAME_RESIGN = "ONLINE_CHESS_GAME_RESIGN";
+
 
 export const fetchInitialState = () => {
     return {
@@ -55,5 +57,11 @@ export const chatHandleSubmit = (msg) => {
     return {
         type: ONLINE_CHESS_GAME_CHAT_SUBMIT,
         payload: msg
+    };
+};
+
+export const handleResign = () => {
+    return {
+        type: ONLINE_CHESS_GAME_RESIGN
     };
 };
