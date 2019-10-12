@@ -28,7 +28,7 @@ class Main extends React.Component {
                         )}/>
                         <Route path="/login" component={LogIn} />
                         <Route path="/signup" component={SignUp} />
-                        <Route path="/trainingroom" component={<div>sorry, this mode is not implemented yet</div>}/>
+                        <Route path="/trainingroom" render={() => (<div>sorry, this mode is not implemented yet</div>)}/>
                         <Route path="/gameroom" component={OnlineChessGame} />
                     </Router>
                 </div>
