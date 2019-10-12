@@ -51,7 +51,6 @@ function* setGameOptions(action) {
         if(chessGame.turn() === "w") whiteTimerStartDate = action.payload.lastUpdateDate;
         else blackTimerStartDate = action.payload.lastUpdateDate;
     }
-    console.log(action.payload.chatMessages);
 
     yield all([
         put( setOrientation(action.payload.orientation) ),

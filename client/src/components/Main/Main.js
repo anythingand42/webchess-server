@@ -4,7 +4,6 @@ import Header from "./Header";
 import SearchOpponent from "./SearchOpponent";
 import LogIn from "./LogIn";
 import SignUp from "./SignUp";
-import TrainingChessGame from "./TrainingChessGame";
 import OnlineChessGame from "./OnlineChessGame";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
@@ -29,7 +28,7 @@ class Main extends React.Component {
                         )}/>
                         <Route path="/login" component={LogIn} />
                         <Route path="/signup" component={SignUp} />
-                        <Route path="/trainingroom"><div>sorry, this mode is not implemented yet</div></Route>
+                        <Route path="/trainingroom" component={<div>sorry, this mode is not implemented yet</div>}/>
                         <Route path="/gameroom" component={OnlineChessGame} />
                     </Router>
                 </div>

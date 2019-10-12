@@ -73,11 +73,13 @@ class OnlineChessGame extends React.PureComponent {
                                 <div className="info__name--up">
                                     {upUserName}
                                 </div>
-                                {this.props.result &&
+                                {this.props.result ?
                                     <div className="info__result">
                                         <p>{this.props.resultReason}</p>
                                         <p>{this.props.result}</p>
                                     </div>
+                                    :
+                                    <div/>
                                 }
                                 <div className="info__name--down">
                                     {downUserName}
