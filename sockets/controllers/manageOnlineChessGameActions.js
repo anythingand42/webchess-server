@@ -12,13 +12,6 @@ async function manageOnlineChessGameActions({ io, socket, payload, type, user })
         if(!chessGame.isGameOver) return;
         const opponentColor = color === "b" ? "w" : "b";
 
-        const opponent = await User.findById(chessGame[opponentColor].userId);
-        opponent.activeGameId = null;
-        opponent.activeGameColor = null;
-
-        user.activeGameId = null;
-        user.activeGameColor = null;
-
         let msg;
         if(user.name) {
             msg = `${user.name} left the game, so chat is off`;
@@ -27,11 +20,7 @@ async function manageOnlineChessGameActions({ io, socket, payload, type, user })
             msg = `${turn} left the game, so chat is off`;
         }
 
-        await Promise.all([
-            opponent.save(),
-            user.save(),
-            chessGame.remove()
-        ]);
+        await chessGame.remove();
 
         io.to(chessGame[opponentColor].socketId).emit("action", {
             type: "toClient/OnlineChessGame/send_chat_msg",
@@ -86,15 +75,26 @@ async function manageOnlineChessGameActions({ io, socket, payload, type, user })
 
     if(type === "game_over") {
         if(chessGame.isGameOver) return;
-        chessGame.isGameOver = true;
-        await chessGame.save();
-
         const opponentColor = color === "b" ? "w" : "b";
 
         io.to(chessGame[opponentColor].socketId).emit("action", {
             type: "toClient/OnlineChessGame/game_over",
             payload: payload
         });
+
+        const opponent = await User.findById(chessGame[opponentColor].userId);
+        opponent.activeGameId = null;
+        opponent.activeGameColor = null;
+
+        user.activeGameId = null;
+        user.activeGameColor = null;
+
+        chessGame.isGameOver = true;
+        await Promise.all([
+            opponent.save(),
+            user.save(),
+            chessGame.remove()
+        ]);
 
         return;
     }
