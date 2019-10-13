@@ -14,30 +14,24 @@ class Main extends React.Component {
     }
 
     render() {
-        if(this.props.isSocketConnected) {
-            return (
-                <div className="main-container">
-                    <Router>
-                        <Header userName={this.props.userName} onLogOut={this.props.logOut}/>
-                        <Route exact path="/" render={(props) => (
-                            this.props.isGameActive ? (
-                                <Redirect to="/gameroom"/>
-                            ) : (
-                                <SearchOpponent {...props}/>
-                            )
-                        )}/>
-                        <Route path="/login" component={LogIn} />
-                        <Route path="/signup" component={SignUp} />
-                        <Route path="/trainingroom" render={() => (<div>sorry, this mode is not implemented yet</div>)}/>
-                        <Route path="/gameroom" component={OnlineChessGame} />
-                    </Router>
-                </div>
-            );
-        } else {
-            return (
-                <div>loading...</div>
-            );
-        }
+        return (
+            <div className="main-container">
+                <Router>
+                    <Header userName={this.props.userName} onLogOut={this.props.logOut}/>
+                    <Route exact path="/" render={(props) => (
+                        this.props.isGameActive ? (
+                            <Redirect to="/gameroom"/>
+                        ) : (
+                            <SearchOpponent {...props}/>
+                        )
+                    )}/>
+                    <Route path="/login" component={LogIn} />
+                    <Route path="/signup" component={SignUp} />
+                    <Route path="/trainingroom" render={() => (<div>sorry, this mode is not implemented yet</div>)}/>
+                    <Route path="/gameroom" component={OnlineChessGame} />
+                </Router>
+            </div>
+        );
     }
 }
 

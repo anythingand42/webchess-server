@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import SearchOpponent from "./SearchOpponent.js";
 import {
-    fetchInitialState,
+    handleMount,
     handleSearchButtonClick,
     handleChallengeClick,
     handleUnmount
@@ -14,7 +14,7 @@ class ConnectedSearchOpponent extends React.Component {
             <SearchOpponent
                 buttons={this.props.buttons}
                 challenges={this.props.challenges}
-                fetchInitialState={this.props.fetchInitialState}
+                handleMount={this.props.handleMount}
                 handleSearchButtonClick={this.props.handleSearchButtonClick}
                 handleChallengeClick={this.props.handleChallengeClick}
                 handleUnmount={this.props.handleUnmount}
@@ -35,7 +35,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
     handleSearchButtonClick,
     handleChallengeClick,
-    fetchInitialState,
+    handleMount,
     handleUnmount
 };
 

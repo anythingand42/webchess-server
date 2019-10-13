@@ -1,32 +1,25 @@
-"user strict";
+"use strict";
 
+const getUserByCookie = require("./getUserByCookie.js");
 const manageMainActions = require("./controllers/manageMainActions");
-const manageSearchOpponentActions = require("./controllers/manageSearchOpponentActions");
+const handleSearchOpponentAction = require("./controllers/handleSearchOpponentAction");
 const manageOnlineChessGameActions = require("./controllers/manageOnlineChessGameActions");
+const controllers = {
+    "Main": manageMainActions,
+    "SearchOpponent": handleSearchOpponentAction,
+    "OnlineChessGame": manageOnlineChessGameActions
+}
 
-function handleAction({action, io, socket, user}) {
-
+async function handleAction({action, io, socket}) {
+    console.log(action, socket.request.headers.cookie);
+    const user = await getUserByCookie(socket.request.headers.cookie);
+    if(!user) throw new Error("can't get user by cookie");
     const splittedActionType = action.type.split("/");
     const component = splittedActionType[1];
     const type = splittedActionType[2];
     const payload = action.payload;
-    
-    const options = { io, socket, payload, type, user };
 
-    switch(component) {
-        case "Main": {
-            manageMainActions(options);
-            break;
-        }
-        case "SearchOpponent": {
-            manageSearchOpponentActions(options);
-            break;
-        }
-        case "OnlineChessGame": {
-            manageOnlineChessGameActions(options);
-            break;
-        }
-    }
+    controllers[component]({ io, socket, payload, type, user });
 }
 
 module.exports = handleAction;

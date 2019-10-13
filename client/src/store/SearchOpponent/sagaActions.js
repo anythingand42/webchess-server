@@ -1,11 +1,11 @@
-export const SEARCH_OPPONENT_FETCH_INITIAL_STATE = "SEARCH_OPPONENT_FETCH_INITIAL_STATE";
+export const SEARCH_OPPONENT_MOUNT = "SEARCH_OPPONENT_MOUNT";
 export const SEARCH_OPPONENT_UNMOUNT = "SEARCH_OPPONENT_UNMOUNT";
 export const SEARCH_BUTTON_CLICK = "SEARCH_BUTTON_CLICK";
 export const CHALLENGE_CLICK = "CHALLENGE_CLICK";
 
-export const fetchInitialState = () => {
+export const handleMount = () => {
     return {
-        type: SEARCH_OPPONENT_FETCH_INITIAL_STATE
+        type: SEARCH_OPPONENT_MOUNT
     };
 };
 

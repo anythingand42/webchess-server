@@ -32,6 +32,8 @@ async function manageOnlineChessGameActions({ io, socket, payload, type, user })
 
     if(type === "connect") {
         if(chessGame.isGameOver) return;
+        user.activeComponent = "OnlineChessGame";
+        await user.save();
 
         const options = {
             pgn: chessGame.pgn,

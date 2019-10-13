@@ -1,6 +1,6 @@
 import { put, takeLeading, all, select } from "redux-saga/effects";
 import {
-    SEARCH_OPPONENT_FETCH_INITIAL_STATE,
+    SEARCH_OPPONENT_MOUNT,
     SEARCH_OPPONENT_UNMOUNT,
     SEARCH_BUTTON_CLICK,
     CHALLENGE_CLICK
@@ -12,9 +12,9 @@ import {
     SEARCH_OPPONENT_RESET
 } from "./actions.js";
 
-function* searchOpponentSetInitialState() {
+function* handleMount() {
     yield put({
-        type: "toServer/SearchOpponent/connect"
+        type: "toServer/SearchOpponent/mount"
     });
 }
 
@@ -134,7 +134,7 @@ function* handleChallengeClick(action) {
 
 export function* searchOpponentWatcherSaga() {
     yield all([
-        takeLeading(SEARCH_OPPONENT_FETCH_INITIAL_STATE, searchOpponentSetInitialState),
+        takeLeading(SEARCH_OPPONENT_MOUNT, handleMount),
         takeLeading("toClient/SearchOpponent/send_challenges", lobbySetChallenges),
         takeLeading("toClient/SearchOpponent/challenge_request_is_processed", searchButtonSetAvailability),
         takeLeading(SEARCH_OPPONENT_UNMOUNT, handleUnmount),
