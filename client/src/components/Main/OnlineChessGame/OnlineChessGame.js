@@ -8,7 +8,7 @@ import "../../Button/style.css";
 class OnlineChessGame extends React.PureComponent {
 
     componentDidMount() {
-        this.props.fetchInitialState();
+        this.props.handleMount();
     }
 
     componentWillUnmount() {

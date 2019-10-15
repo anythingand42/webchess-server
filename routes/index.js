@@ -7,8 +7,8 @@ async function handleAnonConnection(res) {
     const anonymous = new User();
     anonymous.setToken();
     await anonymous.save();
-    res.cookie("webchessUser", "", { maxAge: -1, httpOnly: true, sameSite: true });
-    res.cookie("anonymous", anonymous.getToken(), { maxAge: 1800000, httpOnly: true, sameSite: true });
+    await res.cookie("webchessUser", "", { maxAge: -1, httpOnly: true, sameSite: true }); // работают ли эти await
+    await res.cookie("anonymous", anonymous.getToken(), { maxAge: 1800000, httpOnly: true, sameSite: true });
     res.sendFile('main.html', {root: path.join(__dirname, '../client/dist/')});
 }
 

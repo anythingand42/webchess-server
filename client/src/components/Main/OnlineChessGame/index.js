@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import OnlineChessGame from "./OnlineChessGame.js";
 import {
-    fetchInitialState,
+    handleMount,
     handleMouseDownOnBoard,
     handleMouseUpOnBoard,
     handleMouseLeaveFromBoard,
@@ -32,7 +32,7 @@ class ConnectedOnlineChessGame extends React.Component {
                 result={this.props.result}
                 resultReason={this.props.resultReason}
                 chatMessages={this.props.chatMessages}
-                fetchInitialState={this.props.fetchInitialState}
+                handleMount={this.props.handleMount}
                 handleMouseDownOnBoard={this.props.handleMouseDownOnBoard}
                 handleMouseUpOnBoard={this.props.handleMouseUpOnBoard}
                 handleMouseLeaveFromBoard={this.props.handleMouseLeaveFromBoard}
@@ -67,7 +67,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-    fetchInitialState,
+    handleMount,
     handleMouseDownOnBoard,
     handleMouseUpOnBoard,
     handleMouseLeaveFromBoard,

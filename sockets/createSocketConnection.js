@@ -1,4 +1,4 @@
-const handleAction = require("./handleAction.js");
+const applyHandler = require("./applyHandler.js");
 const getUserByCookie = require("./getUserByCookie.js");
 
 function createSocketConnection(server) {
@@ -7,14 +7,16 @@ function createSocketConnection(server) {
 
         socket.on("disconnect", async () => {
             const user = await getUserByCookie(socket.request.headers.cookie);
+            user.isSessionActive = false;
+            await user.save();
             const component = user.activeComponent;
             const action = { type: `toServer/${component}/disconnect` }
-            handleAction({action, io, socket});
+            applyHandler({action, io, socket, user});
         });
 
         socket.on("action", (action) => {
             console.log("handleAction: ", action);
-            handleAction({action, io, socket});
+            applyHandler({action, io, socket});
         });
 
     });

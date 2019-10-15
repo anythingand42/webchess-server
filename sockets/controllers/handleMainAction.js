@@ -3,7 +3,7 @@ const handlers = {
     "mount": handleMount,
 }
 
-function manageMainActions({io, socket, payload, type, user}) {
+function handleMainAction({io, socket, payload, type, user}) {
     handlers[type]({io, socket, payload, type, user});
 }
 
@@ -18,4 +18,4 @@ async function handleMount({socket, user}) {
     }
 }
 
-module.exports = manageMainActions;
+module.exports = handleMainAction;

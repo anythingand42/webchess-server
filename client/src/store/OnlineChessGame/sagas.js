@@ -1,6 +1,6 @@
 import { put, takeLeading, all, select } from "redux-saga/effects";
 import {
-    ONLINE_CHESS_GAME_FETCH_INITIAL_STATE,
+    ONLINE_CHESS_GAME_MOUNT,
     ONLINE_CHESS_GAME_MOUSE_DOWN_ON_BOARD,
     ONLINE_CHESS_GAME_MOUSE_UP_ON_BOARD,
     ONLINE_CHESS_GAME_UNMOUNT,
@@ -34,9 +34,9 @@ import { mainSetGameFlag } from "../Main/actions.js";
 import Chess from "chess.js";
 let chessGame;
 
-function* onlineChessGameFetchGameOptions() {
+function* handleMount() {
     yield put({
-        type: "toServer/OnlineChessGame/connect"
+        type: "toServer/OnlineChessGame/mount"
     });
 }
 
@@ -459,12 +459,9 @@ function* handleGameOver(action) {
 }
 
 function* handleUnmount() {
-    const store = yield select();
-    if(store.onlineChessGame.result) {
-        yield put({
-            type: "toServer/OnlineChessGame/user_left"
-        });
-    }
+    yield put({
+        type: "toServer/OnlineChessGame/unmount"
+    });
     yield put(reset());
 }
 
@@ -491,7 +488,7 @@ function* handleSendMsg(action) {
 
 export function* onlineChessGameWatcherSaga() {
     yield all([
-        takeLeading(ONLINE_CHESS_GAME_FETCH_INITIAL_STATE, onlineChessGameFetchGameOptions),
+        takeLeading(ONLINE_CHESS_GAME_MOUNT, handleMount),
         takeLeading("toClient/OnlineChessGame/send_game_options", setGameOptions),
         takeLeading(ONLINE_CHESS_GAME_MOUSE_DOWN_ON_BOARD, handleMouseDownOnBoard),
         takeLeading(ONLINE_CHESS_GAME_MOUSE_UP_ON_BOARD, handleMouseUpOnBoard),

@@ -13,7 +13,7 @@ const handlers = {
     "disconnect": handleUnmount
 }
 
-async function handleSearchOpponentActions({ io, socket, payload, type, user }) { 
+async function handleSearchOpponentAction({ io, socket, payload, type, user }) { 
     let room, Challenge;
     if(user.name) { 
         room = "users";
@@ -25,4 +25,4 @@ async function handleSearchOpponentActions({ io, socket, payload, type, user }) 
     handlers[type]({ io, socket, payload, user, room, Challenge });
 }
 
-module.exports = handleSearchOpponentActions;
+module.exports = handleSearchOpponentAction;
