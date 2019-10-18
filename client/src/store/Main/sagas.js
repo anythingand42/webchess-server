@@ -36,10 +36,15 @@ function* startGame() {
     });
 }
 
+function* refreshWindow() {
+    yield window.location.replace("/");
+}
+
 export function* mainWatcherSaga() {
     yield all([
         takeEvery(MAIN_FETCH_INITIAL_STATE, mainFetchInitialState),
         takeEvery(LOG_OUT, logOut),
-        takeEvery("toClient/Main/start_game", startGame)
+        takeEvery("toClient/Main/start_game", startGame),
+        takeEvery("toClient/Main/refresh_window", refreshWindow)
     ]);
 }

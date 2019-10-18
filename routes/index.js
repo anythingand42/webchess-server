@@ -12,21 +12,19 @@ async function handleAnonConnection(res) {
     res.sendFile('main.html', {root: path.join(__dirname, '../client/dist/')});
 }
 
-async function handleUserConnection(res, user) {
-    user.isSessionActive = true;
-    await user.save();
+async function handleUserConnection(res) {
     res.sendFile('main.html', {root: path.join(__dirname, '../client/dist/')});
 }
 
 router.get("/", async (req, res) => {
-    console.log("index get");
+    console.log("index get", req.cookies );
     const token = req.cookies ? req.cookies.webchessUser : null;
     if(!token) {
         handleAnonConnection(res);
         return;
     }
     const user = await User.findOne({token});
-    if(!user || user.isSessionActive) {
+    if(!user) {
         handleAnonConnection(res);
         return;
     }

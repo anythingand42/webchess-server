@@ -366,21 +366,20 @@ function* handleResign() {
 
     const store = yield select();
     const props = store.onlineChessGame;
-    const orientation = props.orientation;
     let color, opponentColor;
     let whiteTimeAfterResign = props.whiteRestOfTime;
     let blackTimeAfterResign = props.blackRestOfTime;
-    if(orientation === "w") {
+    if(chessGame.turn() === "w") {
         color = "white";
         opponentColor = "black";
         if(props.whiteTimerStartDate) {
-            whiteTimeAfterResign = props.whiteRestOfTime - (new Date().getTime() - props.whiteTimerStartDate);
+            whiteTimeAfterResign -= new Date().getTime() - props.whiteTimerStartDate;
         }
     } else {
         color = "black";
         opponentColor = "white";
         if(props.blackTimerStartDate) {
-            blackTimeAfterResign = props.blackRestOfTime - (new Date().getTime() - props.blackTimerStartDate);
+            blackTimeAfterResign -= new Date().getTime() - props.blackTimerStartDate;
         }
     }
     const result = `${opponentColor} won`;

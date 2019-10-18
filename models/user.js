@@ -15,7 +15,6 @@ const UserSchema = new Schema({
     activeGameId: String,
     activeGameColor: String,
     isConnected: Boolean,
-    isSessionActive: Boolean,
     activeComponent: String
 });
 

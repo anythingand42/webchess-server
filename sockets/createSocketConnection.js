@@ -7,8 +7,7 @@ function createSocketConnection(server) {
 
         socket.on("disconnect", async () => {
             const user = await getUserByCookie(socket.request.headers.cookie);
-            user.isSessionActive = false;
-            await user.save();
+            if(!user) return;
             const component = user.activeComponent;
             const action = { type: `toServer/${component}/disconnect` }
             applyHandler({action, io, socket, user});
