@@ -8,14 +8,14 @@ function handleMainAction({io, socket, payload, type, user}) {
 }
 
 async function handleMount({socket, user}) {
-    if(user.activeGameId) {
-        const chessGame = await ChessGame.findById(user.activeGameId); //мб перенести в хэндлер OnlineChessGame эти 3 строчки
-        chessGame[user.activeGameColor].socketId = socket.id;
-        await chessGame.save();
-        socket.emit("action", {
-            type: "toClient/Main/start_game"
-        });
-    }
+    if(!user.activeGameId) return;
+    const chessGame = await ChessGame.findById(user.activeGameId); //мб перенести в хэндлер OnlineChessGame эти 3 строчки
+    if(!chessGame) throw new Error("can't find chess game by activeGameId");
+    chessGame[user.activeGameColor].socketId = socket.id;
+    await chessGame.save();
+    socket.emit("action", {
+        type: "toClient/Main/start_game"
+    });
 }
 
 module.exports = handleMainAction;

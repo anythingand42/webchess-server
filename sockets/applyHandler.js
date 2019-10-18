@@ -11,15 +11,6 @@ const handlers = {
 }
 
 async function applyHandler({action, io, socket, user}) {
-    console.log(action, socket.request.headers.cookie);
-    if(!user) user = await getUserByCookie(socket.request.headers.cookie);
-    if(!user) {
-        console.log("can't get user by cookie");
-        socket.emit("action", {
-            type: "toClient/Main/refresh_window"
-        });
-        return;
-    }
     const splittedActionType = action.type.split("/");
     const component = splittedActionType[1];
     const type = splittedActionType[2];

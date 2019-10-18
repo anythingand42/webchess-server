@@ -3,12 +3,12 @@
 const ChessGame = require("../../../../models/chessGame.js");
 const User = require("../../../../models/user.js");
 
-async function handleUserDisconnect({io, user}) {
+function handleUserDisconnect({io, user}) {
     if(!user.activeGameId) return;
     const id = user._id;
     setTimeout(async () => {
         const user = await User.findById(id);
-        if(user.isSessionActive) return;
+        if(user.isConnected) return;
 
         let result;
         const resultReason = `${user.name} disconnected`;

@@ -8,14 +8,28 @@ function createSocketConnection(server) {
         socket.on("disconnect", async () => {
             const user = await getUserByCookie(socket.request.headers.cookie);
             if(!user) return;
+            user.isConnected = false;
+            await user.save();
             const component = user.activeComponent;
-            const action = { type: `toServer/${component}/disconnect` }
+            let action = { type: `toServer/${component}/disconnect` }
+            applyHandler({action, io, socket, user});
+            action = { type: `toServer/${component}/unmount` }
             applyHandler({action, io, socket, user});
         });
 
-        socket.on("action", (action) => {
+        socket.on("action", async (action) => {
             console.log("handleAction: ", action);
-            applyHandler({action, io, socket});
+            const user = await getUserByCookie(socket.request.headers.cookie);
+            if(!user) {
+                console.log("can't get user by cookie");
+                socket.emit("action", {
+                    type: "toClient/Main/refresh_window"
+                });
+                return;
+            }
+            user.isConnected = true;
+            await user.save();
+            applyHandler({action, io, socket, user});
         });
 
     });
