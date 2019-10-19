@@ -305,6 +305,21 @@ function* handleWhiteTimeOut() {
     const orientation = props.orientation;
     if(orientation !== "w") return;
 
+    const board = chessGame.board();
+    let blackPiecesNumber = 0;
+    for(let line of board) {
+        for(let piece of line) {
+            if(piece && piece.color === "b") {
+                blackPiecesNumber++;
+            }
+        }
+    }
+
+    let result = "black won";
+    if(blackPiecesNumber === 1) {
+        result = "draw";
+    }
+
     yield all([
         put({
             type: ONLINE_CHESS_GAME_SET_IS_ACTIVE,
@@ -313,7 +328,7 @@ function* handleWhiteTimeOut() {
         put( setWhiteTimerStartDate(null) ),
         put( setBlackTimerStartDate(null) ),
         put( setWhiteRestOfTime(0) ),
-        put( setResult("black won", "time out") ),
+        put( setResult(result, "white's time is out") ),
         put( mainSetGameFlag(false) ),
         put( setDraggedPiece(null) ),
         put( setCellsToHighlight(null) )
@@ -322,8 +337,8 @@ function* handleWhiteTimeOut() {
     yield put({
         type: "toServer/OnlineChessGame/game_over",
         payload: {
-            result: "black won",
-            reason: "time out",
+            result: result,
+            reason: "white's time is out",
             whiteRestOfTime: 0,
             blackRestOfTime: props.blackRestOfTime
         }
@@ -337,6 +352,21 @@ function* handleBlackTimeOut() {
     const orientation = props.orientation;
     if(orientation !== "b") return;
 
+    const board = chessGame.board();
+    let whitePiecesNumber = 0;
+    for(let line of board) {
+        for(let piece of line) {
+            if(piece && piece.color === "w") {
+                whitePiecesNumber++;
+            }
+        }
+    }
+
+    let result = "black won";
+    if(whitePiecesNumber === 1) {
+        result = "draw";
+    }
+
     yield all([
         put({
             type: ONLINE_CHESS_GAME_SET_IS_ACTIVE,
@@ -345,7 +375,7 @@ function* handleBlackTimeOut() {
         put( setWhiteTimerStartDate(null) ),
         put( setBlackTimerStartDate(null) ),
         put( setBlackRestOfTime(0) ),
-        put( setResult("white won", "time out") ),
+        put( setResult(result, "black's time is out") ),
         put( mainSetGameFlag(false) ),
         put( setDraggedPiece(null) ),
         put( setCellsToHighlight(null) )
@@ -354,8 +384,8 @@ function* handleBlackTimeOut() {
     yield put({
         type: "toServer/OnlineChessGame/game_over",
         payload: {
-            result: "white won",
-            reason: "time out",
+            result: result,
+            reason: "black's time is out",
             whiteRestOfTime: props.whiteRestOfTime,
             blackRestOfTime: 0
         }

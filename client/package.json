@@ -26,7 +26,7 @@
   "dependencies": {
     "browser-cookie": "^1.2.1",
     "browser-cookies": "^1.2.0",
-    "chess.js": "^0.10.2",
+    "chess.js": "github:jhlywa/chess.js",
     "chessboardjsx": "^2.4.1",
     "file-loader": "^4.2.0",
     "react": "^16.9.0",
