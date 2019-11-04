@@ -1,1 +1,1 @@
-# webchess-server
+# boardGamesserver
