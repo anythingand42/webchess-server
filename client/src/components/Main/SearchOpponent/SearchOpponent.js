@@ -2,7 +2,6 @@ import React from "react";
 import SearchButton from "./SearchButton";
 import Lobby from "./Lobby";
 import "./style.css";
-import "../../Button/style.css";
 import {Link} from "react-router-dom";
 
 class SearchOpponent extends React.Component {

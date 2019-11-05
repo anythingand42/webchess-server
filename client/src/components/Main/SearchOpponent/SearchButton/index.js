@@ -1,5 +1,4 @@
 import React from "react";
-import "../../../Button/style.css";
 import "./style.css";
 
 function SearchButton(props) {

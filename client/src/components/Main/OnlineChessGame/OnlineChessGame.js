@@ -3,7 +3,6 @@ import ChessBoard from "../ChessBoard";
 import ChessTimer from "../ChessTimer";
 import Chat from "../Chat";
 import "./style.css";
-import "../../Button/style.css";
 
 class OnlineChessGame extends React.PureComponent {
 

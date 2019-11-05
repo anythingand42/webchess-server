@@ -3,75 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1d03f3a5-9326-4593-a29b-0c4f6e1f36c3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newDist/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/newDist/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/Cell/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/Cell/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/Piece/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/Piece/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/alpha/bb.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/alpha/bk.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/alpha/bn.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/alpha/bp.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/alpha/bq.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/alpha/br.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/alpha/wb.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/alpha/wk.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/alpha/wn.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/alpha/wp.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/alpha/wq.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/alpha/wr.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/from_wiki/bb.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/from_wiki/bk.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/from_wiki/bn.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/from_wiki/bp.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/from_wiki/bq.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/from_wiki/br.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/from_wiki/link.odt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/from_wiki/wb.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/from_wiki/wk.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/from_wiki/wn.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/from_wiki/wp.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/from_wiki/wq.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/from_wiki/wr.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/mycustom/bb.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/mycustom/bk.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/mycustom/bn.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/mycustom/bp.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/mycustom/bq.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/mycustom/br.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/mycustom/wb.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/mycustom/wk.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/mycustom/wn.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/mycustom/wp.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/mycustom/wq.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/mycustom/wr.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/standart/bb.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/standart/bk.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/standart/bn.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/standart/bp.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/standart/bq.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/standart/br.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/standart/wb.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/standart/wk.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/standart/wn.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/standart/wp.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/standart/wq.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/piecesImages/standart/wr.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessBoard/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessGame.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/newSrc/components/Main/ChessGame/ChessGame.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/Main.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/newSrc/components/Main/Main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/SearchOpponent/SearchOpponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/newSrc/components/Main/SearchOpponent/SearchOpponent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/components/Main/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/newSrc/components/Main/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/store/Main/actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/newSrc/store/Main/actions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/store/Main/reducers.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/newSrc/store/Main/reducers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/newSrc/store/reducers.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/newSrc/store/reducers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/anon.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/challenge.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/game.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/chessGame.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sockets/createSocketConnection.js" beforeDir="false" afterPath="$PROJECT_DIR$/sockets/createSocketConnection.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sockets/handleAnonConnection/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/sockets/handleAnonConnection/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Button/style.css" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -89,8 +21,8 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="javascript.nodejs.core.library.configured.version" value="10.16.3" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/client/newSrc/store/ChessGame_standard" />
+    <property name="javascript.nodejs.core.library.configured.version" value="12.13.0" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/client/src/components" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
@@ -192,6 +124,7 @@
       <workItem from="1568280821956" duration="6014000" />
       <workItem from="1568289152389" duration="645000" />
       <workItem from="1568289875650" duration="130000" />
+      <workItem from="1572967060215" duration="246000" />
     </task>
     <servers />
   </component>

@@ -6,13 +6,13 @@ class Chat extends Component {
         super(props);
         this.state = {
             inputMsg: "",
-        }
+        };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.ref = React.createRef();
     }
 
-    handleSubmit() {
+    handleSubmit(event) {
         event.preventDefault();
         const inputMsg = this.state.inputMsg;
         if(!inputMsg) return;
