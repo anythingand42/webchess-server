@@ -1,0 +1,34 @@
+$black: rgb(100, 100, 100);
+$white: rgb(210, 210, 210);
+
+.cell {
+  width: 100%;
+  height: 100%;
+}
+
+.cell.w {
+  background: $white;
+}
+
+.cell.b {
+  background: $black;
+}
+
+.cell.w.highlight {
+  background: mix(blue, $white, 25%);
+}
+
+.cell.b.highlight {
+  background: mix(blue, $black, 25%);
+}
+
+.cell .piece {
+  pointer-events: none;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.cell .piece.transparent {
+  opacity: 0.3;
+}
